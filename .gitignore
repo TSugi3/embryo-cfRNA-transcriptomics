@@ -1,0 +1,43 @@
+# Local/private configuration
+R/config.local.R
+.env
+
+# Generated outputs
+Figure_revision/
+source_data/
+logs/
+*.pptx
+*.xlsx
+*.png
+*.tif
+*.tiff
+*.pdf
+*.jpeg
+*.jpg
+
+# Raw/large sequencing and alignment data
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bai
+*.sam
+*.cram
+*.sra
+
+# Private submission/manuscript files
+*.docx
+*.doc
+*_metadata_draft.tsv
+*_metadata*.xlsx
+
+# OS/editor/cache
+.DS_Store
+._*
+__pycache__/
+*.pyc
+*.pyo
+.Rhistory
+.RData
+.Rproj.user/
