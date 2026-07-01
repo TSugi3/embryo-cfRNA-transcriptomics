@@ -1,4 +1,4 @@
-# Figure2_revision.R
+# Figure2.R
 # Rebuild Figure 2 panels B-E and panel-level source data.
 
 rm(list = ls())
@@ -16,15 +16,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure2_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure2.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -106,7 +106,7 @@ pB <- ggplot(go_bp_plot, aes(x = minus_log10_qvalue, y = Description)) +
   scale_size_continuous(name = "Gene Count", range = c(1.2, 4.2)) +
   scale_x_continuous(limits = c(3, 8), expand = expansion(mult = c(0.02, 0.06))) +
   labs(x = expression(-log[10]~"(q-value)"), y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = "right",
     legend.title = element_text(size = 6),
@@ -167,7 +167,6 @@ segment_for_plot <- membership_for_plot %>%
   group_by(intersection_id) %>%
   summarise(ymin = min(as.numeric(comparison)), ymax = max(as.numeric(comparison)), .groups = "drop") %>%
   filter(ymin != ymax)
-)
 
 pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection_size)) +
   geom_col(
@@ -181,7 +180,7 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
                      expand = expansion(mult = c(0.01, 0.01))) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.16))) +
   labs(x = NULL, y = "Intersection size") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
@@ -203,7 +202,7 @@ pC_matrix <- ggplot(matrix_for_plot, aes(x = intersection_id, y = comparison)) +
                      expand = expansion(mult = c(0.01, 0.01))) +
   scale_y_discrete(drop = FALSE) +
   labs(x = NULL, y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
@@ -281,7 +280,7 @@ pD <- ggplot(score_scaled, aes(x = Sample, y = Pathway, fill = z_score)) +
   scale_fill_gradient2(low = "navy", mid = "white", high = "firebrick3",
                        midpoint = 0, name = "z-score") +
   labs(x = NULL, y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
@@ -327,10 +326,10 @@ pE <- ggplot(ssgsea_long, aes(x = SampleType, y = ssGSEA_Score, fill = SampleTyp
     tip.length = 0.01
   ) +
   facet_wrap(~Pathway, scales = "free_y", nrow = 1) +
-  scale_fill_manual(values = color_ncbi_group) +
+  scale_fill_manual(values = color_group) +
   scale_y_continuous(expand = expansion(mult = c(0.04, 0.20))) +
   labs(x = NULL, y = "ssGSEA Score") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     strip.background = element_blank(),
     strip.text = element_text(size = 6.2, face = "bold"),

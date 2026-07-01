@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compose revised Figure 6 panels into a high-resolution raster image."""
+"""Compose Figure 6 panels into a high-resolution raster image."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from path_config import BASE_DIR, FIG_DIR
 
-# NCB/Nature guide maximum page dimensions are 180 mm wide by 170 mm tall.
+# Publication guide maximum page dimensions are 180 mm wide by 170 mm tall.
 # At 600 dpi this corresponds approximately to 4252 x 4016 px.
 CANVAS_IN = (180 / 25.4, 170 / 25.4)
 DPI = 600

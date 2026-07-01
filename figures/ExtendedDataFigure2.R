@@ -1,4 +1,4 @@
-# ExtendedDataFigure2_revision.R
+# ExtendedDataFigure2.R
 # Rebuild Extended Data Figure 2 panels with clipping fixes and source data.
 
 rm(list = ls())
@@ -12,15 +12,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure2_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure2.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -61,7 +61,7 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     scale_color_viridis_c(name = "Gene ratio", option = "D", direction = 1, end = 0.95) +
     scale_size_continuous(name = "Gene count", range = c(1.0, 3.6)) +
     labs(title = title, x = expression(-log[10]~"(q-value)"), y = NULL) +
-    theme_ncbi() +
+    theme_publication() +
     theme(
       plot.title = element_text(size = 7.5, face = "bold", hjust = 0.5),
       axis.text.y = element_text(size = axis_text_size, lineheight = 0.86),
@@ -122,7 +122,7 @@ pB <- (ggplot(intersection_b, aes(x = pattern, y = intersection_size)) +
          geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
          scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
          labs(y = "Intersection size", x = NULL) +
-         theme_ncbi() +
+         theme_publication() +
          theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
                axis.text.y = element_text(size = 6), axis.title.y = element_text(size = 6.5),
                plot.margin = margin(1, 1, 0, 1))) /
@@ -131,7 +131,7 @@ pB <- (ggplot(intersection_b, aes(x = pattern, y = intersection_size)) +
          geom_point(aes(fill = present), shape = 21, size = 1.8, color = "black", stroke = 0.2) +
          scale_fill_manual(values = c("TRUE" = "black", "FALSE" = "white"), guide = "none") +
          labs(x = NULL, y = NULL) +
-         theme_ncbi() +
+         theme_publication() +
          theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
                axis.text.y = element_text(size = 6),
                plot.margin = margin(0, 1, 1, 1))) +
@@ -195,9 +195,9 @@ pE <- ggplot(plot_data, aes(x = Group, y = Expression, fill = Group)) +
   facet_wrap(~Gene, scales = "free_y", ncol = 3,
              labeller = labeller(Gene = as_labeller(gene_lab, label_parsed))) +
   scale_y_continuous(expand = expansion(mult = c(0.02, 0.12))) +
-  scale_fill_manual(values = color_ncbi_group) +
+  scale_fill_manual(values = color_group) +
   labs(x = NULL, y = "Normalized expression") +
-  theme_ncbi() +
+  theme_publication() +
   theme(legend.position = "none",
         strip.text = element_text(size = 7, face = "italic"),
         strip.background = element_blank(),

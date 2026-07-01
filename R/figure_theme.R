@@ -1,10 +1,10 @@
-# theme_ncb_revision.R
+# figure_theme.R
 
 suppressPackageStartupMessages({
   library(ggplot2)
 })
 
-theme_ncb_revision <- function(base_size = 7.5, base_family = "Arial") {
+theme_publication <- function(base_size = 7.5, base_family = "Arial") {
   theme_bw(base_size = base_size, base_family = base_family) %+replace%
     theme(
       panel.background = element_blank(),
@@ -27,7 +27,7 @@ theme_ncb_revision <- function(base_size = 7.5, base_family = "Arial") {
     )
 }
 
-group_colours <- c(
+color_group <- c(
   "EWE" = "#009EBD",
   "AWE" = "#F8766D",
   "ESM" = "#619CFF",
@@ -48,7 +48,7 @@ gsea_nes_colours <- c(
   high = "#B2182B"
 )
 
-save_ncb_plot <- function(plot, filename_base, width_mm, height_mm, output_dir,
+save_publication_plot <- function(plot, filename_base, width_mm, height_mm, output_dir,
                           dpi = 600, bg = "white") {
   stopifnot(dir.exists(output_dir))
   width_in <- width_mm / 25.4

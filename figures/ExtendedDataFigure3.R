@@ -1,5 +1,5 @@
-# ExtendedDataFigure3_revision.R
-# Rebuild Extended Data Figure 3 panels with reviewer-driven readability fixes.
+# ExtendedDataFigure3.R
+# Rebuild Extended Data Figure 3 panels with readability improvements.
 
 rm(list = ls())
 
@@ -16,15 +16,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure3_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure3.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -99,7 +99,7 @@ pA <- ggplot(data_long, aes(x = Value, fill = Comparison, color = Comparison)) +
   scale_fill_manual(values = c("EWE vs. ESM" = "#00BFC4", "AWE vs. ASM" = "#F8766D")) +
   scale_color_manual(values = c("EWE vs. ESM" = "#00BFC4", "AWE vs. ASM" = "#F8766D")) +
   labs(x = expression(log[2]~"value"), y = "Density") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     strip.background = element_blank(),
     strip.text = element_text(size = 7, face = "bold"),
@@ -156,7 +156,7 @@ make_reactome_dotplot <- function(files, title, output_name, panel_id) {
     scale_y_discrete(labels = function(x) gsub("___.*", "", x)) +
     facet_grid(rows = vars(Comparison), scales = "free_y", space = "free_y", switch = "y") +
     labs(x = expression(-log[10]~"(q-value)"), y = NULL, title = title) +
-    theme_ncbi() +
+    theme_publication() +
     theme(
       plot.title = element_text(hjust = 0.75, size = 8, face = "bold"),
       strip.text.y.left = element_text(angle = 90, size = 5),
@@ -216,7 +216,7 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
   scale_color_viridis_c(option = "D", name = expression(-log[10]~"(FDR)")) +
   scale_size_continuous(name = "Gene set size", range = c(1.0, 3.6)) +
   labs(title = "Reactome GSEA of AWE vs. ASM", x = "NES", y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 7),
     axis.text.y = element_text(size = 6.6, lineheight = 0.88),

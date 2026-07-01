@@ -1,4 +1,4 @@
-# Figure4_revision.R
+# Figure4.R
 # Rebuild Figure 4 panels with high-resolution outputs and source data.
 
 rm(list = ls())
@@ -15,15 +15,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure4_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure4.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -93,7 +93,7 @@ pA <- ggplot(gsea_top, aes(x = NES, y = Description_wrapped, color = set, size =
   scale_color_manual(values = c("Upregulated in ESM" = "#1b9e77", "Upregulated in ASM" = "#d95f02")) +
   facet_wrap(~set, scales = "free_y", ncol = 1) +
   labs(title = "GO:BP GSEA of ESM vs. ASM", x = "Normalized Enrichment Score (NES)", y = NULL, color = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(size = 8, hjust = 0.5),
     strip.text = element_text(size = 8),
@@ -159,11 +159,11 @@ pB <- ggplot(expr_b, aes(x = Group, y = Log2_expression, fill = Group)) +
                      label = "p.format", size = 2.0) +
   facet_wrap(~gene_id, scales = "free_y", ncol = 6,
              labeller = labeller(gene_id = as_labeller(gene_lab_b, label_parsed))) +
-  scale_fill_manual(values = color_ncbi_group[c("ESM", "ASM")]) +
+  scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.16))) +
   labs(title = "Representative genes associated with RNA transport and metabolism",
        y = "log2 normalized expression", x = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 8),
     strip.text = element_text(size = 6.5, face = "italic"),
@@ -215,11 +215,11 @@ pC <- ggplot(expr_c, aes(x = Group, y = Log2_expression, fill = Group)) +
                      label = "p.format", size = 2.0) +
   facet_wrap(~gene_id, scales = "free_y", ncol = 6,
              labeller = labeller(gene_id = as_labeller(gene_lab_c, label_parsed))) +
-  scale_fill_manual(values = color_ncbi_group[c("ESM", "ASM")]) +
+  scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.16))) +
   labs(title = "Exosome marker genes in spent media",
        y = "log2 normalized expression", x = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 8),
     strip.text = element_text(size = 6.5, face = "italic"),
@@ -282,10 +282,10 @@ pD <- ggplot(df_scores, aes(x = Group, y = Score, fill = Group)) +
   facet_wrap(~Pathway, scales = "free_y", nrow = 1) +
   stat_compare_means(comparisons = list(c("ESM", "ASM")), label = "p.format",
                      method = "wilcox.test", size = 2.0) +
-  scale_fill_manual(values = color_ncbi_group[c("ESM", "ASM")]) +
+  scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
   labs(x = NULL, y = "ssGSEA enrichment score", title = "cfRNA-associated pathway activity (ssGSEA)") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = "none",
     strip.background = element_blank(),

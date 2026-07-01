@@ -1,5 +1,5 @@
-# ExtendedDataFigure4_revision.R
-# Rebuild Extended Data Figure 4 panels with reviewer-driven readability fixes.
+# ExtendedDataFigure4.R
+# Rebuild Extended Data Figure 4 panels with readability improvements.
 
 rm(list = ls())
 
@@ -15,15 +15,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure4_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure4.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -129,7 +129,7 @@ pA <- ggplot(kegg_plot, aes(x = GeneRatio_numeric, y = Description_wrapped)) +
   scale_size_continuous(range = c(1.0, 3.6), name = "Gene count") +
   labs(title = "KEGG enrichment of mRNAs co-expressed with lncRNAs",
        x = "Gene ratio", y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(face = "bold", size = 7, hjust = 0.5),
     axis.text.y = element_text(size = 7.0, lineheight = 0.92),
@@ -174,7 +174,7 @@ sample_groups <- tibble(Sample = colnames(expr_mat_plot)) %>%
 expr_mat_plot <- expr_mat_plot[, sample_groups$Sample, drop = FALSE]
 annotation_col <- data.frame(Group = sample_groups$Group)
 rownames(annotation_col) <- sample_groups$Sample
-annotation_colours <- list(Group = color_ncbi_group)
+annotation_colours <- list(Group = color_group)
 
 pheat <- pheatmap(
   expr_mat_plot,

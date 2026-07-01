@@ -4,7 +4,7 @@ The public repository does not include raw sequencing data or private local anal
 
 ## Human processed analysis directory
 
-Set as `NCB_HUMAN_ANALYSIS_DIR`. Expected subdirectories/files include, among others:
+Set as `CFRNA_HUMAN_ANALYSIS_DIR`. Expected subdirectories/files include, among others:
 
 - `InsertLength/InsertLengthWESM.xlsx`
 - `biotype/biotype_all.xlsx`
@@ -15,14 +15,14 @@ Set as `NCB_HUMAN_ANALYSIS_DIR`. Expected subdirectories/files include, among ot
 
 ## Human figure script directory
 
-Set as `NCB_HUMAN_FIGURE_SCRIPT_DIR`. Expected to include:
+Set as `CFRNA_HUMAN_FIGURE_SCRIPT_DIR`. Expected to include:
 
 - `theme_figure.R`
 - original processed figure inputs where required
 
 ## Mouse processed analysis directory
 
-Set as `NCB_MOUSE_ANALYSIS_DIR`. Expected files include:
+Set as `CFRNA_MOUSE_ANALYSIS_DIR`. Expected files include:
 
 - `CQ_tmm_edger_3_0.1_0.05_TCC_Normalized.csv`
 - `CB_tmm_edger_3_0.1_0.05_TCC_Normalized.csv`
@@ -34,7 +34,7 @@ Set as `NCB_MOUSE_ANALYSIS_DIR`. Expected files include:
 
 Set these output locations:
 
-- `NCB_REVISED_FIGURE_DIR`
-- `NCB_SOURCE_DATA_DIR`
-- `NCB_SOURCE_DATA_WORKBOOK`
-- `NCB_LOG_DIR`
+- `CFRNA_FIGURE_DIR`
+- `CFRNA_SOURCE_DATA_DIR`
+- `CFRNA_SOURCE_DATA_WORKBOOK`
+- `CFRNA_LOG_DIR`

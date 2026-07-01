@@ -1,4 +1,4 @@
-# ExtendedDataFigure1_revision.R
+# ExtendedDataFigure1.R
 # Rebuild Extended Data Figure 1 panels with clipping fixes and source data.
 
 rm(list = ls())
@@ -12,15 +12,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure1_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "ExtendedDataFigure1.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -74,7 +74,7 @@ raw_reads <- raw_reads %>%
   ) %>%
   arrange(SampleType, SampleID)
 
-group_colors_ext <- c(color_ncbi_group, MWE = "gold", MSM = "deeppink")
+group_colors_ext <- c(color_group, MWE = "gold", MSM = "deeppink")
 
 # A. Raw and mapped reads
 df_a <- raw_reads %>%
@@ -87,7 +87,7 @@ pA <- ggplot(df_a, aes(x = SampleID, y = ReadCount, fill = ReadType)) +
   scale_y_log10(expand = expansion(mult = c(0, 0.06))) +
   scale_fill_manual(values = c(Raw_Reads = "#1f77b4", Mapped_Reads = "#ff7f0e")) +
   labs(x = "Analysis ID", y = "Read count (log10)") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_text(size = 4.2, angle = 90, vjust = 0.5, hjust = 1),
     axis.text.y = element_text(size = 7),
@@ -110,7 +110,7 @@ pB <- ggplot(raw_reads, aes(x = SampleType, y = Raw_Reads, fill = SampleType)) +
   scale_fill_manual(values = group_colors_ext) +
   scale_y_log10(expand = expansion(mult = c(0, 0.06))) +
   labs(x = "Sample type", y = "Raw read count (log10)") +
-  theme_ncbi() +
+  theme_publication() +
   theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(2, 2, 2, 2))
 output_files <- c(output_files, save_panel(pB, "FigureS1B_ViolinPlot_RawReads", 60, 52))
@@ -131,10 +131,10 @@ pC <- ggplot(df_c, aes(x = Group, y = MappingRate, fill = Group)) +
   ggpubr::stat_compare_means(comparisons = list(c("EWE", "AWE"), c("ESM", "ASM")),
                              method = "wilcox.test", label = "p.signif",
                              step.increase = 0.14, tip.length = 0.02, size = 2.4) +
-  scale_fill_manual(values = color_ncbi_group[c("EWE", "AWE", "ESM", "ASM")]) +
+  scale_fill_manual(values = color_group[c("EWE", "AWE", "ESM", "ASM")]) +
   coord_cartesian(ylim = c(0, 130), clip = "off") +
   labs(x = "Sample type", y = "Mapping rate (%)") +
-  theme_ncbi() +
+  theme_publication() +
   theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(4, 3, 2, 2))
 output_files <- c(output_files, save_panel(pC, "FigureS1C_MappingRate_PerGroup", 60, 52))
@@ -162,11 +162,11 @@ pD <- ggplot(df_d, aes(x = Group, y = Gini, fill = Group)) +
   ggpubr::stat_compare_means(comparisons = list(c("EWE", "AWE"), c("ESM", "ASM")),
                              method = "wilcox.test", label = "p.signif",
                              step.increase = 0.12, tip.length = 0.02, size = 2.4) +
-  scale_fill_manual(values = color_ncbi_group[c("EWE", "AWE", "ESM", "ASM")]) +
+  scale_fill_manual(values = color_group[c("EWE", "AWE", "ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.18))) +
   coord_cartesian(clip = "off") +
   labs(x = "Sample type", y = "Gini coefficient") +
-  theme_ncbi() +
+  theme_publication() +
   theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(5, 5, 2, 2))
 output_files <- c(output_files, save_panel(pD, "FigureS1D_GiniCoefficient_withPval", 60, 56))
@@ -185,7 +185,7 @@ plot_subsampling <- function(data, y_col, y_label, title_label, show_legend = FA
     geom_line(linewidth = 0.32, alpha = 0.9) +
     scale_y_log10() +
     labs(x = "# Reads (million)", y = y_label, title = title_label, color = "Sample") +
-    theme_ncbi(base_size = 8) +
+    theme_publication(base_size = 8) +
     theme(plot.title = element_text(size = 8, face = "bold", hjust = 0.5),
           axis.text = element_text(size = 7),
           axis.title = element_text(size = 7),
@@ -228,7 +228,7 @@ pG <- ggplot(ma_df, aes(x = a.value, y = m.value, color = DEG)) +
   facet_wrap(~Comparison, ncol = 2) +
   scale_color_manual(values = deg_colors, name = NULL) +
   labs(title = "MA plots of pairwise comparisons", x = "Average expression (log2 scale)", y = "log2 fold change") +
-  theme_ncbi() +
+  theme_publication() +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
         legend.position = "none", strip.background = element_blank(),
         strip.text = element_text(size = 7.5, face = "bold"),
@@ -238,7 +238,7 @@ pH <- ggplot(ma_df, aes(x = a.value, fill = DEG)) +
   facet_wrap(~Comparison, ncol = 2, scales = "free_x") +
   scale_fill_manual(values = deg_colors, name = NULL) +
   labs(title = "Density plots of average expression", x = "Average expression (log2 scale)", y = "Density") +
-  theme_ncbi() +
+  theme_publication() +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
         axis.title = element_text(size = 7), axis.text = element_text(size = 7),
         strip.text = element_text(size = 7.5, face = "bold"), strip.background = element_blank(),
@@ -280,7 +280,7 @@ pI_bar <- ggplot(intersection_i, aes(x = pattern, y = intersection_size)) +
   geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
   labs(y = "Intersection size", x = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         axis.text.y = element_text(size = 6), axis.title.y = element_text(size = 6.5),
         plot.margin = margin(1, 1, 0, 1))
@@ -289,7 +289,7 @@ pI_matrix <- ggplot(matrix_i, aes(x = pattern, y = Comparison)) +
   geom_point(aes(fill = present), shape = 21, size = 1.8, color = "black", stroke = 0.2) +
   scale_fill_manual(values = c("TRUE" = "black", "FALSE" = "white"), guide = "none") +
   labs(x = NULL, y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
         axis.text.y = element_text(size = 6),
         plot.margin = margin(0, 1, 1, 1))

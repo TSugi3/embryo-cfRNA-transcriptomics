@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a review deck containing previews of all revised figures."""
+"""Build a preview deck containing previews of all figures."""
 
 from __future__ import annotations
 
@@ -11,23 +11,23 @@ from pptx.util import Inches, Pt
 
 
 from path_config import BASE_DIR, FIG_DIR
-OUT_PPTX = FIG_DIR / "AllFigures_Revised_review_deck.pptx"
+OUT_PPTX = FIG_DIR / "AllFigures_preview_deck.pptx"
 
 SLIDE_W = 10.0
 SLIDE_H = 7.5
 
 
 SLIDES = [
-    ("Figure 1", ["Figure1_Revised_working_preview.png"]),
-    ("Figure 2", ["Figure2_Revised_working_preview.png"]),
-    ("Figure 3", ["Figure3_Revised_working_slide1_preview.png", "Figure3_Revised_working_slide2_preview.png"]),
-    ("Figure 4", ["Figure4_Revised_working_preview.png"]),
-    ("Figure 5", ["Figure5_Revised_working_slide1_preview.png", "Figure5_Revised_working_slide2_preview.png"]),
-    ("Figure 6", ["Figure6_Revised_working_preview.png"]),
-    ("Extended Data Figure 1", ["ExtendedDataFigure1_Revised_working_slide1_preview.png", "ExtendedDataFigure1_Revised_working_slide2_preview.png"]),
-    ("Extended Data Figure 2", ["ExtendedDataFigure2_Revised_working_slide1_preview.png", "ExtendedDataFigure2_Revised_working_slide2_preview.png"]),
-    ("Extended Data Figure 3", ["ExtendedDataFigure3_Revised_working_slide1_preview.png", "ExtendedDataFigure3_Revised_working_slide2_preview.png", "ExtendedDataFigure3_Revised_working_slide3_preview.png"]),
-    ("Extended Data Figure 4", ["ExtendedDataFigure4_Revised_working_slide1_preview.png", "ExtendedDataFigure4_Revised_working_slide2_preview.png"]),
+    ("Figure 1", ["Figure1_editable_preview.png"]),
+    ("Figure 2", ["Figure2_editable_preview.png"]),
+    ("Figure 3", ["Figure3_editable_slide1_preview.png", "Figure3_editable_slide2_preview.png"]),
+    ("Figure 4", ["Figure4_editable_preview.png"]),
+    ("Figure 5", ["Figure5_editable_slide1_preview.png", "Figure5_editable_slide2_preview.png"]),
+    ("Figure 6", ["Figure6_editable_preview.png"]),
+    ("Extended Data Figure 1", ["ExtendedDataFigure1_editable_slide1_preview.png", "ExtendedDataFigure1_editable_slide2_preview.png"]),
+    ("Extended Data Figure 2", ["ExtendedDataFigure2_editable_slide1_preview.png", "ExtendedDataFigure2_editable_slide2_preview.png"]),
+    ("Extended Data Figure 3", ["ExtendedDataFigure3_editable_slide1_preview.png", "ExtendedDataFigure3_editable_slide2_preview.png", "ExtendedDataFigure3_editable_slide3_preview.png"]),
+    ("Extended Data Figure 4", ["ExtendedDataFigure4_editable_slide1_preview.png", "ExtendedDataFigure4_editable_slide2_preview.png"]),
 ]
 
 

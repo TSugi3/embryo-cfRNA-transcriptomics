@@ -1,4 +1,4 @@
-# Figure1_revision.R
+# Figure1.R
 # Rebuild Figure 1 panels B-G using the submitted manuscript style.
 
 rm(list = ls())
@@ -15,15 +15,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure1_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure1.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -83,7 +83,7 @@ pB <- ggplot(insert_long, aes(x = InsertLength, y = RelativeFrequency,
   labs(x = "Insert Size (bp)", y = "Relative Read Fraction") +
   annotate("text", x = Inf, y = Inf, label = ks_result,
            hjust = 1, vjust = 1, size = 2.3, color = "black") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = c(0.7, 0.7),
     legend.background = element_rect(fill = "transparent"),
@@ -148,7 +148,7 @@ pC <- ggplot(biotype_summary, aes(x = Group, y = MeanProportion, fill = Biotype)
   geom_bar(stat = "identity", width = 0.8) +
   scale_fill_manual(values = biotype_colors) +
   labs(x = "Sample type", y = "Percentage") +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = "right",
     legend.title = element_blank(),
@@ -205,7 +205,7 @@ pD <- ggplot(gene_count_df, aes(x = Group, y = Count, fill = Group)) +
   stat_compare_means(comparisons = comparisons_d, method = "wilcox.test",
                      label = "p.signif", size = 2.5, tip.length = 0.01) +
   labs(x = NULL, y = "Number of Genes") +
-  theme_ncbi() +
+  theme_publication() +
   theme(legend.position = "none", plot.title = element_blank())
 
 output_files <- c(output_files, save_panel(pD, "Figure1D_GeneCount", 60, 60))
@@ -249,7 +249,7 @@ pE <- ggplot(shannon_df, aes(x = Group, y = Shannon, fill = Group)) +
   stat_compare_means(comparisons = comparisons_e, method = "wilcox.test",
                      label = "p.signif", size = 2.5) +
   labs(x = NULL, y = "Shannon Entropy") +
-  theme_ncbi() +
+  theme_publication() +
   theme(legend.position = "none", plot.title = element_blank())
 
 output_files <- c(output_files, save_panel(pE, "Figure1E_ShannonEntropy", 60, 60))
@@ -283,7 +283,7 @@ pF <- ggplot(pca_df, aes(x = PC1, y = PC2, color = Group)) +
   geom_point(size = 1, alpha = 0.9) +
   scale_color_manual(values = group_colors, name = "Group") +
   labs(x = x_label, y = y_label) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = "top",
     legend.direction = "horizontal",
@@ -357,7 +357,7 @@ pG <- ggplot(hex_data, aes(x = WE_mean, y = SM_mean)) +
     x = "Whole Embryo Mean Expression (log10 scale)",
     y = "Spent Media Mean Expression (log10 scale)"
   ) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     legend.position = "right",
     strip.background = element_blank(),

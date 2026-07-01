@@ -1,5 +1,5 @@
-# Figure3_revision.R
-# Rebuild Figure 3 panels with reviewer-driven readability fixes.
+# Figure3.R
+# Rebuild Figure 3 panels with readability improvements.
 
 rm(list = ls())
 
@@ -13,15 +13,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure3_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure3.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -72,7 +72,7 @@ pA <- ggplot(deg_summary, aes(x = Group, y = Percentage, fill = DEG_class)) +
                     breaks = c("Up", "non-DEG", "Down")) +
   labs(x = NULL, y = "Proportion (%)", fill = "Expression change") +
   coord_flip() +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.y = element_text(size = 7),
     axis.text.x = element_text(size = 7),
@@ -125,7 +125,7 @@ make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
     scale_y_discrete(labels = function(x) gsub("___.*", "", x)) +
     facet_grid(rows = vars(Comparison), scales = "free_y", space = "free_y", switch = "y") +
     labs(x = expression(-log[10]~"(q-value)"), y = NULL, title = title) +
-    theme_ncbi() +
+    theme_publication() +
     theme(
       plot.title = element_text(hjust = 0.5, size = 7),
       strip.text.y.left = element_text(angle = 90, size = 6.2),
@@ -184,7 +184,7 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
   geom_point(aes(size = setSize), color = "#2A9D8F", alpha = 0.95) +
   scale_size_continuous(name = "Gene set size", range = c(1, 4)) +
   labs(title = "GO:BP GSEA of AWE vs. ASM", x = "NES", y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 7),
     axis.text.y = element_text(size = 6.8, lineheight = 0.88),
@@ -254,7 +254,7 @@ pE <- ggplot(expr_long, aes(x = Group, y = Expression, fill = Group)) +
   scale_fill_manual(values = c("EWE" = "#00BFC4", "AWE" = "#F8766D")) +
   labs(title = "Expression of NMD and apoptosis-associated genes",
        y = "Expression (TMM-normalized)", x = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 7),
     strip.text = element_text(size = 6, face = "italic"),

@@ -1,6 +1,6 @@
 # ============================================================
-# Figure6_revision.R
-# Revised Figure 6 mouse validation
+# Figure6.R
+# Figure 6 mouse validation
 #
 # A: CQ GSEA dotplot
 # B: CQ-responsive WE gene boxplots, log10(count + 1)
@@ -18,16 +18,16 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure6_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure6.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
-source(file.path(script_root, "R", "theme_ncb_revision.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
 
 base_dir <- paths$mouse_analysis_dir
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 table_dir <- paths$source_data_dir
 aux_table_dir <- file.path(paths$log_dir, "Figure6_aux_tables")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
@@ -462,7 +462,7 @@ pB_all <- ggplot(cq_we_gene_long, aes(x = group, y = log_count, fill = group)) +
 # ============================================================
 # Save
 # ============================================================
-candidate_outputs <- save_ncb_plot(
+candidate_outputs <- save_publication_plot(
   pB_all,
   filename_base = "Figure6B_candidate_gene_screening",
   width_mm = 180,
@@ -471,16 +471,16 @@ candidate_outputs <- save_ncb_plot(
 )
 
 panel_outputs <- c(
-  save_ncb_plot(pA, "Figure6A_CQ_GSEA_dotplot", 120, 95, fig_dir),
-  save_ncb_plot(pB, "Figure6B_CQ_WE_gene_boxplot", 120, 70, fig_dir),
-  save_ncb_plot(pC, "Figure6C_CQ_SM_release_barplot", 120, 62, fig_dir),
-  save_ncb_plot(pD, "Figure6D_CB_GSEA_dotplot", 120, 95, fig_dir)
+  save_publication_plot(pA, "Figure6A_CQ_GSEA_dotplot", 120, 95, fig_dir),
+  save_publication_plot(pB, "Figure6B_CQ_WE_gene_boxplot", 120, 70, fig_dir),
+  save_publication_plot(pC, "Figure6C_CQ_SM_release_barplot", 120, 62, fig_dir),
+  save_publication_plot(pD, "Figure6D_CB_GSEA_dotplot", 120, 95, fig_dir)
 )
 
 combined <- (pA | pB) / (pC | pD) +
   plot_layout(widths = c(1.12, 1), heights = c(1.05, 1))
 
-combined_outputs <- save_ncb_plot(
+combined_outputs <- save_publication_plot(
   combined,
   filename_base = "Figure6_MouseValidation_Combined",
   width_mm = 180,
@@ -495,5 +495,5 @@ write_run_manifest(
   log_dir = paths$log_dir
 )
 
-message("Figure6 revision completed.")
+message("Figure6 completed.")
 message("Output directory: ", fig_dir)

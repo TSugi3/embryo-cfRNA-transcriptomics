@@ -1,5 +1,5 @@
-# run_all_revised_figures.R
-# Driver script for the revised figure/source-data workflow.
+# run_all_figures.R
+# Driver script for the figure/source-data workflow.
 
 rm(list = ls())
 
@@ -11,16 +11,16 @@ script_dir <- if (length(file_arg) > 0) {
   getwd()
 }
 source(file.path(script_dir, "R", "load_config.R"))
-source(file.path(script_dir, "R", "theme_ncb_revision.R"))
+source(file.path(script_dir, "R", "figure_theme.R"))
 source(file.path(script_dir, "R", "source_data_helpers.R"))
 
-message("NCB revision figure workflow")
-message("Revised figure directory: ", paths$revised_figure_dir)
+message("Figure workflow")
+message("Figure directory: ", paths$figure_dir)
 message("Panel source-data directory: ", paths$source_data_dir)
 
-# Individual revised figure scripts will be added here as they are completed.
+# Individual figure scripts will be added here as they are completed.
 # Example:
-# source(file.path(script_dir, "figures", "Figure1_revision.R"))
+# source(file.path(script_dir, "figures", "Figure1.R"))
 
 if (dir.exists(paths$source_data_dir)) {
   csv_files <- list.files(paths$source_data_dir, pattern = "\\.csv$", full.names = TRUE)

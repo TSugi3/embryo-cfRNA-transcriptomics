@@ -1,4 +1,4 @@
-Figure,Panel,Current source script,Current output,Reviewer-driven revision,Source Data contents,Priority
+Figure,Panel,Current source script,Current output,Purpose,Source Data contents,Priority
 Figure 1,A,manual workflow panel,FIgure20250812.pptx,Check size and page fit; keep design,workflow source or note if schematic only,Medium
 Figure 1,B,Figure1B_InsertLength.R,Figure1B.tiff,Export vector-compatible PDF and high-resolution TIFF; check label size,insert-length plotted values and group labels,Medium
 Figure 1,C,Figure1C_Biotype_Comparison.R,Figure1C.tiff,Export vector-compatible PDF and high-resolution TIFF; check legend readability,biotype proportions/counts,Medium
@@ -24,7 +24,7 @@ Figure 5,B,Figure5B_Biotype_PieChart.R,Figure5B_Biotype_PieChart.tiff,Check labe
 Figure 5,C,Figure5C_GO_BP_viridis_dotplot.R,Figure5C_GO_BP_dotplot_viridis_final.tiff,Improve readability and descriptive legend title,GO terms with enrichment statistics,High
 Figure 5,D,Figure5D_Heatmap_Autophagy.R,Figure5D_heatmap_autophagy_1.0.tiff,Improve readability; address batch-effect concern in text/method; avoid label cut-off,heatmap expression matrix and sample annotations,High
 Figure 5,E,Figure5E_chord_autophagy.R,Figure5E_chord_autophagy_1.0.tiff,Check readability and page fit,chord input edges/weights and annotations,Medium
-Figure 6,A,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign in same style as Figures 1-5; fit NCB page; include GSEA statistics,CQ WE/SM selected GSEA terms with NES p value FDR,High
+Figure 6,A,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign in same style as Figures 1-5; fit publication page; include GSEA statistics,CQ WE/SM selected GSEA terms with NES p value FDR,High
 Figure 6,B,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign gene boxplots to match manuscript style; report tests/n; italicize mouse gene symbols in figure labels,CQ representative gene expression values and Wilcoxon/test outputs,High
 Figure 6,C,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign release-term barplot; include GSEA statistics,CQ SM release term NES p value FDR,High
 Figure 6,D,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign CB GSEA panel to match manuscript style,CB WE/SM selected GSEA terms with NES p value FDR,High

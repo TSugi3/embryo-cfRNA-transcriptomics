@@ -1,28 +1,30 @@
-GitHub-ready code package
-Source: revision Script directory; private local path intentionally omitted.
-Output: GitHub-ready code package directory; private local path intentionally omitted.
+Code package
+Source: analysis script directory; private local path intentionally omitted.
+Output: code package directory; private local path intentionally omitted.
 
 Files:
 .gitignore
+LICENSE
+PACKAGE_MANIFEST.txt
 R/config_template.R
+R/figure_theme.R
 R/load_config.R
 R/packages.R
 R/source_data_helpers.R
-R/theme_ncb_revision.R
 README.md
 build_source_data_workbook.py
 data_inputs_README.md
-figures/ExtendedDataFigure1_revision.R
-figures/ExtendedDataFigure2_revision.R
-figures/ExtendedDataFigure3_revision.R
-figures/ExtendedDataFigure4_revision.R
-figures/Figure1_revision.R
-figures/Figure2_revision.R
-figures/Figure3_revision.R
-figures/Figure4_revision.R
-figures/Figure5_revision.R
-figures/Figure6_revision.R
-figures/build_all_figures_review_deck.py
+figures/ExtendedDataFigure1.R
+figures/ExtendedDataFigure2.R
+figures/ExtendedDataFigure3.R
+figures/ExtendedDataFigure4.R
+figures/Figure1.R
+figures/Figure2.R
+figures/Figure3.R
+figures/Figure4.R
+figures/Figure5.R
+figures/Figure6.R
+figures/build_all_figures_preview_deck.py
 figures/build_extended_data_figure1_pptx.py
 figures/build_extended_data_figure2_pptx.py
 figures/build_extended_data_figure3_pptx.py
@@ -36,12 +38,12 @@ figures/build_figure4_pptx.py
 figures/build_figure5_pptx.py
 figures/build_figure6_combined_image.py
 figures/build_figure6_pptx.py
-figures/export_submission_figures.py
+figures/export_figures.py
 figures/path_config.py
 figures/render_figure_previews.py
-inventory/figure_revision_inventory.csv
+inventory/figure_inventory.csv
 requirements-python.txt
-run_all_revised_figures.R
+run_all_figures.R
 
 Sensitive-string scan:
 No local path or credential-like strings detected in packaged text files.

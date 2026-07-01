@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build revised Figure 6 as a working PowerPoint file from checked panels."""
+"""Build Figure 6 as a editable PowerPoint file from assembled panels."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from pptx.util import Inches, Pt
 
 
 from path_config import BASE_DIR, FIG_DIR
-OUT_PPTX = FIG_DIR / "Figure6_Revised_working.pptx"
+OUT_PPTX = FIG_DIR / "Figure6_editable.pptx"
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,

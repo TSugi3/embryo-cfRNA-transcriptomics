@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export manuscript figure PPTX files to submission PNG/TIFF/PDF deliverables."""
+"""Export manuscript figure PPTX files to publication PNG/TIFF/PDF deliverables."""
 
 from __future__ import annotations
 
@@ -22,16 +22,16 @@ MM_PER_INCH = 25.4
 
 
 FIGURE_ORDER = [
-    ("Figure1", "Figure1_Revised_working.pptx"),
-    ("Figure2", "Figure2_Revised_working.pptx"),
-    ("Figure3", "Figure3_Revised_working.pptx"),
-    ("Figure4", "Figure4_Revised_working.pptx"),
-    ("Figure5", "Figure5_Revised_working.pptx"),
-    ("Figure6", "Figure6_Revised_working.pptx"),
-    ("ExtendedDataFigure1", "ExtendedDataFigure1_Revised_working.pptx"),
-    ("ExtendedDataFigure2", "ExtendedDataFigure2_Revised_working.pptx"),
-    ("ExtendedDataFigure3", "ExtendedDataFigure3_Revised_working.pptx"),
-    ("ExtendedDataFigure4", "ExtendedDataFigure4_Revised_working.pptx"),
+    ("Figure1", "Figure1_editable.pptx"),
+    ("Figure2", "Figure2_editable.pptx"),
+    ("Figure3", "Figure3_editable.pptx"),
+    ("Figure4", "Figure4_editable.pptx"),
+    ("Figure5", "Figure5_editable.pptx"),
+    ("Figure6", "Figure6_editable.pptx"),
+    ("ExtendedDataFigure1", "ExtendedDataFigure1_editable.pptx"),
+    ("ExtendedDataFigure2", "ExtendedDataFigure2_editable.pptx"),
+    ("ExtendedDataFigure3", "ExtendedDataFigure3_editable.pptx"),
+    ("ExtendedDataFigure4", "ExtendedDataFigure4_editable.pptx"),
 ]
 
 
@@ -58,7 +58,7 @@ def is_figure_page_title(shape) -> bool:
     if not text:
         return False
     # Working PPTX files keep a page-level figure title at the top-left for QA.
-    # Individual submission figure images should not include this title, because
+    # Individual figure images should not include this title, because
     # panel labels and legends already identify the figure in the manuscript.
     if shape.top > int(0.12 * EMU_PER_INCH):
         return False
@@ -184,7 +184,7 @@ def main() -> None:
     for fig_name, pptx_name in FIGURE_ORDER:
         pptx_path = args.figure_dir / pptx_name
         prs = Presentation(str(pptx_path))
-        editable = args.out_dir / f"{fig_name}_Revised_editable.pptx"
+        editable = args.out_dir / f"{fig_name}_editable.pptx"
         shutil.copy2(pptx_path, editable)
         page_count = len(prs.slides)
         for page_idx, slide in enumerate(prs.slides, start=1):
@@ -208,20 +208,20 @@ def main() -> None:
                 "pixel_height": str(image.height),
             })
 
-    contact = args.out_dir / "Figure_submission_contact_sheet_20260630.png"
-    pdf = args.out_dir / "All_Figures_submission_20260630.pdf"
-    manifest = args.out_dir / "figure_submission_manifest.csv"
+    contact = args.out_dir / "Figure_contact_sheet.png"
+    pdf = args.out_dir / "All_Figures.pdf"
+    manifest = args.out_dir / "figure_manifest.csv"
     make_contact_sheet(pngs, contact)
     make_pdf(pngs_with_labels, pdf)
     with manifest.open("w", newline="") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
-    readme = args.out_dir / "README_figure_submission_20260630.txt"
+    readme = args.out_dir / "README_figure_exports.txt"
     readme.write_text(
-        "Submission figure exports generated from revised working PPTX files.\n"
+        "Figure exports generated from editable PPTX files.\n"
         "PNG and TIFF files are rendered at 180 mm width with 600 dpi metadata.\n"
-        "PNG and TIFF files omit the working PPTX page-level figure titles.\n"
+        "PNG and TIFF files omit the editable PPTX page-level figure titles.\n"
         "The combined PDF contains one figure page per page with figure labels added for review and no page numbers.\n",
         encoding="utf-8",
     )

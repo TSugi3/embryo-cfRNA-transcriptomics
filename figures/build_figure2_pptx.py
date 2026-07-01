@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build revised Figure 2 as an editable PowerPoint slide."""
+"""Build Figure 2 as an editable PowerPoint slide."""
 
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from pptx.util import Inches, Pt
 
 
 from path_config import BASE_DIR, FIG_DIR
-OUT_PPTX = FIG_DIR / "Figure2_Revised_working.pptx"
+OUT_PPTX = FIG_DIR / "Figure2_editable.pptx"
 
 SLIDE_W = 7.5
 SLIDE_H = 8.9

@@ -1,5 +1,5 @@
-# Figure5_revision.R
-# Rebuild Figure 5 panels with reviewer-driven readability fixes and source data.
+# Figure5.R
+# Rebuild Figure 5 panels with readability improvements and source-data outputs.
 
 rm(list = ls())
 
@@ -15,15 +15,15 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure5_revision.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure5.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
 source(file.path(script_root, "R", "load_config.R"))
 source(file.path(script_root, "R", "source_data_helpers.R"))
-source(file.path(paths$human_figure_script_dir, "theme_figure.R"))
+source(file.path(script_root, "R", "figure_theme.R"))
 
-fig_dir <- paths$revised_figure_dir
+fig_dir <- paths$figure_dir
 panel_data_dir <- paths$source_data_dir
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(panel_data_dir, recursive = TRUE, showWarnings = FALSE)
@@ -100,7 +100,7 @@ pA_bar <- ggplot(intersection_counts, aes(x = membership, y = intersection_size)
   geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
   labs(y = "Intersection size", x = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
@@ -114,7 +114,7 @@ pA_matrix <- ggplot(set_labels, aes(x = membership, y = set)) +
   geom_point(aes(fill = present), shape = 21, size = 2.2, color = "black", stroke = 0.2) +
   scale_fill_manual(values = c("TRUE" = "black", "FALSE" = "white"), guide = "none") +
   labs(x = NULL, y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     axis.text.x = element_text(size = 5.5, angle = 35, hjust = 1),
     axis.text.y = element_text(size = 6),
@@ -224,7 +224,7 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
   scale_size_continuous(name = "Gene count", range = c(1.2, 4.0)) +
   labs(title = "GO:BP enrichment of mRNAs co-expressed with lncRNAs",
        x = "Gene ratio", y = NULL) +
-  theme_ncbi() +
+  theme_publication() +
   theme(
     plot.title = element_text(face = "bold", size = 8, hjust = 0.5),
     legend.position = "right",
@@ -273,7 +273,7 @@ sample_group_df <- tibble(
 
 pD_group <- ggplot(sample_group_df, aes(x = Sample, y = "Group", fill = Group)) +
   geom_tile(color = "white", linewidth = 0.08) +
-  scale_fill_manual(values = color_ncbi_group[c("EWE", "AWE", "ESM", "ASM")], na.value = "grey85") +
+  scale_fill_manual(values = color_group[c("EWE", "AWE", "ESM", "ASM")], na.value = "grey85") +
   labs(x = NULL, y = NULL) +
   theme_void(base_family = "Arial") +
   theme(

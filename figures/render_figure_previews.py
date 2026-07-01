@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Render lightweight PNG previews from figure PPTX files.
 
-This is a QA helper for the revision workflow. It renders embedded images and
+This is a QA helper for the figure workflow. It renders embedded images and
 native text boxes sufficiently for checking layout, clipping and legibility.
 """
 
@@ -125,16 +125,16 @@ def main() -> None:
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     pptx_files = [
-        "Figure1_Revised_working.pptx",
-        "Figure2_Revised_working.pptx",
-        "Figure3_Revised_working.pptx",
-        "Figure4_Revised_working.pptx",
-        "Figure5_Revised_working.pptx",
-        "Figure6_Revised_working.pptx",
-        "ExtendedDataFigure1_Revised_working.pptx",
-        "ExtendedDataFigure2_Revised_working.pptx",
-        "ExtendedDataFigure3_Revised_working.pptx",
-        "ExtendedDataFigure4_Revised_working.pptx",
+        "Figure1_editable.pptx",
+        "Figure2_editable.pptx",
+        "Figure3_editable.pptx",
+        "Figure4_editable.pptx",
+        "Figure5_editable.pptx",
+        "Figure6_editable.pptx",
+        "ExtendedDataFigure1_editable.pptx",
+        "ExtendedDataFigure2_editable.pptx",
+        "ExtendedDataFigure3_editable.pptx",
+        "ExtendedDataFigure4_editable.pptx",
     ]
     all_images: list[Path] = []
     for name in pptx_files:
