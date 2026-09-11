@@ -5,14 +5,14 @@ Figure 3,A-C,figures/Figure3.R,figures/build_figure3_pptx.py,Source Data sheets 
 Figure 4,A-B,figures/Figure3.R,figures/build_figure4_pptx.py,Final Figure 4 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
 Figure 5,A-D,figures/Figure4.R,figures/build_figure5_pptx.py,Final Figure 5 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
 Figure 6,A-D,figures/Figure5.R,figures/build_figure6_pptx.py,Final Figure 6 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
-Figure 7,none,figures/Figure5.R,figures/build_figure7_pptx.py,Final Figure 7 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
+Figure 7,single panel,figures/Figure5.R,figures/build_figure7_pptx.py,Final Figure 7 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
 Figure 8,A-D,figures/Figure8.R,figures/build_figure8_pptx.py,Source Data sheets beginning with Fig8 are produced through inventory/source_data_sheet_mapping.csv.
 Extended Data Figure 1,A-F,figures/ExtendedDataFigure1.R,figures/build_extended_data_figure1_pptx.py,Source Data sheets beginning with EDFig1.
 Extended Data Figure 2,A-C,figures/ExtendedDataFigure1.R and figures/ExtendedDataFigure2.R,figures/build_extended_data_figure2_pptx.py,Source Data sheets beginning with EDFig2.
 Extended Data Figure 3,A-B,figures/ExtendedDataFigure2.R,figures/build_extended_data_figure3_pptx.py,Source Data sheets beginning with EDFig3.
 Extended Data Figure 4,A-C,figures/ExtendedDataFigure2.R,figures/build_extended_data_figure4_pptx.py,Source Data sheets beginning with EDFig4.
 Extended Data Figure 5,A-B,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig5.
-Extended Data Figure 6,none,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig6.
+Extended Data Figure 6,single panel,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig6.
 Extended Data Figure 7,A-B,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig7.
 Extended Data Figure 8,A-B,figures/ExtendedDataFigure4.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig8.
-Extended Data Figure 9,none,figures/ExtendedDataFigure4.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig9.
+Extended Data Figure 9,single panel,figures/ExtendedDataFigure4.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig9.

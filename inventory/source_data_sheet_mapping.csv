@@ -17,7 +17,7 @@ Figure5B_gene_biotypes,Fig6B_gene_biotypes,Figure 6,B_gene_biotypes,Gene-level b
 Figure5C_GO_BP_enrichment_terms,Fig6C_GO_BP_terms,Figure 6,C,GO biological process enrichment terms for mRNAs co-expressed with lncRNAs.
 Figure5D_autophagy_heatmap_expression,Fig6D_heatmap_expression,Figure 6,D_expression,Expression matrix used for the autophagy-related release heatmap.
 Figure5D_autophagy_heatmap_zscores,Fig6D_heatmap_zscore,Figure 6,D_z_scores,Row-scaled z-scores plotted in the autophagy-related release heatmap.
-Figure5E_autophagy_chord_correlations,Fig7_chord_correlations,Figure 7,none,lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.
+Figure5E_autophagy_chord_correlations,Fig7_chord_correlations,Figure 7,,lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.
 Figure8A_CQ_GSEA_selected_terms,Fig8A_CQ_GSEA_terms,Figure 8,A,Selected autophagy lysosome endosome and vesicle secretion GO BP GSEA terms for CQ-treated samples.
 Figure8B_CQ_WE_gene_values,Fig8B_CQ_WE_gene_values,Figure 8,B_values,Sample-level log10 normalized expression values for selected CQ-responsive genes.
 Figure8B_CQ_WE_gene_statistics,Fig8B_CQ_WE_gene_stats,Figure 8,B_statistics,Wilcoxon rank-sum test outputs for selected CQ-responsive genes.
@@ -42,12 +42,12 @@ FigureS2E_representative_gene_values,EDFig4C_gene_values,Extended Data Figure 4,
 FigureS3A_KS_statistics,EDFig5A_KS_stats,Extended Data Figure 5,A_statistics,KS-test statistics for Extended Data Figure 5 panel A.
 FigureS3A_distribution_values,EDFig5A_distribution_values,Extended Data Figure 5,A_values,Distribution values plotted in Extended Data Figure 5 panel A.
 FigureS3B_Reactome_UpregulatedOnly_terms,EDFig5B_Reactome_up_terms,Extended Data Figure 5,B,Reactome upregulated enrichment terms plotted in Extended Data Figure 5 panel B.
-FigureS3C_Reactome_DownregulatedOnly_terms,EDFig6_Reactome_down_terms,Extended Data Figure 6,none,Reactome downregulated enrichment terms plotted in Extended Data Figure 6.
+FigureS3C_Reactome_DownregulatedOnly_terms,EDFig6_Reactome_down_terms,Extended Data Figure 6,,Reactome downregulated enrichment terms plotted in Extended Data Figure 6.
 FigureS3D_GSEA_Reactome_terms,EDFig7A_GSEA_Reactome_terms,Extended Data Figure 7,A,Reactome GSEA terms plotted in Extended Data Figure 7 panel A.
 FigureS3E_GSEAplot_Reactome_statistics,EDFig7B_GSEAplot_stats,Extended Data Figure 7,B,Reactome GSEA curve statistics plotted in Extended Data Figure 7 panel B.
 FigureS4A_KEGG_all_terms,EDFig8A_KEGG_all_terms,Extended Data Figure 8,A_all,All KEGG enrichment terms for Extended Data Figure 8 panel A.
 FigureS4A_KEGG_plotted_terms,EDFig8A_KEGG_plotted_terms,Extended Data Figure 8,A_plotted,Plotted KEGG enrichment terms for Extended Data Figure 8 panel A.
 FigureS4B_heatmap_all_expression,EDFig8B_heatmap_all_expr,Extended Data Figure 8,B_all,All expression values for Extended Data Figure 8 panel B.
 FigureS4B_heatmap_plotted_expression,EDFig8B_heatmap_plotted_expr,Extended Data Figure 8,B_plotted,Plotted expression values for Extended Data Figure 8 panel B.
-FigureS4C_chord_all_correlations,EDFig9_chord_all_corr,Extended Data Figure 9,all,All lncRNA-mRNA correlations for Extended Data Figure 9.
-FigureS4C_chord_plotted_correlations,EDFig9_chord_plotted_corr,Extended Data Figure 9,plotted,Plotted lncRNA-mRNA correlations for Extended Data Figure 9.
+FigureS4C_chord_all_correlations,EDFig9_chord_all_corr,Extended Data Figure 9,,All lncRNA-mRNA correlations for Extended Data Figure 9.
+FigureS4C_chord_plotted_correlations,EDFig9_chord_plotted_corr,Extended Data Figure 9,,Plotted lncRNA-mRNA correlations for Extended Data Figure 9.

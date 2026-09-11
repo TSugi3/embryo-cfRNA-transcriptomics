@@ -1,5 +1,5 @@
 # ExtendedDataFigure4.R
-# Rebuild Extended Data Figure 4 panels with readability improvements.
+# Generate Extended Data Figure 8 and 9 panels with source data.
 
 rm(list = ls())
 

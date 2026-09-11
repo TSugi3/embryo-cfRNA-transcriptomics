@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+import math
 import shutil
 from pathlib import Path
 
@@ -86,9 +87,13 @@ def font_for(size_pt: float, bold: bool = False) -> ImageFont.FreeTypeFont:
     return ImageFont.load_default()
 
 
-def render_slide(prs: Presentation, slide, width_mm: float, dpi: int, skip_page_title: bool = False) -> Image.Image:
-    out_w = int(round(width_mm / MM_PER_INCH * dpi))
-    out_h = int(round(out_w * prs.slide_height / prs.slide_width))
+def render_slide(prs: Presentation, slide, max_width_mm: float, max_height_mm: float,
+                 dpi: int, skip_page_title: bool = False) -> Image.Image:
+    max_w = max_width_mm / MM_PER_INCH * dpi
+    max_h = max_height_mm / MM_PER_INCH * dpi
+    slide_ratio = prs.slide_height / prs.slide_width
+    out_w = int(math.floor(min(max_w, max_h / slide_ratio)))
+    out_h = int(math.floor(out_w * slide_ratio))
     sx = out_w / prs.slide_width
     sy = out_h / prs.slide_height
     canvas_img = Image.new("RGB", (out_w, out_h), "white")
@@ -123,8 +128,8 @@ def render_slide(prs: Presentation, slide, width_mm: float, dpi: int, skip_page_
 
 def output_stem(fig_name: str, page_count: int, page_idx: int) -> str:
     if page_count == 1:
-        return f"{fig_name}_180mm_600dpi"
-    return f"{fig_name}_page{page_idx:02d}_180mm_600dpi"
+        return f"{fig_name}_max180x200mm_600dpi"
+    return f"{fig_name}_page{page_idx:02d}_max180x200mm_600dpi"
 
 
 def make_contact_sheet(pngs: list[Path], out_path: Path, thumb_w: int = 560) -> None:
@@ -179,6 +184,7 @@ def main() -> None:
     parser.add_argument("--figure-dir", required=True, type=Path)
     parser.add_argument("--out-dir", required=True, type=Path)
     parser.add_argument("--width-mm", type=float, default=180.0)
+    parser.add_argument("--height-mm", type=float, default=200.0)
     parser.add_argument("--dpi", type=int, default=600)
     args = parser.parse_args()
 
@@ -197,12 +203,15 @@ def main() -> None:
         shutil.copy2(pptx_path, editable)
         page_count = len(prs.slides)
         for page_idx, slide in enumerate(prs.slides, start=1):
-            image = render_slide(prs, slide, args.width_mm, args.dpi, skip_page_title=True)
+            image = render_slide(prs, slide, args.width_mm, args.height_mm,
+                                 args.dpi, skip_page_title=True)
             stem = output_stem(fig_name, page_count, page_idx)
             png = args.out_dir / f"{stem}.png"
             tif = args.out_dir / f"{stem}.tif"
             image.save(png, dpi=(args.dpi, args.dpi))
             image.save(tif, dpi=(args.dpi, args.dpi), compression="tiff_lzw")
+            rendered_width_mm = image.width / args.dpi * MM_PER_INCH
+            rendered_height_mm = image.height / args.dpi * MM_PER_INCH
             pngs.append(png)
             pngs_with_labels.append((png, pdf_label(fig_name, page_count, page_idx)))
             rows.append({
@@ -211,7 +220,10 @@ def main() -> None:
                 "png": png.name,
                 "tif": tif.name,
                 "editable_pptx": editable.name,
-                "width_mm": f"{args.width_mm:g}",
+                "max_width_mm": f"{args.width_mm:g}",
+                "max_height_mm": f"{args.height_mm:g}",
+                "rendered_width_mm": f"{rendered_width_mm:.2f}",
+                "rendered_height_mm": f"{rendered_height_mm:.2f}",
                 "dpi": str(args.dpi),
                 "pixel_width": str(image.width),
                 "pixel_height": str(image.height),
@@ -231,7 +243,7 @@ def main() -> None:
     readme = args.out_dir / "README_figure_exports.txt"
     readme.write_text(
         "Figure exports generated from editable PPTX files.\n"
-        "PNG and TIFF files are rendered at 180 mm width with 600 dpi metadata.\n"
+        "PNG and TIFF files are rendered within 180 mm width and 200 mm height with 600 dpi metadata.\n"
         "PNG and TIFF files omit the editable PPTX page-level figure titles.\n"
         "The combined PDF contains one figure page per page with figure labels added for review and no page numbers.\n",
         encoding="utf-8",

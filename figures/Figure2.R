@@ -1,5 +1,5 @@
 # Figure2.R
-# Rebuild Figure 2 panels B-E and panel-level source data.
+# Generate Figure 2 panels B-E and panel-level source data.
 
 rm(list = ls())
 

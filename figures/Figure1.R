@@ -1,5 +1,5 @@
 # Figure1.R
-# Rebuild Figure 1 panels B-G using the final manuscript style.
+# Generate Figure 1 panels B-G and panel-level source data.
 
 rm(list = ls())
 
@@ -379,4 +379,3 @@ source_files <- c(
 write_run_manifest("Figure1", output_files, source_files, paths$log_dir)
 message("Figure1 panels B-G completed.")
 message("Output directory: ", fig_dir)
-

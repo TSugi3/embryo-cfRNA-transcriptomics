@@ -1,5 +1,5 @@
 # Figure5.R
-# Rebuild Figure 5 panels with readability improvements and source-data outputs.
+# Generate final Figure 6 and Figure 7 panels with source-data outputs.
 
 rm(list = ls())
 

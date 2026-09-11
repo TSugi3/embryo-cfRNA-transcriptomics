@@ -1,5 +1,5 @@
 # Figure3.R
-# Rebuild Figure 3 panels with readability improvements.
+# Generate Figure 3 and Figure 4 panels with panel-level source data.
 
 rm(list = ls())
 
@@ -200,7 +200,7 @@ output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_
 source_files <- c(source_files, write_panel_source_data(
   gsea_plot %>% arrange(desc(abs(NES))),
   "Figure 3", "D",
-  "GO biological process GSEA terms. Points encode gene set size and colour encodes -log10(FDR).",
+  "GO biological process GSEA terms. Points encode gene set size.",
   panel_data_dir, "Figure3D_GSEA_GO_BP_terms"
 ))
 

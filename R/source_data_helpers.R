@@ -3,7 +3,6 @@
 suppressPackageStartupMessages({
   library(readr)
   library(dplyr)
-  library(openxlsx)
 })
 
 write_panel_source_data <- function(data, figure, panel, description,
@@ -26,52 +25,6 @@ write_panel_source_data <- function(data, figure, panel, description,
   file <- file.path(source_data_dir, paste0(file_stub, ".csv"))
   readr::write_csv(out, file, na = "")
   invisible(file)
-}
-
-combine_source_data_workbook <- function(panel_dir, output_xlsx) {
-  files <- list.files(panel_dir, pattern = "\\.csv$", full.names = TRUE)
-  if (length(files) == 0) {
-    stop("No panel-level CSV files found in: ", panel_dir, call. = FALSE)
-  }
-
-  wb <- openxlsx::createWorkbook()
-  openxlsx::addWorksheet(wb, "Index")
-  index <- tibble::tibble(
-    sheet = character(),
-    file = character(),
-    rows = integer(),
-    columns = integer()
-  )
-
-  for (file in sort(files)) {
-    df <- readr::read_csv(file, show_col_types = FALSE)
-    base <- tools::file_path_sans_ext(basename(file))
-    sheet <- substr(gsub("[^A-Za-z0-9_]", "_", base), 1, 31)
-    original_sheet <- sheet
-    i <- 1
-    while (sheet %in% names(wb)) {
-      suffix <- paste0("_", i)
-      sheet <- substr(paste0(substr(original_sheet, 1, 31 - nchar(suffix)), suffix), 1, 31)
-      i <- i + 1
-    }
-    openxlsx::addWorksheet(wb, sheet)
-    openxlsx::writeData(wb, sheet, df)
-    openxlsx::freezePane(wb, sheet, firstRow = TRUE)
-    index <- bind_rows(index, tibble::tibble(
-      sheet = sheet,
-      file = basename(file),
-      rows = nrow(df),
-      columns = ncol(df)
-    ))
-  }
-
-  openxlsx::writeData(wb, "Index", index)
-  openxlsx::freezePane(wb, "Index", firstRow = TRUE)
-  if (file.exists(output_xlsx)) {
-    unlink(output_xlsx)
-  }
-  openxlsx::saveWorkbook(wb, output_xlsx, overwrite = TRUE)
-  invisible(output_xlsx)
 }
 
 write_run_manifest <- function(figure, output_files, source_files, log_dir) {

@@ -34,8 +34,6 @@ figures/build_extended_data_figure6_pptx.py
 figures/build_extended_data_figure7_pptx.py
 figures/build_extended_data_figure8_pptx.py
 figures/build_extended_data_figure9_pptx.py
-figures/build_figure1A_vector.py
-figures/build_figure1_combined.py
 figures/build_figure1_pptx.py
 figures/build_figure2_pptx.py
 figures/build_figure3_pptx.py
@@ -43,7 +41,6 @@ figures/build_figure4_pptx.py
 figures/build_figure5_pptx.py
 figures/build_figure6_pptx.py
 figures/build_figure7_pptx.py
-figures/build_figure8_combined_image.py
 figures/build_figure8_pptx.py
 figures/export_figures.py
 figures/path_config.py
@@ -56,4 +53,4 @@ requirements-python.txt
 run_all_figures.R
 
 Sensitive-string scan:
-No local path or credential-like strings detected in packaged text files at the time this manifest was updated.
+No local path or credential-like strings detected in packaged text files.

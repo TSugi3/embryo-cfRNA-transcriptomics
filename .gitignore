@@ -30,7 +30,7 @@ logs/
 # Private manuscript files
 *.docx
 *.doc
-*_metadata_draft.tsv
+*_metadata*.tsv
 *_metadata*.xlsx
 
 # R/RStudio/session files

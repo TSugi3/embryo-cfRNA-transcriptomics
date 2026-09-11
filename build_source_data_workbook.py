@@ -117,13 +117,14 @@ def build_workbook(panel_dir: Path, output_xlsx: Path, sheet_map: Path | None = 
                 raw_rows.append(row)
 
         source_figure, source_panel, source_description, rows = split_metadata(raw_rows, file.stem)
-        source_figure = mapped.get("source_figure") or source_figure
-        source_panel = mapped.get("source_panel") or source_panel
-        source_description = mapped.get("description") or source_description
+        if mapped:
+            source_figure = mapped.get("source_figure", source_figure)
+            source_panel = mapped.get("source_panel", source_panel)
+            source_description = mapped.get("description", source_description) or source_description
         title_parts = []
         if source_figure:
             title_parts.append(source_figure)
-        if source_panel:
+        if source_panel and source_panel.lower() != "none":
             title_parts.append(f"panel {source_panel}")
         prefix = " ".join(title_parts)
         title = f"{prefix}: {source_description}" if prefix else source_description

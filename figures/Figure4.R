@@ -1,5 +1,5 @@
 # Figure4.R
-# Rebuild Figure 4 panels with high-resolution outputs and source data.
+# Generate final Figure 5 panels and panel-level source data.
 
 rm(list = ls())
 

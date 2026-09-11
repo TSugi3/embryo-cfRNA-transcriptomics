@@ -3,7 +3,7 @@
 
 cran_packages <- c(
   "tidyverse", "readxl", "ggplot2", "ggpubr", "ggrepel", "ggupset",
-  "patchwork", "cowplot", "viridis", "hexbin", "entropy", "openxlsx",
+  "patchwork", "cowplot", "viridis", "hexbin", "entropy",
   "circlize", "pheatmap", "ggsci", "scales", "RColorBrewer"
 )
 

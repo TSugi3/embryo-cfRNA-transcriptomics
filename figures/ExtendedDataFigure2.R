@@ -1,5 +1,5 @@
 # ExtendedDataFigure2.R
-# Rebuild Extended Data Figure 2 panels with clipping fixes and source data.
+# Generate Extended Data Figure 3 and 4 panels with source data.
 
 rm(list = ls())
 
