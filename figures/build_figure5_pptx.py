@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Build Figure 5 as a two-slide editable PowerPoint file."""
+"""Build final Figure 5 as an editable PowerPoint slide."""
 
 from __future__ import annotations
-
-from pathlib import Path
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
@@ -11,11 +9,11 @@ from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
 
-from path_config import BASE_DIR, FIG_DIR
-OUT_PPTX = FIG_DIR / "Figure5_editable.pptx"
+from path_config import FIG_DIR
 
+OUT_PPTX = FIG_DIR / "Figure5_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 10.833333333333334
+SLIDE_H = 9.2
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -50,33 +48,21 @@ def add_picture(slide, filename: str, left: float, top: float, width: float, hei
                              width=Inches(width), height=Inches(height))
 
 
-def add_picture_keep_aspect(slide, filename: str, left: float, top: float, width: float) -> None:
-    path = FIG_DIR / filename
-    if not path.exists():
-        raise FileNotFoundError(path)
-    slide.shapes.add_picture(str(path), Inches(left), Inches(top), width=Inches(width))
-
-
 def main() -> None:
     prs = Presentation()
     prs.slide_width = Inches(SLIDE_W)
     prs.slide_height = Inches(SLIDE_H)
 
-    slide1 = prs.slides.add_slide(prs.slide_layouts[6])
-    add_textbox(slide1, "Figure 5 (continues)", 0.0, 0.005, 1.99, 0.30, 10)
-    add_picture(slide1, "Figure5A_UpSetPlot_nonDEG_CV.png", 0.230, 0.459, 1.958, 1.958)
-    add_picture(slide1, "Figure5B_Biotype_PieChart.png", 2.195, 0.459, 5.111, 1.958)
-    add_picture_keep_aspect(slide1, "Figure5C_GO_BP_dotplot_viridis.png", 0.208, 2.442, 7.083)
-    add_picture_keep_aspect(slide1, "Figure5D_heatmap_autophagy.png", 0.223, 5.300, 7.083)
-    add_panel_label(slide1, "A", 0.208, 0.296)
-    add_panel_label(slide1, "B", 2.195, 0.296)
-    add_panel_label(slide1, "C", 0.208, 2.271)
-    add_panel_label(slide1, "D", 0.208, 5.182)
-
-    slide2 = prs.slides.add_slide(prs.slide_layouts[6])
-    add_textbox(slide2, "Figure 5 (continued)", 0.0, 0.005, 1.99, 0.30, 10)
-    add_picture(slide2, "Figure5E_chord_autophagy.png", 0.208, 0.308, 7.083, 6.500)
-    add_panel_label(slide2, "E", 0.208, 0.296)
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+    add_textbox(slide, "Figure 5", 0.0, 0.005, 1.25, 0.30, 10)
+    add_picture(slide, "Figure4A_GSEA_GO_BP_ESMvsASM_dotplot.png", 0.208, 0.308, 7.083, 3.931)
+    add_picture(slide, "Figure4B_Representative_Gene_Expression_Boxplot.png", 0.208, 4.238, 7.083, 1.569)
+    add_picture(slide, "Figure4C_ExosomeMarkers_Boxplot.png", 0.208, 6.007, 7.083, 1.486)
+    add_picture(slide, "Figure4D_ssGSEA_Boxplot_GO_BP.png", 0.208, 7.596, 7.083, 1.569)
+    add_panel_label(slide, "A", 0.208, 0.296)
+    add_panel_label(slide, "B", 0.208, 4.131)
+    add_panel_label(slide, "C", 0.208, 5.889)
+    add_panel_label(slide, "D", 0.208, 7.540)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

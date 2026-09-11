@@ -148,7 +148,7 @@ plot_df <- gsea_df %>%
     significance = ifelse(p.adjust < 0.05, "FDR < 0.05", "trend / n.s.")
   )
 
-write.csv(plot_df, file.path(aux_table_dir, "Figure07_GSEA_selected_terms.csv"), row.names = FALSE)
+write.csv(plot_df, file.path(aux_table_dir, "Figure8_GSEA_selected_terms.csv"), row.names = FALSE)
 
 make_gsea_dotplot <- function(df, exp_name, title_text, subtitle_text) {
   df_use <- df %>% filter(experiment == exp_name)
@@ -198,7 +198,7 @@ make_sm_release_barplot <- function(df, exp_name, title_text, subtitle_text, fil
 
   write.csv(
     df_use,
-    file.path(aux_table_dir, paste0("Figure07_", exp_name, "_SM_release_terms.csv")),
+    file.path(aux_table_dir, paste0("Figure8_", exp_name, "_SM_release_terms.csv")),
     row.names = FALSE
   )
 
@@ -255,7 +255,7 @@ read_gene_map <- function(xlsx_file) {
     }
   }
 
-  stop("Geneid と gene_name / gene_symbol を含むシートが見つかりませんでした。")
+  stop("No annotation sheet containing Geneid and gene_name / gene_symbol columns was found.")
 }
 
 gene_map <- read_gene_map(annot_file)
@@ -293,7 +293,7 @@ cq_we_gene_long <- cq_norm %>%
 
 write.csv(
   cq_we_gene_long,
-  file.path(aux_table_dir, "Figure07B_CQ_WE_candidate_gene_counts_long.csv"),
+  file.path(aux_table_dir, "Figure8B_CQ_WE_candidate_gene_counts_long.csv"),
   row.names = FALSE
 )
 
@@ -323,7 +323,7 @@ stat_df <- cq_we_gene_long %>%
 
 write.csv(
   stat_df,
-  file.path(aux_table_dir, "Figure07B_CQ_WE_candidate_gene_summary.csv"),
+  file.path(aux_table_dir, "Figure8B_CQ_WE_candidate_gene_summary.csv"),
   row.names = FALSE
 )
 

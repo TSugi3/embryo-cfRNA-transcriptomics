@@ -20,16 +20,21 @@ SLIDE_H = 7.5
 SLIDES = [
     ("Figure 1", ["Figure1_editable_preview.png"]),
     ("Figure 2", ["Figure2_editable_preview.png"]),
-    ("Figure 3", ["Figure3_editable_slide1_preview.png", "Figure3_editable_slide2_preview.png"]),
+    ("Figure 3", ["Figure3_editable_preview.png"]),
     ("Figure 4", ["Figure4_editable_preview.png"]),
-    ("Figure 5", ["Figure5_editable_slide1_preview.png", "Figure5_editable_slide2_preview.png"]),
+    ("Figure 5", ["Figure5_editable_preview.png"]),
     ("Figure 6", ["Figure6_editable_preview.png"]),
     ("Figure 7", ["Figure7_editable_preview.png"]),
     ("Figure 8", ["Figure8_editable_preview.png"]),
-    ("Extended Data Figure 1", ["ExtendedDataFigure1_editable_slide1_preview.png", "ExtendedDataFigure1_editable_slide2_preview.png"]),
-    ("Extended Data Figure 2", ["ExtendedDataFigure2_editable_slide1_preview.png", "ExtendedDataFigure2_editable_slide2_preview.png"]),
-    ("Extended Data Figure 3", ["ExtendedDataFigure3_editable_slide1_preview.png", "ExtendedDataFigure3_editable_slide2_preview.png", "ExtendedDataFigure3_editable_slide3_preview.png"]),
-    ("Extended Data Figure 4", ["ExtendedDataFigure4_editable_slide1_preview.png", "ExtendedDataFigure4_editable_slide2_preview.png"]),
+    ("Extended Data Figure 1", ["ExtendedDataFigure1_editable_preview.png"]),
+    ("Extended Data Figure 2", ["ExtendedDataFigure2_editable_preview.png"]),
+    ("Extended Data Figure 3", ["ExtendedDataFigure3_editable_preview.png"]),
+    ("Extended Data Figure 4", ["ExtendedDataFigure4_editable_preview.png"]),
+    ("Extended Data Figure 5", ["ExtendedDataFigure5_editable_preview.png"]),
+    ("Extended Data Figure 6", ["ExtendedDataFigure6_editable_preview.png"]),
+    ("Extended Data Figure 7", ["ExtendedDataFigure7_editable_preview.png"]),
+    ("Extended Data Figure 8", ["ExtendedDataFigure8_editable_preview.png"]),
+    ("Extended Data Figure 9", ["ExtendedDataFigure9_editable_preview.png"]),
 ]
 
 

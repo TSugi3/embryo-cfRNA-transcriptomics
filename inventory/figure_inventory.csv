@@ -1,52 +1,18 @@
-Figure,Panel,Current source script,Current output,Purpose,Source Data contents,Priority
-Figure 1,A,manual workflow panel,FIgure20250812.pptx,Check size and page fit; keep design,workflow source or note if schematic only,Medium
-Figure 1,B,Figure1B_InsertLength.R,Figure1B.tiff,Export vector-compatible PDF and high-resolution TIFF; check label size,insert-length plotted values and group labels,Medium
-Figure 1,C,Figure1C_Biotype_Comparison.R,Figure1C.tiff,Export vector-compatible PDF and high-resolution TIFF; check legend readability,biotype proportions/counts,Medium
-Figure 1,D,Figure1D_GeneCount_withPval.R,Figure1D.tiff,Check statistical test/n in legend and Source Data,gene counts per sample and test output,High
-Figure 1,E,Figure1E_ShannonEntropy.R,Figure1E.tiff,Check statistical test/n in legend and Source Data,Shannon entropy per sample and test output,High
-Figure 1,F,Figure1F_PCA.R,Figure1F.tiff,Check point labels/legend and batch-related clarity,PCA coordinates and explained variance,High
-Figure 1,G,Figure1G_HexbinPlot.R,Figure1G.tiff,Check panel size and axis text,mean expression values used for hexbin,Medium
-Figure 2,B,Figure2B_GO_BP_EWEvsESM_dotplot.R,Figure2B.tiff,Improve readability if needed; include enrichment statistics,GO terms with gene ratio p value adjusted p value,High
-Figure 2,C,Figure2C_UpSetPlot_nonDEG.R,Figure2C.tiff,Clarify non-DEG/CV counts; maintain corrected interpretation,intersection membership and counts,High
-Figure 2,D,Figure2D_ssGSEA_heatmap.R,Figure2D_ssGSEA_heatmap.tiff,Improve readability; avoid cut-off labels; Source Data from same ssGSEA matrix,ssGSEA score matrix and pathway/sample annotations,High
-Figure 2,E,Figure2E_ssGSEA_score_comparison.R,Figure2E_ssGSEA_score_comparison.tiff,Ensure ASM is handled consistently with text; report tests/n,ssGSEA sample scores and statistical tests,High
-Figure 3,A,Figure3A_DEG_Proportion.R,Figure3A_DEG_Proportion_with_pvalue.tiff,Check statistical details and labels,DEG proportions/counts and test outputs,High
-Figure 3,B,Figure3B_dotplot_GO_BP_UpregulatedOnly.R,Figure3B_dotplot_GO_BP_UpregulatedOnly.tiff,Reduce/adjust font size to avoid overlap,upregulated GO terms with enrichment statistics,High
-Figure 3,C,Figure3C_dotplot_GO_BP_DownregulatedOnly.R,Figure3C_dotplot_GO_BP_DownregulatedOnly.tiff,Reduce/adjust font size to avoid overlap,downregulated GO terms with enrichment statistics,High
-Figure 3,D,Figure3D_GSEA_GO_BP.R,Figure3D_dotplot_GSEA_GO_BP.tiff,Clarify black points in legend; include GSEA statistics,GSEA terms with NES p value adjusted p value and point encoding,High
-Figure 3,E,Figure3E_Expression_NMD_Apoptosis.R,Figure3E_Expression_NMD_Apoptosis.tiff,Avoid overstatement where not significant; report tests/n,representative gene expression values and tests,High
-Figure 4,A,Figure4A_GSEA_GO_BP_ESMvsASM_dotplot.R,Figure4A_GSEA_GO_BP_ESMvsASM_dotplot.tiff,Check GSEA statistics and readability,GSEA terms with NES p value adjusted p value,High
-Figure 4,B,Figure4B_Representative_Gene_Expression_Boxplot.R,Figure4B_Representative_Gene_Expression_Boxplot.tiff,Avoid overstatement where not significant; report tests/n,representative gene expression values and tests,High
-Figure 4,C,Figure4C_ExosomeMarkers_Boxplot.R,Figure4C_ExosomeMarkers_Boxplot.tiff,Report statistical tests/n and multiple-comparison handling,exosome marker expression values and tests,High
-Figure 4,D,Figure4D_ssGSEA_Boxplot_GO_BP.R,Figure4D_ssGSEA_Boxplot_GO_BP.tiff,Report statistical tests/n and multiple-comparison handling,ssGSEA scores and test outputs,High
-Figure 5,A,Figure5A_UpSetPlot_nonDEG_CV.R,Figure5A_UpSetPlot_nonDEG_CV.tiff,Improve readability; clarify CV < 1.0 logic,intersection membership and counts,High
-Figure 5,B,Figure5B_Biotype_PieChart.R,Figure5B_Biotype_PieChart.tiff,Check label readability and page fit,biotype counts/proportions,Medium
-Figure 5,C,Figure5C_GO_BP_viridis_dotplot.R,Figure5C_GO_BP_dotplot_viridis_final.tiff,Improve readability and descriptive legend title,GO terms with enrichment statistics,High
-Figure 5,D,Figure5D_Heatmap_Autophagy.R,Figure5D_heatmap_autophagy_1.0.tiff,Improve readability; address batch-effect concern in text/method; avoid label cut-off,heatmap expression matrix and sample annotations,High
-Figure 5,E,Figure5E_chord_autophagy.R,Figure5E_chord_autophagy_1.0.tiff,Check readability and page fit,chord input edges/weights and annotations,Medium
-Figure 6,A,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign in same style as Figures 1-5; fit publication page; include GSEA statistics,CQ WE/SM selected GSEA terms with NES p value FDR,High
-Figure 6,B,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign gene boxplots to match manuscript style; report tests/n; italicize mouse gene symbols in figure labels,CQ representative gene expression values and Wilcoxon/test outputs,High
-Figure 6,C,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign release-term barplot; include GSEA statistics,CQ SM release term NES p value FDR,High
-Figure 6,D,Analysis_RNAseq_mouse/Step07.R,Figure07_MouseValidation_Combined.png,Redesign CB GSEA panel to match manuscript style,CB WE/SM selected GSEA terms with NES p value FDR,High
-Extended Data Fig. 1,A,FigureS1A_Barplot_ReadCounts.R,FigureS1A_Barplot_ReadCounts.tiff,Check page fit and label size,raw/mapped read counts by sample/group,High
-Extended Data Fig. 1,B,FigureS1B_ViolinPlot_RawReads.R,FigureS1B_ViolinPlot_RawReads.tiff,Check page fit and label size,raw read counts and tests if shown,Medium
-Extended Data Fig. 1,C,FigureS1C_MappingRate_Plot.R,FigureS1C_MappingRate_PerGroup.tiff,Check page fit and label size,mapping rates by sample/group,Medium
-Extended Data Fig. 1,D,FigureS1D_GiniCoefficient.R,FigureS1D_GiniCoefficient_withPval.tiff,Fix cut-off panel/labels; report test/n,Gini coefficient values and test output,High
-Extended Data Fig. 1,E,FigureS1E_Subsampling_Gene_Count_ALL.R,FigureS1E_Subsampling_Gene_Count_ALL_log10.tiff,Check readability,subsampling gene-count values,Medium
-Extended Data Fig. 1,F,FigureS1F_Subsampling_Gene_Count_Protein-coding.R,FigureS1F_Subsampling_Gene_Count_Protein-coding_log10.tiff,Check readability,subsampling protein-coding gene-count values,Medium
-Extended Data Fig. 1,G,FigureS1G_MAplot.R,FigureS1G_MAplot_Facet.tiff,Check readability,MA plot values,Medium
-Extended Data Fig. 1,H,FigureS1H_DensityPlot.R,FigureS1H_DensityPlot_Facet.tiff,Check readability,density input values or summary,Medium
-Extended Data Fig. 1,I,FigureS1I_UpSetPlot_DEG.R,FigureS1I_UpSetPlot_DEG.tiff,Check readability,DEG intersection membership and counts,Medium
-Extended Data Fig. 2,A,FigureS2A_KEGG_EWEvsESM_dotplot.R,FigureS2A_KEGG_EWEvsESM_dotplot.tiff,Improve readability if needed,KEGG enrichment statistics,High
-Extended Data Fig. 2,B,FigureS2B_UpSetPlot_GO_BP_Terms.R,FigureS2B_UpSetPlot_GO_BP_Terms.tiff,Improve readability if needed,GO term intersection membership/counts,Medium
-Extended Data Fig. 2,C,FigureS2C_GO_BP_EWEvsESM_EWEvsAWE_dotplot.R,FigureS2C_GO_BP_EWEvsESM_EWEvsAWE_dotplot.tiff,Fix cut-off/overlapping labels,GO enrichment statistics,High
-Extended Data Fig. 2,D,FigureS2D_KEGG_EWEvsESM_EWEvsAWE_dotplot.R,FigureS2D_KEGG_EWEvsESM_EWEvsAWE_dotplot.tiff,Fix cut-off/overlapping labels,KEGG enrichment statistics,High
-Extended Data Fig. 2,E,FigureS2E_RepresentativeGene_Boxplot.R,FigureS2E_RepresentativeGene_Boxplot.tiff,Report tests/n,representative gene expression values and tests,Medium
-Extended Data Fig. 3,A,FigureS3A_mvalue_avalue_distribution_facet.R,FigureS3A_Distribution_KS_Density.tiff,Improve readability,distribution values and KS statistics if shown,High
-Extended Data Fig. 3,B,FigureS3B_dotplot_Reactome_UpregulatedOnly.R,FigureS3B_dotplot_Reactome_UpregulatedOnly.tiff,Improve readability,Reactome upregulated enrichment statistics,High
-Extended Data Fig. 3,C,FigureS3C_dotplot_Reactome_DownregulatedOnly.R,FigureS3C_dotplot_Reactome_DownregulatedOnly.tiff,Improve readability,Reactome downregulated enrichment statistics,High
-Extended Data Fig. 3,D,FigureS3D_GSEA_Reactome.R,FigureS3D_dotplot_GSEA_Reactome.tiff,Improve readability; include GSEA statistics,Reactome GSEA terms with NES p value adjusted p value,High
-Extended Data Fig. 3,E,FigureS3E_GSEAplot_Reactome_EWEvsAWE.R,FigureS3E_GSEAplot_EWEvsAWE_Reactome.tiff,Add NES and p value to plot as requested,GSEA running score plot data and NES p value adjusted p value,High
-Extended Data Fig. 4,A,FigureS4A_KEGG_dotplot.R,FigureS4A_KEGG_dotplot_final.tiff,Improve readability,KEGG enrichment statistics,High
-Extended Data Fig. 4,B,FigureS4B_heatmap_vesicle_1.0.R,FigureS4B_heatmap_vesicle.tiff,Improve readability; avoid cut-off labels,heatmap matrix and sample annotations,High
-Extended Data Fig. 4,C,FigureS4C_chord_vesicle.R,FigureS4C_chord_vesicle.tiff,Improve readability,chord input edges/weights and annotations,High
+display_item,panels,analysis_script,assembly_helper,source_data_note
+Figure 1,A-G,figures/Figure1.R,figures/build_figure1_pptx.py,Source Data sheets beginning with Figure1.
+Figure 2,A-E,figures/Figure2.R,figures/build_figure2_pptx.py,Source Data sheets beginning with Figure2.
+Figure 3,A-C,figures/Figure3.R,figures/build_figure3_pptx.py,Source Data sheets beginning with Figure3.
+Figure 4,A-B,figures/Figure3.R,figures/build_figure4_pptx.py,Final Figure 4 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
+Figure 5,A-D,figures/Figure4.R,figures/build_figure5_pptx.py,Final Figure 5 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
+Figure 6,A-D,figures/Figure5.R,figures/build_figure6_pptx.py,Final Figure 6 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
+Figure 7,none,figures/Figure5.R,figures/build_figure7_pptx.py,Final Figure 7 source-data sheet names are produced through inventory/source_data_sheet_mapping.csv.
+Figure 8,A-D,figures/Figure8.R,figures/build_figure8_pptx.py,Source Data sheets beginning with Fig8 are produced through inventory/source_data_sheet_mapping.csv.
+Extended Data Figure 1,A-F,figures/ExtendedDataFigure1.R,figures/build_extended_data_figure1_pptx.py,Source Data sheets beginning with EDFig1.
+Extended Data Figure 2,A-C,figures/ExtendedDataFigure1.R and figures/ExtendedDataFigure2.R,figures/build_extended_data_figure2_pptx.py,Source Data sheets beginning with EDFig2.
+Extended Data Figure 3,A-B,figures/ExtendedDataFigure2.R,figures/build_extended_data_figure3_pptx.py,Source Data sheets beginning with EDFig3.
+Extended Data Figure 4,A-C,figures/ExtendedDataFigure2.R,figures/build_extended_data_figure4_pptx.py,Source Data sheets beginning with EDFig4.
+Extended Data Figure 5,A-B,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig5.
+Extended Data Figure 6,none,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig6.
+Extended Data Figure 7,A-B,figures/ExtendedDataFigure3.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig7.
+Extended Data Figure 8,A-B,figures/ExtendedDataFigure4.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig8.
+Extended Data Figure 9,none,figures/ExtendedDataFigure4.R,see inventory/final_figure_mapping.csv,Source Data sheets beginning with EDFig9.

@@ -131,10 +131,17 @@ def main() -> None:
         "Figure4_editable.pptx",
         "Figure5_editable.pptx",
         "Figure6_editable.pptx",
+        "Figure7_editable.pptx",
+        "Figure8_editable.pptx",
         "ExtendedDataFigure1_editable.pptx",
         "ExtendedDataFigure2_editable.pptx",
         "ExtendedDataFigure3_editable.pptx",
         "ExtendedDataFigure4_editable.pptx",
+        "ExtendedDataFigure5_editable.pptx",
+        "ExtendedDataFigure6_editable.pptx",
+        "ExtendedDataFigure7_editable.pptx",
+        "ExtendedDataFigure8_editable.pptx",
+        "ExtendedDataFigure9_editable.pptx",
     ]
     all_images: list[Path] = []
     for name in pptx_files:

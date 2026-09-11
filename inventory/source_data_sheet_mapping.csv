@@ -18,8 +18,36 @@ Figure5C_GO_BP_enrichment_terms,Fig6C_GO_BP_terms,Figure 6,C,GO biological proce
 Figure5D_autophagy_heatmap_expression,Fig6D_heatmap_expression,Figure 6,D_expression,Expression matrix used for the autophagy-related release heatmap.
 Figure5D_autophagy_heatmap_zscores,Fig6D_heatmap_zscore,Figure 6,D_z_scores,Row-scaled z-scores plotted in the autophagy-related release heatmap.
 Figure5E_autophagy_chord_correlations,Fig7_chord_correlations,Figure 7,none,lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.
-Figure6A_CQ_GSEA_selected_terms,Fig8A_CQ_GSEA_terms,Figure 8,A,Selected autophagy lysosome endosome and vesicle secretion GO BP GSEA terms for CQ-treated samples.
-Figure6B_CQ_WE_gene_values,Fig8B_CQ_WE_gene_values,Figure 8,B_values,Sample-level log10 normalized expression values for selected CQ-responsive genes.
-Figure6B_CQ_WE_gene_statistics,Fig8B_CQ_WE_gene_stats,Figure 8,B_statistics,Wilcoxon rank-sum test outputs for selected CQ-responsive genes.
-Figure6C_CQ_SM_release_terms,Fig8C_CQ_SM_terms,Figure 8,C,CQ spent-medium cfRNA release-associated GSEA terms.
-Figure6D_CB_GSEA_selected_terms,Fig8D_CB_GSEA_terms,Figure 8,D,Selected autophagy lysosome endosome and vesicle secretion GO BP GSEA terms for CB-treated samples.
+Figure8A_CQ_GSEA_selected_terms,Fig8A_CQ_GSEA_terms,Figure 8,A,Selected autophagy lysosome endosome and vesicle secretion GO BP GSEA terms for CQ-treated samples.
+Figure8B_CQ_WE_gene_values,Fig8B_CQ_WE_gene_values,Figure 8,B_values,Sample-level log10 normalized expression values for selected CQ-responsive genes.
+Figure8B_CQ_WE_gene_statistics,Fig8B_CQ_WE_gene_stats,Figure 8,B_statistics,Wilcoxon rank-sum test outputs for selected CQ-responsive genes.
+Figure8C_CQ_SM_release_terms,Fig8C_CQ_SM_terms,Figure 8,C,CQ spent-medium cfRNA release-associated GSEA terms.
+Figure8D_CB_GSEA_selected_terms,Fig8D_CB_GSEA_terms,Figure 8,D,Selected autophagy lysosome endosome and vesicle secretion GO BP GSEA terms for CB-treated samples.
+FigureS1A_read_counts,EDFig1A_read_counts,Extended Data Figure 1,A,Read-count values plotted in Extended Data Figure 1 panel A.
+FigureS1B_raw_read_values,EDFig1B_raw_read_values,Extended Data Figure 1,B,Raw read-count values plotted in Extended Data Figure 1 panel B.
+FigureS1C_mapping_rate_values,EDFig1C_mapping_values,Extended Data Figure 1,C_values,Mapping-rate values plotted in Extended Data Figure 1 panel C.
+FigureS1C_mapping_rate_statistics,EDFig1C_mapping_stats,Extended Data Figure 1,C_statistics,Statistical output for Extended Data Figure 1 panel C.
+FigureS1D_gini_values,EDFig1D_gini_values,Extended Data Figure 1,D_values,Gini coefficient values plotted in Extended Data Figure 1 panel D.
+FigureS1D_gini_statistics,EDFig1D_gini_stats,Extended Data Figure 1,D_statistics,Statistical output for Extended Data Figure 1 panel D.
+FigureS1EF_subsampling_values,EDFig1EF_subsampling,Extended Data Figure 1,E_F,Subsampling values plotted in Extended Data Figure 1 panels E and F.
+FigureS1GH_MA_density_values,EDFig2A_MA_density_values,Extended Data Figure 2,A,MA-plot and density input values plotted in Extended Data Figure 2.
+FigureS1I_DEG_intersections,EDFig2B_DEG_intersections,Extended Data Figure 2,B_intersections,DEG intersection sizes plotted in Extended Data Figure 2.
+FigureS1I_DEG_membership,EDFig2B_DEG_membership,Extended Data Figure 2,B_membership,DEG set membership matrix plotted in Extended Data Figure 2.
+FigureS2A_KEGG_EWEvsESM_terms,EDFig3A_KEGG_terms,Extended Data Figure 3,A,KEGG enrichment terms plotted in Extended Data Figure 3 panel A.
+FigureS2B_GO_BP_term_intersections,EDFig3B_GO_BP_intersections,Extended Data Figure 3,B_intersections,GO BP term intersection sizes plotted in Extended Data Figure 3 panel B.
+FigureS2B_GO_BP_term_membership,EDFig3B_GO_BP_membership,Extended Data Figure 3,B_membership,GO BP term membership matrix plotted in Extended Data Figure 3 panel B.
+FigureS2C_GO_BP_shared_terms,EDFig4A_GO_BP_terms,Extended Data Figure 4,A,GO BP enrichment terms plotted in Extended Data Figure 4 panel A.
+FigureS2D_KEGG_shared_terms,EDFig4B_KEGG_terms,Extended Data Figure 4,B,KEGG enrichment terms plotted in Extended Data Figure 4 panel B.
+FigureS2E_representative_gene_values,EDFig4C_gene_values,Extended Data Figure 4,C,Representative gene-expression values plotted in Extended Data Figure 4 panel C.
+FigureS3A_KS_statistics,EDFig5A_KS_stats,Extended Data Figure 5,A_statistics,KS-test statistics for Extended Data Figure 5 panel A.
+FigureS3A_distribution_values,EDFig5A_distribution_values,Extended Data Figure 5,A_values,Distribution values plotted in Extended Data Figure 5 panel A.
+FigureS3B_Reactome_UpregulatedOnly_terms,EDFig5B_Reactome_up_terms,Extended Data Figure 5,B,Reactome upregulated enrichment terms plotted in Extended Data Figure 5 panel B.
+FigureS3C_Reactome_DownregulatedOnly_terms,EDFig6_Reactome_down_terms,Extended Data Figure 6,none,Reactome downregulated enrichment terms plotted in Extended Data Figure 6.
+FigureS3D_GSEA_Reactome_terms,EDFig7A_GSEA_Reactome_terms,Extended Data Figure 7,A,Reactome GSEA terms plotted in Extended Data Figure 7 panel A.
+FigureS3E_GSEAplot_Reactome_statistics,EDFig7B_GSEAplot_stats,Extended Data Figure 7,B,Reactome GSEA curve statistics plotted in Extended Data Figure 7 panel B.
+FigureS4A_KEGG_all_terms,EDFig8A_KEGG_all_terms,Extended Data Figure 8,A_all,All KEGG enrichment terms for Extended Data Figure 8 panel A.
+FigureS4A_KEGG_plotted_terms,EDFig8A_KEGG_plotted_terms,Extended Data Figure 8,A_plotted,Plotted KEGG enrichment terms for Extended Data Figure 8 panel A.
+FigureS4B_heatmap_all_expression,EDFig8B_heatmap_all_expr,Extended Data Figure 8,B_all,All expression values for Extended Data Figure 8 panel B.
+FigureS4B_heatmap_plotted_expression,EDFig8B_heatmap_plotted_expr,Extended Data Figure 8,B_plotted,Plotted expression values for Extended Data Figure 8 panel B.
+FigureS4C_chord_all_correlations,EDFig9_chord_all_corr,Extended Data Figure 9,all,All lncRNA-mRNA correlations for Extended Data Figure 9.
+FigureS4C_chord_plotted_correlations,EDFig9_chord_plotted_corr,Extended Data Figure 9,plotted,Plotted lncRNA-mRNA correlations for Extended Data Figure 9.

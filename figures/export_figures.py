@@ -47,8 +47,7 @@ def pdf_label(fig_name: str, page_count: int, page_idx: int) -> str:
     display = " ".join(display.split())
     if page_count == 1:
         return display
-    suffix = "continues" if page_idx == 1 else "continued"
-    return f"{display} ({suffix})"
+    return f"{display} (page {page_idx} of {page_count})"
 
 
 def shape_text(shape) -> str:

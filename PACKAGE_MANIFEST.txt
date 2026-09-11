@@ -29,6 +29,11 @@ figures/build_extended_data_figure1_pptx.py
 figures/build_extended_data_figure2_pptx.py
 figures/build_extended_data_figure3_pptx.py
 figures/build_extended_data_figure4_pptx.py
+figures/build_extended_data_figure5_pptx.py
+figures/build_extended_data_figure6_pptx.py
+figures/build_extended_data_figure7_pptx.py
+figures/build_extended_data_figure8_pptx.py
+figures/build_extended_data_figure9_pptx.py
 figures/build_figure1A_vector.py
 figures/build_figure1_combined.py
 figures/build_figure1_pptx.py
@@ -36,10 +41,13 @@ figures/build_figure2_pptx.py
 figures/build_figure3_pptx.py
 figures/build_figure4_pptx.py
 figures/build_figure5_pptx.py
-figures/build_figure6_combined_image.py
 figures/build_figure6_pptx.py
+figures/build_figure7_pptx.py
+figures/build_figure8_combined_image.py
+figures/build_figure8_pptx.py
 figures/export_figures.py
 figures/path_config.py
+figures/pptx_helpers.py
 figures/render_figure_previews.py
 inventory/figure_inventory.csv
 inventory/final_figure_mapping.csv

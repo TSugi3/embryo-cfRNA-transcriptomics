@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
-"""Build Figure 4 as a editable PowerPoint slide."""
+"""Build final Figure 4 as an editable PowerPoint slide."""
 
 from __future__ import annotations
-
-from pathlib import Path
 
 from pptx import Presentation
 from pptx.dml.color import RGBColor
@@ -11,11 +9,11 @@ from pptx.enum.text import PP_ALIGN
 from pptx.util import Inches, Pt
 
 
-from path_config import BASE_DIR, FIG_DIR
-OUT_PPTX = FIG_DIR / "Figure4_editable.pptx"
+from path_config import FIG_DIR
 
+OUT_PPTX = FIG_DIR / "Figure4_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 10.833333333333334
+SLIDE_H = 7.3
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -42,12 +40,11 @@ def add_panel_label(slide, label: str, left: float, top: float) -> None:
     add_textbox(slide, label, left, top, 0.31, 0.24, 9, bold=True)
 
 
-def add_picture(slide, filename: str, left: float, top: float, width: float, height: float) -> None:
+def add_picture_keep_aspect(slide, filename: str, left: float, top: float, width: float) -> None:
     path = FIG_DIR / filename
     if not path.exists():
         raise FileNotFoundError(path)
-    slide.shapes.add_picture(str(path), Inches(left), Inches(top),
-                             width=Inches(width), height=Inches(height))
+    slide.shapes.add_picture(str(path), Inches(left), Inches(top), width=Inches(width))
 
 
 def main() -> None:
@@ -57,16 +54,10 @@ def main() -> None:
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 4", 0.0, 0.005, 1.25, 0.30, 10)
-
-    add_picture(slide, "Figure4A_GSEA_GO_BP_ESMvsASM_dotplot.png", 0.208, 0.308, 7.083, 3.931)
-    add_picture(slide, "Figure4B_Representative_Gene_Expression_Boxplot.png", 0.208, 4.238, 7.083, 1.569)
-    add_picture(slide, "Figure4C_ExosomeMarkers_Boxplot.png", 0.208, 6.007, 7.083, 1.486)
-    add_picture(slide, "Figure4D_ssGSEA_Boxplot_GO_BP.png", 0.208, 7.596, 7.083, 1.569)
-
+    add_picture_keep_aspect(slide, "Figure3D_GSEA_GO_BP_dotplot.png", 0.208, 0.420, 7.083)
+    add_picture_keep_aspect(slide, "Figure3E_Expression_NMD_Apoptosis.png", 0.208, 5.270, 7.083)
     add_panel_label(slide, "A", 0.208, 0.296)
-    add_panel_label(slide, "B", 0.208, 4.131)
-    add_panel_label(slide, "C", 0.208, 5.889)
-    add_panel_label(slide, "D", 0.208, 7.540)
+    add_panel_label(slide, "B", 0.208, 5.150)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

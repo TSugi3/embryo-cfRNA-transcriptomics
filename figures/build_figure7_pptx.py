@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build final Figure 6 as an editable PowerPoint slide."""
+"""Build final Figure 7 as an editable PowerPoint slide."""
 
 from __future__ import annotations
 
@@ -11,9 +11,9 @@ from pptx.util import Inches, Pt
 
 from path_config import FIG_DIR
 
-OUT_PPTX = FIG_DIR / "Figure6_editable.pptx"
+OUT_PPTX = FIG_DIR / "Figure7_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 9.1
+SLIDE_H = 7.1
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -36,18 +36,6 @@ def add_textbox(slide, text: str, left: float, top: float, width: float, height:
     run.font.color.rgb = RGBColor(0, 0, 0)
 
 
-def add_panel_label(slide, label: str, left: float, top: float) -> None:
-    add_textbox(slide, label, left, top, 0.31, 0.24, 9, bold=True)
-
-
-def add_picture(slide, filename: str, left: float, top: float, width: float, height: float) -> None:
-    path = FIG_DIR / filename
-    if not path.exists():
-        raise FileNotFoundError(path)
-    slide.shapes.add_picture(str(path), Inches(left), Inches(top),
-                             width=Inches(width), height=Inches(height))
-
-
 def add_picture_keep_aspect(slide, filename: str, left: float, top: float, width: float) -> None:
     path = FIG_DIR / filename
     if not path.exists():
@@ -61,15 +49,8 @@ def main() -> None:
     prs.slide_height = Inches(SLIDE_H)
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
-    add_textbox(slide, "Figure 6", 0.0, 0.005, 1.25, 0.30, 10)
-    add_picture(slide, "Figure5A_UpSetPlot_nonDEG_CV.png", 0.230, 0.459, 1.958, 1.958)
-    add_picture(slide, "Figure5B_Biotype_PieChart.png", 2.195, 0.459, 5.111, 1.958)
-    add_picture_keep_aspect(slide, "Figure5C_GO_BP_dotplot_viridis.png", 0.208, 2.442, 7.083)
-    add_picture_keep_aspect(slide, "Figure5D_heatmap_autophagy.png", 0.223, 5.300, 7.083)
-    add_panel_label(slide, "A", 0.208, 0.296)
-    add_panel_label(slide, "B", 2.195, 0.296)
-    add_panel_label(slide, "C", 0.208, 2.271)
-    add_panel_label(slide, "D", 0.208, 5.182)
+    add_textbox(slide, "Figure 7", 0.0, 0.005, 1.25, 0.30, 10)
+    add_picture_keep_aspect(slide, "Figure5E_chord_autophagy.png", 0.208, 0.308, 7.083)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)
