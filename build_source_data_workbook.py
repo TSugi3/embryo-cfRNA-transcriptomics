@@ -33,6 +33,27 @@ def safe_sheet_name(stem: str, used: set[str]) -> str:
 META_COLUMNS = ["source_figure", "source_panel", "source_description"]
 
 
+def readable_panel_label(panel: str) -> str:
+    panel = (panel or "").strip()
+    if not panel or panel.lower() == "none":
+        return ""
+    if re.fullmatch(r"[A-Z](?:_[A-Z])+", panel):
+        letters = panel.split("_")
+        return "panels " + ", ".join(letters[:-1]) + " and " + letters[-1]
+    parts = panel.split("_")
+    if parts and re.fullmatch(r"[A-Z]", parts[0]):
+        if len(parts) == 1:
+            return f"panel {parts[0]}"
+        suffix = "_".join(parts[1:]).replace("z_scores", "z scores")
+        suffix = suffix.replace("_", " ")
+        if suffix == "all":
+            suffix = "all values"
+        elif suffix == "plotted":
+            suffix = "plotted values"
+        return f"panel {parts[0]} {suffix}"
+    return "panel " + panel.replace("_", " ")
+
+
 def set_reasonable_widths(ws, rows: list[list[str]], max_scan_rows: int = 200) -> None:
     if not rows:
         return
@@ -124,8 +145,9 @@ def build_workbook(panel_dir: Path, output_xlsx: Path, sheet_map: Path | None = 
         title_parts = []
         if source_figure:
             title_parts.append(source_figure)
-        if source_panel and source_panel.lower() != "none":
-            title_parts.append(f"panel {source_panel}")
+        panel_label = readable_panel_label(source_panel)
+        if panel_label:
+            title_parts.append(panel_label)
         prefix = " ".join(title_parts)
         title = f"{prefix}: {source_description}" if prefix else source_description
 

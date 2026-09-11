@@ -1,8 +1,3 @@
-Code package
-Source: figure-generation and source-data helper scripts; private local paths intentionally omitted.
-Output: public code repository.
-
-Files:
 .gitignore
 LICENSE
 PACKAGE_MANIFEST.txt
@@ -51,6 +46,3 @@ inventory/final_figure_mapping.csv
 inventory/source_data_sheet_mapping.csv
 requirements-python.txt
 run_all_figures.R
-
-Sensitive-string scan:
-No local path or credential-like strings detected in packaged text files.
