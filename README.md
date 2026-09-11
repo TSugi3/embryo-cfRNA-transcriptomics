@@ -1,10 +1,10 @@
-# Embryo cfRNA release analysis code
+# Embryo cfRNA transcriptomics analysis code
 
-This repository contains analysis scripts used to generate figures and source-data tables for the manuscript:
+This repository contains analysis scripts used to generate figure panels and source-data tables for the manuscript:
 
-**Regulated release of embryo-derived cell-free RNA reflects chromosomal integrity and developmental potential**
+**Full-length RNA-sequencing profiles intracellular and extracellular RNAs in euploid and aneuploid human embryos**
 
-The scripts are intended to document and reproduce the figure-generation workflow from processed input tables. Raw sequencing files and private manuscript materials are not included in this repository.
+The scripts document the figure-generation workflow from processed input tables. Raw sequencing files, private sample-registration materials, correspondence and manuscript drafts are not included.
 
 ## Repository contents
 
@@ -13,24 +13,25 @@ The scripts are intended to document and reproduce the figure-generation workflo
 - `R/figure_theme.R`: shared plotting theme for figures.
 - `R/source_data_helpers.R`: helper functions for panel-level source-data tables.
 - `figures/*.R`: scripts that generate figure panels and panel-level source-data CSV files.
-- `figures/build_*_pptx.py`: scripts that assemble editable PowerPoint figures from generated panels.
+- `figures/build_*_pptx.py`: helper scripts for assembling editable PowerPoint figures when the corresponding generated panel images are available locally.
 - `figures/render_figure_previews.py`: preview rendering helper.
-- `figures/export_figures.py`: publication image/PDF export helper.
-- `build_source_data_workbook.py`: combines panel-level CSV files into `SourceData.xlsx`.
-- `inventory/figure_inventory.csv`: panel-level figure checklist.
+- `figures/export_figures.py`: image/PDF export helper for editable figure files.
+- `build_source_data_workbook.py`: combines panel-level CSV files into a single Source Data workbook.
+- `inventory/final_figure_mapping.csv`: mapping between the final manuscript display items and the public figure-generation scripts.
+- `inventory/source_data_sheet_mapping.csv`: optional mapping used to convert older panel-output stems to final Source Data sheet names.
 
 ## Data availability and inputs
 
-This code expects processed input files generated from the RNA-seq analysis workflow. Raw sequencing data are available from the public repositories described in the manuscript Data availability section. Processed count matrices and figure source data are provided with the paper as Supplementary Tables and Source Data files.
+This code expects processed input files generated from the RNA-seq analysis workflow. Raw sequencing data are available from the public repositories described in the manuscript Data Availability section. Processed count matrices, sample metadata, differential-expression outputs, pathway-enrichment outputs and source data are provided with the paper as Supplementary Tables and Source Data files.
 
 Expected local inputs include:
 
-- Human RNA-seq processed analysis directory, including normalized expression matrices, differential-expression outputs, enrichment results and QC tables.
-- Original human figure script/data directory containing `theme_figure.R` and processed figure inputs.
+- Human RNA-seq processed analysis directory, including normalized expression matrices, differential-expression outputs, enrichment results and quality-control tables.
+- Human figure-input directory containing processed figure inputs where required.
 - Mouse perturbation processed analysis directory, including normalized count matrices, treatment groupings, ranked lists and GO:BP GSEA outputs.
 - A writable output directory for figures, panel-level source-data CSV files and logs.
 
-Local paths are intentionally not stored in the repository.
+Local paths are intentionally not stored in this repository.
 
 ## Configuration
 
@@ -55,9 +56,30 @@ export CFRNA_LOG_DIR=/path/to/project_workspace/figure_outputs/logs
 
 `R/config.local.R` is ignored by git and should not be published.
 
+## Final figure organization
+
+The final manuscript contains eight main figures and nine Extended Data figures. Some figure scripts generate panels that were split into separate final display items during final formatting. Use `inventory/final_figure_mapping.csv` for the exact relationship between final figures and scripts.
+
+Main figure script mapping:
+
+- `figures/Figure1.R` -> Figure 1 panels B-G; Figure 1A is a schematic workflow panel assembled separately.
+- `figures/Figure2.R` -> Figure 2.
+- `figures/Figure3.R` -> Figure 3 panels A-C and Figure 4 panels A-B.
+- `figures/Figure4.R` -> Figure 5.
+- `figures/Figure5.R` -> Figure 6 panels A-D and Figure 7.
+- `figures/Figure8.R` -> Figure 8.
+
+Extended Data figure scripts were similarly reorganized into single-page final display items; see `inventory/final_figure_mapping.csv`.
+
 ## Basic usage
 
-Generate individual figure panels:
+Generate figure panels and panel-level source-data CSV files:
+
+```bash
+Rscript run_all_figures.R
+```
+
+Alternatively, run individual scripts:
 
 ```bash
 Rscript figures/Figure1.R
@@ -65,34 +87,25 @@ Rscript figures/Figure2.R
 Rscript figures/Figure3.R
 Rscript figures/Figure4.R
 Rscript figures/Figure5.R
-Rscript figures/Figure6.R
+Rscript figures/Figure8.R
 Rscript figures/ExtendedDataFigure1.R
 Rscript figures/ExtendedDataFigure2.R
 Rscript figures/ExtendedDataFigure3.R
 Rscript figures/ExtendedDataFigure4.R
 ```
 
-Build the combined Source Data workbook:
+Build the combined Source Data workbook using final manuscript sheet names where a mapping is provided:
 
 ```bash
 python3 build_source_data_workbook.py \
   --panel-dir "$CFRNA_SOURCE_DATA_DIR" \
-  --output "$CFRNA_SOURCE_DATA_WORKBOOK"
+  --output "$CFRNA_SOURCE_DATA_WORKBOOK" \
+  --sheet-map inventory/source_data_sheet_mapping.csv
 ```
 
-Assemble editable figures and export publication images:
+Assemble editable figures and export publication images when local panel images and PowerPoint assembly dependencies are available:
 
 ```bash
-python3 figures/build_figure1_pptx.py
-python3 figures/build_figure2_pptx.py
-python3 figures/build_figure3_pptx.py
-python3 figures/build_figure4_pptx.py
-python3 figures/build_figure5_pptx.py
-python3 figures/build_figure6_pptx.py
-python3 figures/build_extended_data_figure1_pptx.py
-python3 figures/build_extended_data_figure2_pptx.py
-python3 figures/build_extended_data_figure3_pptx.py
-python3 figures/build_extended_data_figure4_pptx.py
 python3 figures/export_figures.py --figure-dir "$CFRNA_FIGURE_DIR" --out-dir /path/to/figure_exports --width-mm 180 --dpi 600
 ```
 
@@ -100,11 +113,11 @@ python3 figures/export_figures.py --figure-dir "$CFRNA_FIGURE_DIR" --out-dir /pa
 
 - Do not commit raw FASTQ/BAM files, SRA metadata containing local file paths, private correspondence, manuscript drafts, credentials or `config.local.R`.
 - Generated figures, PowerPoint files, PDFs, images, logs and Excel workbooks are ignored by default.
-- Some paths in the scripts refer to expected processed input filenames. If input filenames differ, update the local processed-data directory or add a small local adapter script outside the public repository.
+- The repository is designed for processed, de-identified analysis inputs. If local input filenames differ, update the local processed-data directory or add a small local adapter script outside the public repository.
 
 ## Software
 
-The workflow uses R and Python. Main R packages include `tidyverse`, `readxl`, `ggplot2`, `ggpubr`, `ComplexHeatmap`, `clusterProfiler`, `ReactomePA`, `GSVA`, `circlize`, `openxlsx`, `patchwork`, `cowplot`, `viridis`, `ggrepel`, `ggupset` and related plotting/data packages. Python helpers use `openpyxl`, `python-pptx` and `Pillow`.
+The workflow uses R and Python. Main R packages include `tidyverse`, `readxl`, `ggplot2`, `ggpubr`, `ComplexHeatmap`, `clusterProfiler`, `ReactomePA`, `GSVA`, `circlize`, `openxlsx`, `patchwork`, `cowplot`, `viridis`, `ggrepel`, `ggupset` and related plotting/data packages. Python helpers use `openpyxl`, `python-pptx`, `reportlab` and `Pillow`.
 
 ## License
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Create a vector/high-resolution replacement for Figure 1A.
 
-The submitted Figure 1A was embedded in the PowerPoint as a low-resolution
+The source Figure 1A was embedded in the PowerPoint as a low-resolution
 image. This script redraws the same workflow as editable/vector PDF and
 high-resolution PNG/TIFF files while preserving the original content and
 visual layout.

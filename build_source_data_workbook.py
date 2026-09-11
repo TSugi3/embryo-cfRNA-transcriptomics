@@ -80,10 +80,25 @@ def format_data_sheet(ws, rows: list[list[str]], title: str) -> None:
     ws.auto_filter.ref = f"A3:{get_column_letter(max_cols)}{max(ws.max_row, 3)}"
 
 
-def build_workbook(panel_dir: Path, output_xlsx: Path) -> None:
+def read_sheet_map(sheet_map: Path | None) -> dict[str, dict[str, str]]:
+    if sheet_map is None:
+        return {}
+    mapping: dict[str, dict[str, str]] = {}
+    with sheet_map.open(newline="", encoding="utf-8") as handle:
+        reader = csv.DictReader(handle)
+        for row in reader:
+            stem = (row.get("file_stem") or "").strip()
+            if stem:
+                mapping[stem] = {key: (value or "").strip() for key, value in row.items()}
+    return mapping
+
+
+def build_workbook(panel_dir: Path, output_xlsx: Path, sheet_map: Path | None = None) -> None:
     files = sorted(panel_dir.glob("*.csv"))
     if not files:
         raise FileNotFoundError(f"No CSV files found in {panel_dir}")
+
+    mapping = read_sheet_map(sheet_map)
 
     wb = Workbook()
     default_ws = wb.active
@@ -91,7 +106,9 @@ def build_workbook(panel_dir: Path, output_xlsx: Path) -> None:
     used = set()
 
     for file in files:
-        sheet = safe_sheet_name(file.stem, used)
+        mapped = mapping.get(file.stem, {})
+        sheet_seed = mapped.get("sheet_name") or file.stem
+        sheet = safe_sheet_name(sheet_seed, used)
         ws = wb.create_sheet(sheet)
         raw_rows: list[list[str]] = []
         with file.open(newline="", encoding="utf-8") as handle:
@@ -100,6 +117,9 @@ def build_workbook(panel_dir: Path, output_xlsx: Path) -> None:
                 raw_rows.append(row)
 
         source_figure, source_panel, source_description, rows = split_metadata(raw_rows, file.stem)
+        source_figure = mapped.get("source_figure") or source_figure
+        source_panel = mapped.get("source_panel") or source_panel
+        source_description = mapped.get("description") or source_description
         title_parts = []
         if source_figure:
             title_parts.append(source_figure)
@@ -124,8 +144,10 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--panel-dir", required=True, type=Path)
     parser.add_argument("--output", required=True, type=Path)
+    parser.add_argument("--sheet-map", type=Path, default=None,
+                        help="Optional CSV mapping from panel CSV stems to final Source Data sheet names and titles.")
     args = parser.parse_args()
-    build_workbook(args.panel_dir, args.output)
+    build_workbook(args.panel_dir, args.output, args.sheet_map)
 
 
 if __name__ == "__main__":

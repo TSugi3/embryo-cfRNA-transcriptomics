@@ -1,6 +1,6 @@
 Code package
-Source: analysis script directory; private local path intentionally omitted.
-Output: code package directory; private local path intentionally omitted.
+Source: figure-generation and source-data helper scripts; private local paths intentionally omitted.
+Output: public code repository.
 
 Files:
 .gitignore
@@ -23,7 +23,7 @@ figures/Figure2.R
 figures/Figure3.R
 figures/Figure4.R
 figures/Figure5.R
-figures/Figure6.R
+figures/Figure8.R
 figures/build_all_figures_preview_deck.py
 figures/build_extended_data_figure1_pptx.py
 figures/build_extended_data_figure2_pptx.py
@@ -42,8 +42,10 @@ figures/export_figures.py
 figures/path_config.py
 figures/render_figure_previews.py
 inventory/figure_inventory.csv
+inventory/final_figure_mapping.csv
+inventory/source_data_sheet_mapping.csv
 requirements-python.txt
 run_all_figures.R
 
 Sensitive-string scan:
-No local path or credential-like strings detected in packaged text files.
+No local path or credential-like strings detected in packaged text files at the time this manifest was updated.

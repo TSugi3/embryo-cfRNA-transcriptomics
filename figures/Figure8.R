@@ -1,6 +1,6 @@
 # ============================================================
-# Figure6.R
-# Figure 6 mouse validation
+# Figure8.R
+# Figure 8 mouse perturbation analysis
 #
 # A: CQ GSEA dotplot
 # B: CQ-responsive WE gene boxplots, log10(count + 1)
@@ -18,7 +18,7 @@ suppressPackageStartupMessages({
 
 cmd_args <- commandArgs(trailingOnly = FALSE)
 file_arg <- grep("^--file=", cmd_args, value = TRUE)
-this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure6.R"
+this_file <- if (length(file_arg) > 0) sub("^--file=", "", file_arg[1]) else "Figure8.R"
 script_dir <- dirname(normalizePath(this_file, mustWork = FALSE))
 script_root <- normalizePath(file.path(script_dir, ".."), mustWork = FALSE)
 
@@ -29,7 +29,7 @@ source(file.path(script_root, "R", "source_data_helpers.R"))
 base_dir <- paths$mouse_analysis_dir
 fig_dir <- paths$figure_dir
 table_dir <- paths$source_data_dir
-aux_table_dir <- file.path(paths$log_dir, "Figure6_aux_tables")
+aux_table_dir <- file.path(paths$log_dir, "Figure8_aux_tables")
 dir.create(fig_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(table_dir, recursive = TRUE, showWarnings = FALSE)
 dir.create(aux_table_dir, recursive = TRUE, showWarnings = FALSE)
@@ -338,43 +338,43 @@ stat_panel <- stat_df %>%
 source_files <- c(
   write_panel_source_data(
     plot_df %>% filter(experiment == "CQ"),
-    figure = "Figure 6",
+    figure = "Figure 8",
     panel = "A",
     description = "Selected autophagy, lysosome/endosome and vesicle/secretion GO BP GSEA terms for CQ-treated whole embryos and spent-medium cfRNA.",
     source_data_dir = table_dir,
-    file_stub = "Figure6A_CQ_GSEA_selected_terms"
+    file_stub = "Figure8A_CQ_GSEA_selected_terms"
   ),
   write_panel_source_data(
     cq_we_gene_panel,
-    figure = "Figure 6",
+    figure = "Figure 8",
     panel = "B_values",
     description = "Sample-level log10(normalized count + 1) values for selected CQ-responsive autophagy-lysosome-vesicle genes in whole embryos.",
     source_data_dir = table_dir,
-    file_stub = "Figure6B_CQ_WE_gene_values"
+    file_stub = "Figure8B_CQ_WE_gene_values"
   ),
   write_panel_source_data(
     stat_panel,
-    figure = "Figure 6",
+    figure = "Figure 8",
     panel = "B_statistics",
     description = "Wilcoxon rank-sum test outputs for selected CQ-responsive whole-embryo genes.",
     source_data_dir = table_dir,
-    file_stub = "Figure6B_CQ_WE_gene_statistics"
+    file_stub = "Figure8B_CQ_WE_gene_statistics"
   ),
   write_panel_source_data(
     plot_df %>% filter(experiment == "CQ", sample_type == "SM cfRNA", Description %in% release_terms),
-    figure = "Figure 6",
+    figure = "Figure 8",
     panel = "C",
     description = "CQ spent-medium cfRNA release-associated GSEA terms used for the barplot.",
     source_data_dir = table_dir,
-    file_stub = "Figure6C_CQ_SM_release_terms"
+    file_stub = "Figure8C_CQ_SM_release_terms"
   ),
   write_panel_source_data(
     plot_df %>% filter(experiment == "CB"),
-    figure = "Figure 6",
+    figure = "Figure 8",
     panel = "D",
     description = "Selected autophagy, lysosome/endosome and vesicle/secretion GO BP GSEA terms for CB-treated whole embryos and spent-medium cfRNA.",
     source_data_dir = table_dir,
-    file_stub = "Figure6D_CB_GSEA_selected_terms"
+    file_stub = "Figure8D_CB_GSEA_selected_terms"
   )
 )
 
@@ -464,17 +464,17 @@ pB_all <- ggplot(cq_we_gene_long, aes(x = group, y = log_count, fill = group)) +
 # ============================================================
 candidate_outputs <- save_publication_plot(
   pB_all,
-  filename_base = "Figure6B_candidate_gene_screening",
+  filename_base = "Figure8B_candidate_gene_screening",
   width_mm = 180,
   height_mm = 230,
   output_dir = fig_dir
 )
 
 panel_outputs <- c(
-  save_publication_plot(pA, "Figure6A_CQ_GSEA_dotplot", 120, 95, fig_dir),
-  save_publication_plot(pB, "Figure6B_CQ_WE_gene_boxplot", 120, 70, fig_dir),
-  save_publication_plot(pC, "Figure6C_CQ_SM_release_barplot", 120, 62, fig_dir),
-  save_publication_plot(pD, "Figure6D_CB_GSEA_dotplot", 120, 95, fig_dir)
+  save_publication_plot(pA, "Figure8A_CQ_GSEA_dotplot", 120, 95, fig_dir),
+  save_publication_plot(pB, "Figure8B_CQ_WE_gene_boxplot", 120, 70, fig_dir),
+  save_publication_plot(pC, "Figure8C_CQ_SM_release_barplot", 120, 62, fig_dir),
+  save_publication_plot(pD, "Figure8D_CB_GSEA_dotplot", 120, 95, fig_dir)
 )
 
 combined <- (pA | pB) / (pC | pD) +
@@ -482,18 +482,18 @@ combined <- (pA | pB) / (pC | pD) +
 
 combined_outputs <- save_publication_plot(
   combined,
-  filename_base = "Figure6_MouseValidation_Combined",
+  filename_base = "Figure8_MouseValidation_Combined",
   width_mm = 180,
   height_mm = 170,
   output_dir = fig_dir
 )
 
 write_run_manifest(
-  "Figure6",
+  "Figure8",
   output_files = c(candidate_outputs, panel_outputs, combined_outputs),
   source_files = source_files,
   log_dir = paths$log_dir
 )
 
-message("Figure6 completed.")
+message("Figure8 completed.")
 message("Output directory: ", fig_dir)

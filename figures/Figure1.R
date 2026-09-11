@@ -1,5 +1,5 @@
 # Figure1.R
-# Rebuild Figure 1 panels B-G using the submitted manuscript style.
+# Rebuild Figure 1 panels B-G using the final manuscript style.
 
 rm(list = ls())
 

@@ -24,6 +24,8 @@ SLIDES = [
     ("Figure 4", ["Figure4_editable_preview.png"]),
     ("Figure 5", ["Figure5_editable_slide1_preview.png", "Figure5_editable_slide2_preview.png"]),
     ("Figure 6", ["Figure6_editable_preview.png"]),
+    ("Figure 7", ["Figure7_editable_preview.png"]),
+    ("Figure 8", ["Figure8_editable_preview.png"]),
     ("Extended Data Figure 1", ["ExtendedDataFigure1_editable_slide1_preview.png", "ExtendedDataFigure1_editable_slide2_preview.png"]),
     ("Extended Data Figure 2", ["ExtendedDataFigure2_editable_slide1_preview.png", "ExtendedDataFigure2_editable_slide2_preview.png"]),
     ("Extended Data Figure 3", ["ExtendedDataFigure3_editable_slide1_preview.png", "ExtendedDataFigure3_editable_slide2_preview.png", "ExtendedDataFigure3_editable_slide3_preview.png"]),

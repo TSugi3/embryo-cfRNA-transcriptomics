@@ -27,7 +27,7 @@ logs/
 *.cram
 *.sra
 
-# Private submission/manuscript files
+# Private manuscript files
 *.docx
 *.doc
 *_metadata_draft.tsv

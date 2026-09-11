@@ -28,10 +28,17 @@ FIGURE_ORDER = [
     ("Figure4", "Figure4_editable.pptx"),
     ("Figure5", "Figure5_editable.pptx"),
     ("Figure6", "Figure6_editable.pptx"),
+    ("Figure7", "Figure7_editable.pptx"),
+    ("Figure8", "Figure8_editable.pptx"),
     ("ExtendedDataFigure1", "ExtendedDataFigure1_editable.pptx"),
     ("ExtendedDataFigure2", "ExtendedDataFigure2_editable.pptx"),
     ("ExtendedDataFigure3", "ExtendedDataFigure3_editable.pptx"),
     ("ExtendedDataFigure4", "ExtendedDataFigure4_editable.pptx"),
+    ("ExtendedDataFigure5", "ExtendedDataFigure5_editable.pptx"),
+    ("ExtendedDataFigure6", "ExtendedDataFigure6_editable.pptx"),
+    ("ExtendedDataFigure7", "ExtendedDataFigure7_editable.pptx"),
+    ("ExtendedDataFigure8", "ExtendedDataFigure8_editable.pptx"),
+    ("ExtendedDataFigure9", "ExtendedDataFigure9_editable.pptx"),
 ]
 
 
@@ -183,6 +190,9 @@ def main() -> None:
 
     for fig_name, pptx_name in FIGURE_ORDER:
         pptx_path = args.figure_dir / pptx_name
+        if not pptx_path.exists():
+            print(f"Skipping missing editable figure file: {pptx_path}")
+            continue
         prs = Presentation(str(pptx_path))
         editable = args.out_dir / f"{fig_name}_editable.pptx"
         shutil.copy2(pptx_path, editable)
@@ -214,6 +224,8 @@ def main() -> None:
     make_contact_sheet(pngs, contact)
     make_pdf(pngs_with_labels, pdf)
     with manifest.open("w", newline="") as handle:
+        if not rows:
+            raise FileNotFoundError("No editable figure PPTX files were found to export.")
         writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)

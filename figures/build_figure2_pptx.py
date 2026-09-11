@@ -74,8 +74,8 @@ def add_down_arrow(slide, x: float, y: float) -> None:
 
 
 def add_figure2a(slide) -> None:
-    # Use the original submitted workflow panel to preserve layout and styling.
-    add_picture(slide, FIG_DIR / "Figure2A_from_submitted_PPT.png", 0.62, 0.42, 6.26, 1.99)
+    # Use the source workflow panel to preserve layout and styling.
+    add_picture(slide, FIG_DIR / "Figure2A_from_source_PPT.png", 0.62, 0.42, 6.26, 1.99)
 
 
 def add_picture(slide, path: Path, left: float, top: float, width: float, height: float) -> None:

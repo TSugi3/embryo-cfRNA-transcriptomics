@@ -1,6 +1,6 @@
 # Expected processed inputs
 
-The public repository does not include raw sequencing data or private local analysis folders. The figure scripts expect processed inputs prepared by the RNA-seq analysis pipeline.
+This repository does not include raw sequencing data or private local analysis folders. The figure scripts expect processed inputs prepared by the RNA-seq analysis pipeline.
 
 ## Human processed analysis directory
 
