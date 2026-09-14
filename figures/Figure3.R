@@ -166,7 +166,7 @@ output_files <- c(output_files, resB$output, resC$output)
 source_files <- c(source_files, resB$source, resC$source)
 
 # ============================================================
-# Figure 3D - GSEA GO BP dotplot
+# Final Figure 4A - GSEA GO BP dotplot
 # ============================================================
 gsea <- read_csv(file.path(paths$human_analysis_dir, "DEG", "GSEA", "AWEvsASM", "GSEA_GO_BP.csv"),
                  show_col_types = FALSE)
@@ -196,16 +196,16 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
     plot.margin = margin(2, 2, 2, 8)
   )
 
-output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "Figure3D_GSEA_GO_BP_dotplot", 180, 125))
+output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "Figure4A_GSEA_GO_BP_dotplot", 180, 125))
 source_files <- c(source_files, write_panel_source_data(
   gsea_plot %>% arrange(desc(abs(NES))),
-  "Figure 3", "D",
+  "Figure 4", "A",
   "GO biological process GSEA terms. Points encode gene set size.",
-  panel_data_dir, "Figure3D_GSEA_GO_BP_terms"
+  panel_data_dir, "Figure4A_GSEA_GO_BP_terms"
 ))
 
 # ============================================================
-# Figure 3E - NMD/apoptosis gene expression
+# Final Figure 4B - NMD/apoptosis gene expression
 # ============================================================
 expr <- read_csv(file.path(paths$human_analysis_dir, "2024-06-03_tmm_edger_3_0.1_0.05_TCC_Normalized.csv"),
                  show_col_types = FALSE)
@@ -269,15 +269,15 @@ pE <- ggplot(expr_long, aes(x = Group, y = Expression, fill = Group)) +
     plot.margin = margin(2, 2, 2, 2)
   )
 
-output_files <- c(output_files, save_panel(pE, "Figure3E_Expression_NMD_Apoptosis", 180, 74))
+output_files <- c(output_files, save_panel(pE, "Figure4B_Expression_NMD_Apoptosis", 180, 74))
 source_files <- c(
   source_files,
-  write_panel_source_data(expr_long, "Figure 3", "E_values",
+  write_panel_source_data(expr_long, "Figure 4", "B_values",
                           "Sample-level expression values for NMD and apoptosis-associated genes.",
-                          panel_data_dir, "Figure3E_NMD_Apoptosis_values"),
-  write_panel_source_data(stats_e, "Figure 3", "E_statistics",
+                          panel_data_dir, "Figure4B_NMD_Apoptosis_values"),
+  write_panel_source_data(stats_e, "Figure 4", "B_statistics",
                           "Wilcoxon rank-sum tests comparing EWE and AWE for each gene.",
-                          panel_data_dir, "Figure3E_NMD_Apoptosis_statistics")
+                          panel_data_dir, "Figure4B_NMD_Apoptosis_statistics")
 )
 
 write_run_manifest("Figure3", output_files, source_files, paths$log_dir)

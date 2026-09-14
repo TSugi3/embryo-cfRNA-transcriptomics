@@ -50,7 +50,7 @@ def main() -> None:
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 7", 0.0, 0.005, 1.25, 0.30, 10)
-    add_picture_keep_aspect(slide, "Figure5E_chord_autophagy.png", 0.208, 0.308, 7.083)
+    add_picture_keep_aspect(slide, "Figure7_chord_autophagy.png", 0.208, 0.308, 7.083)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

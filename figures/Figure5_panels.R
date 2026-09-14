@@ -106,12 +106,12 @@ pA <- ggplot(gsea_top, aes(x = NES, y = Description_wrapped, color = set, size =
   ) +
   guides(color = "none")
 
-output_files <- c(output_files, save_panel(pA, "Figure4A_GSEA_GO_BP_ESMvsASM_dotplot", 180, 100))
+output_files <- c(output_files, save_panel(pA, "Figure5A_GSEA_GO_BP_ESMvsASM_dotplot", 180, 100))
 source_files <- c(source_files, write_panel_source_data(
   gsea_top %>% arrange(set, desc(abs(NES))),
   "Figure 5", "A",
   "GO biological process GSEA terms for ESM versus ASM. Point size encodes -log10(q-value).",
-  panel_data_dir, "Figure4A_GSEA_GO_BP_ESMvsASM_terms"
+  panel_data_dir, "Figure5A_GSEA_GO_BP_ESMvsASM_terms"
 ))
 
 # ============================================================
@@ -176,15 +176,15 @@ pB <- ggplot(expr_b, aes(x = Group, y = Log2_expression, fill = Group)) +
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pB, "Figure4B_Representative_Gene_Expression_Boxplot", 180, 40))
+output_files <- c(output_files, save_panel(pB, "Figure5B_Representative_Gene_Expression_Boxplot", 180, 40))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_b, "Figure 5", "B_values",
                           "Sample-level expression values for representative genes in ESM and ASM.",
-                          panel_data_dir, "Figure4B_Representative_Gene_values"),
+                          panel_data_dir, "Figure5B_Representative_Gene_values"),
   write_panel_source_data(stats_b, "Figure 5", "B_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each representative gene.",
-                          panel_data_dir, "Figure4B_Representative_Gene_statistics")
+                          panel_data_dir, "Figure5B_Representative_Gene_statistics")
 )
 
 # ============================================================
@@ -232,15 +232,15 @@ pC <- ggplot(expr_c, aes(x = Group, y = Log2_expression, fill = Group)) +
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pC, "Figure4C_ExosomeMarkers_Boxplot", 180, 38))
+output_files <- c(output_files, save_panel(pC, "Figure5C_ExosomeMarkers_Boxplot", 180, 38))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_c, "Figure 5", "C_values",
                           "Sample-level expression values for exosome marker genes in ESM and ASM.",
-                          panel_data_dir, "Figure4C_ExosomeMarker_values"),
+                          panel_data_dir, "Figure5C_ExosomeMarker_values"),
   write_panel_source_data(stats_c, "Figure 5", "C_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each exosome marker gene.",
-                          panel_data_dir, "Figure4C_ExosomeMarker_statistics")
+                          panel_data_dir, "Figure5C_ExosomeMarker_statistics")
 )
 
 # ============================================================
@@ -298,22 +298,22 @@ pD <- ggplot(df_scores, aes(x = Group, y = Score, fill = Group)) +
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pD, "Figure4D_ssGSEA_Boxplot_GO_BP", 180, 40))
+output_files <- c(output_files, save_panel(pD, "Figure5D_ssGSEA_Boxplot_GO_BP", 180, 40))
 source_files <- c(
   source_files,
   write_panel_source_data(df_scores, "Figure 5", "D_values",
                           "Sample-level ssGSEA pathway scores for ESM and ASM.",
-                          panel_data_dir, "Figure4D_ssGSEA_values"),
+                          panel_data_dir, "Figure5D_ssGSEA_values"),
   write_panel_source_data(stats_d, "Figure 5", "D_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each ssGSEA pathway.",
-                          panel_data_dir, "Figure4D_ssGSEA_statistics"),
+                          panel_data_dir, "Figure5D_ssGSEA_statistics"),
   write_panel_source_data(
     tibble(pathway = names(gene_sets), go_id = go_terms,
            gene_count = lengths(gene_sets),
            genes = vapply(gene_sets, paste, collapse = "; ", FUN.VALUE = character(1))),
     "Figure 5", "D_gene_sets",
     "GO gene sets used for ssGSEA pathway scoring.",
-    panel_data_dir, "Figure4D_ssGSEA_gene_sets"
+    panel_data_dir, "Figure5D_ssGSEA_gene_sets"
   )
 )
 

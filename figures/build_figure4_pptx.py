@@ -54,8 +54,8 @@ def main() -> None:
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 4", 0.0, 0.005, 1.25, 0.30, 10)
-    add_picture_keep_aspect(slide, "Figure3D_GSEA_GO_BP_dotplot.png", 0.208, 0.420, 7.083)
-    add_picture_keep_aspect(slide, "Figure3E_Expression_NMD_Apoptosis.png", 0.208, 5.270, 7.083)
+    add_picture_keep_aspect(slide, "Figure4A_GSEA_GO_BP_dotplot.png", 0.208, 0.420, 7.083)
+    add_picture_keep_aspect(slide, "Figure4B_Expression_NMD_Apoptosis.png", 0.208, 5.270, 7.083)
     add_panel_label(slide, "A", 0.208, 0.296)
     add_panel_label(slide, "B", 0.208, 5.150)
 

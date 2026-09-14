@@ -124,15 +124,15 @@ pA_matrix <- ggplot(set_labels, aes(x = membership, y = set)) +
 
 pA <- pA_bar / pA_matrix + plot_layout(heights = c(2.2, 1))
 
-output_files <- c(output_files, save_panel(pA, "Figure5A_UpSetPlot_nonDEG_CV", 50, 50))
+output_files <- c(output_files, save_panel(pA, "Figure6A_UpSetPlot_nonDEG_CV", 50, 50))
 source_files <- c(
   source_files,
   write_panel_source_data(gene_matrix, "Figure 6", "A_membership",
                           "Gene-level membership of non-DEG CV < 1.0 sets.",
-                          panel_data_dir, "Figure5A_nonDEG_CV_membership"),
+                          panel_data_dir, "Figure6A_nonDEG_CV_membership"),
   write_panel_source_data(intersection_counts, "Figure 6", "A_intersections",
                           "Intersection sizes for non-DEG CV < 1.0 sets.",
-                          panel_data_dir, "Figure5A_nonDEG_CV_intersections")
+                          panel_data_dir, "Figure6A_nonDEG_CV_intersections")
 )
 
 # ============================================================
@@ -192,15 +192,15 @@ pB2 <- ggplot(etc_df, aes(x = "", y = count, fill = gene_type)) +
 
 pB <- pB1 + pB2 + plot_layout(ncol = 2, widths = c(1.0, 1.2))
 
-output_files <- c(output_files, save_panel(pB, "Figure5B_Biotype_PieChart", 130, 50))
+output_files <- c(output_files, save_panel(pB, "Figure6B_Biotype_PieChart", 130, 50))
 source_files <- c(
   source_files,
   write_panel_source_data(biotype_counts, "Figure 6", "B_biotype_counts",
                           "Biotype composition of common non-DEG genes with CV < 1.0.",
-                          panel_data_dir, "Figure5B_biotype_counts"),
+                          panel_data_dir, "Figure6B_biotype_counts"),
   write_panel_source_data(annotated_genes, "Figure 6", "B_gene_annotations",
                           "Gene-level biotype annotations for common non-DEG genes.",
-                          panel_data_dir, "Figure5B_gene_biotypes")
+                          panel_data_dir, "Figure6B_gene_biotypes")
 )
 
 # ============================================================
@@ -237,12 +237,12 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
     plot.margin = margin(1, 1, 1, 2, unit = "mm")
   )
 
-output_files <- c(output_files, save_panel(pC, "Figure5C_GO_BP_dotplot_viridis", 180, 68))
+output_files <- c(output_files, save_panel(pC, "Figure6C_GO_BP_dotplot_viridis", 180, 68))
 source_files <- c(source_files, write_panel_source_data(
   top_terms_c %>% arrange(p.adjust),
   "Figure 6", "C",
   "GO biological process enrichment terms for mRNAs co-expressed with lncRNAs.",
-  panel_data_dir, "Figure5C_GO_BP_enrichment_terms"
+  panel_data_dir, "Figure6C_GO_BP_enrichment_terms"
 ))
 
 # ============================================================
@@ -304,15 +304,15 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
 
 pD <- pD_group / pD_heat + patchwork::plot_layout(heights = c(0.11, 1))
 
-output_files <- c(output_files, save_panel(pD, "Figure5D_heatmap_autophagy", 180, 100))
+output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 180, 100))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_d, "Figure 6", "D_expression",
                           "Expression matrix used for the autophagy-related release heatmap.",
-                          panel_data_dir, "Figure5D_autophagy_heatmap_expression"),
+                          panel_data_dir, "Figure6D_autophagy_heatmap_expression"),
   write_panel_source_data(heat_df, "Figure 6", "D_z_scores",
                           "Row-scaled z-scores plotted in the autophagy-related release heatmap.",
-                          panel_data_dir, "Figure5D_autophagy_heatmap_zscores")
+                          panel_data_dir, "Figure6D_autophagy_heatmap_zscores")
 )
 
 # ============================================================
@@ -342,11 +342,11 @@ draw_chord <- function() {
   circos.clear()
 }
 
-output_files <- c(output_files, save_circlize_panel(draw_chord, "Figure5E_chord_autophagy", 180, 165))
+output_files <- c(output_files, save_circlize_panel(draw_chord, "Figure7_chord_autophagy", 180, 165))
 source_files <- c(source_files, write_panel_source_data(
   cor_df, "Figure 7", "",
   "lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.",
-  panel_data_dir, "Figure5E_autophagy_chord_correlations"
+  panel_data_dir, "Figure7_autophagy_chord_correlations"
 ))
 
 write_run_manifest("Figure6_7", output_files, source_files, paths$log_dir)
