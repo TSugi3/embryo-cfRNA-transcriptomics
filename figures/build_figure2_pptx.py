@@ -74,8 +74,12 @@ def add_down_arrow(slide, x: float, y: float) -> None:
 
 
 def add_figure2a(slide) -> None:
-    # Use the source workflow panel to preserve layout and styling.
-    add_picture(slide, FIG_DIR / "Figure2A_from_source_PPT.png", 0.62, 0.42, 6.26, 1.99)
+    panel = FIG_DIR / "Figure2A_from_source_PPT.png"
+    if panel.exists():
+        add_picture(slide, panel, 0.62, 0.42, 6.26, 1.99)
+    else:
+        add_rect(slide, "Schematic workflow panel prepared separately",
+                 0.62, 0.42, 6.26, 1.99, fill="F7F7F7", line="D0D0D0", font_size=7.0)
 
 
 def add_picture(slide, path: Path, left: float, top: float, width: float, height: float) -> None:
