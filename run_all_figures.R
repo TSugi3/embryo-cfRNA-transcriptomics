@@ -45,7 +45,10 @@ for (script in figure_scripts) {
     next
   }
   message("Running ", script)
-  source(script_path, local = new.env(parent = globalenv()))
+  status <- system2("Rscript", script_path)
+  if (!identical(status, 0L)) {
+    stop("Figure script failed with status ", status, ": ", script, call. = FALSE)
+  }
 }
 
 if (dir.exists(paths$source_data_dir)) {
