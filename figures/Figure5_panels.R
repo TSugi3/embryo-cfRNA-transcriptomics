@@ -63,7 +63,7 @@ output_files <- character()
 source_files <- character()
 
 # ============================================================
-# Figure 4A - GO:BP GSEA of ESM vs. ASM
+# Final Figure 5A - GO:BP GSEA of ESM vs. ASM
 # ============================================================
 gsea <- readr::read_csv(file.path(paths$human_analysis_dir, "DEG", "GSEA", "ESMvsASM", "GSEA_GO_BP.csv"),
                         show_col_types = FALSE)
@@ -109,19 +109,19 @@ pA <- ggplot(gsea_top, aes(x = NES, y = Description_wrapped, color = set, size =
 output_files <- c(output_files, save_panel(pA, "Figure4A_GSEA_GO_BP_ESMvsASM_dotplot", 180, 100))
 source_files <- c(source_files, write_panel_source_data(
   gsea_top %>% arrange(set, desc(abs(NES))),
-  "Figure 4", "A",
+  "Figure 5", "A",
   "GO biological process GSEA terms for ESM versus ASM. Point size encodes -log10(q-value).",
   panel_data_dir, "Figure4A_GSEA_GO_BP_ESMvsASM_terms"
 ))
 
 # ============================================================
-# Shared expression table for Figure 4B/C
+# Shared expression table for final Figure 5B/C
 # ============================================================
 expr <- readr::read_csv(file.path(paths$human_analysis_dir, "2024-06-03_tmm_edger_3_0.1_0.05_TCC_Normalized.csv"),
                         show_col_types = FALSE)
 
 # ============================================================
-# Figure 4B - Representative gene expression
+# Final Figure 5B - Representative gene expression
 # ============================================================
 gene_set <- list(
   "RNA Splicing" = c("SRSF1", "SF3B1"),
@@ -179,16 +179,16 @@ pB <- ggplot(expr_b, aes(x = Group, y = Log2_expression, fill = Group)) +
 output_files <- c(output_files, save_panel(pB, "Figure4B_Representative_Gene_Expression_Boxplot", 180, 40))
 source_files <- c(
   source_files,
-  write_panel_source_data(expr_b, "Figure 4", "B_values",
+  write_panel_source_data(expr_b, "Figure 5", "B_values",
                           "Sample-level expression values for representative genes in ESM and ASM.",
                           panel_data_dir, "Figure4B_Representative_Gene_values"),
-  write_panel_source_data(stats_b, "Figure 4", "B_statistics",
+  write_panel_source_data(stats_b, "Figure 5", "B_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each representative gene.",
                           panel_data_dir, "Figure4B_Representative_Gene_statistics")
 )
 
 # ============================================================
-# Figure 4C - Exosome marker gene expression
+# Final Figure 5C - Exosome marker gene expression
 # ============================================================
 target_genes_c <- c("CD81", "SDCBP", "SMPD3", "TSG101", "VPS4A", "SYTL4")
 expr_c <- expr %>%
@@ -235,16 +235,16 @@ pC <- ggplot(expr_c, aes(x = Group, y = Log2_expression, fill = Group)) +
 output_files <- c(output_files, save_panel(pC, "Figure4C_ExosomeMarkers_Boxplot", 180, 38))
 source_files <- c(
   source_files,
-  write_panel_source_data(expr_c, "Figure 4", "C_values",
+  write_panel_source_data(expr_c, "Figure 5", "C_values",
                           "Sample-level expression values for exosome marker genes in ESM and ASM.",
                           panel_data_dir, "Figure4C_ExosomeMarker_values"),
-  write_panel_source_data(stats_c, "Figure 4", "C_statistics",
+  write_panel_source_data(stats_c, "Figure 5", "C_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each exosome marker gene.",
                           panel_data_dir, "Figure4C_ExosomeMarker_statistics")
 )
 
 # ============================================================
-# Figure 4D - ssGSEA pathway scores
+# Final Figure 5D - ssGSEA pathway scores
 # ============================================================
 expr_matrix <- expr %>% as.data.frame()
 rownames(expr_matrix) <- expr_matrix[[1]]
@@ -301,21 +301,21 @@ pD <- ggplot(df_scores, aes(x = Group, y = Score, fill = Group)) +
 output_files <- c(output_files, save_panel(pD, "Figure4D_ssGSEA_Boxplot_GO_BP", 180, 40))
 source_files <- c(
   source_files,
-  write_panel_source_data(df_scores, "Figure 4", "D_values",
+  write_panel_source_data(df_scores, "Figure 5", "D_values",
                           "Sample-level ssGSEA pathway scores for ESM and ASM.",
                           panel_data_dir, "Figure4D_ssGSEA_values"),
-  write_panel_source_data(stats_d, "Figure 4", "D_statistics",
+  write_panel_source_data(stats_d, "Figure 5", "D_statistics",
                           "Wilcoxon rank-sum tests comparing ESM and ASM for each ssGSEA pathway.",
                           panel_data_dir, "Figure4D_ssGSEA_statistics"),
   write_panel_source_data(
     tibble(pathway = names(gene_sets), go_id = go_terms,
            gene_count = lengths(gene_sets),
            genes = vapply(gene_sets, paste, collapse = "; ", FUN.VALUE = character(1))),
-    "Figure 4", "D_gene_sets",
+    "Figure 5", "D_gene_sets",
     "GO gene sets used for ssGSEA pathway scoring.",
     panel_data_dir, "Figure4D_ssGSEA_gene_sets"
   )
 )
 
-write_run_manifest("Figure4", output_files, source_files, paths$log_dir)
-message("Figure4 panels and source data completed.")
+write_run_manifest("Figure5", output_files, source_files, paths$log_dir)
+message("Figure5 panels and source data completed.")

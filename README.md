@@ -2,7 +2,7 @@
 
 This repository contains analysis scripts used to generate figure panels and source-data tables for the manuscript:
 
-**Full-length RNA-sequencing profiles intracellular and extracellular RNAs in euploid and aneuploid human embryos**
+**Regulated release of embryo-derived cell-free RNA reflects chromosomal integrity and developmental potential**
 
 The scripts document the figure-generation workflow from processed input tables. Raw sequencing files, private sample-registration materials, correspondence and private manuscript files are not included.
 

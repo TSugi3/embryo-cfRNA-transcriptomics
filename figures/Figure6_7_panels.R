@@ -64,7 +64,7 @@ output_files <- character()
 source_files <- character()
 
 # ============================================================
-# Figure 5A - non-DEG CV intersection
+# Final Figure 6A - non-DEG CV intersection
 # ============================================================
 file_es <- file.path(paths$human_analysis_dir, "nonDEG", "nonDEGfile_CV", "nonDEG_EWEvsESM_CV_lt_1.0.csv")
 file_ea <- file.path(paths$human_analysis_dir, "nonDEG", "nonDEGfile_CV", "nonDEG_EWEvsAWE_CV_lt_1.0.csv")
@@ -127,16 +127,16 @@ pA <- pA_bar / pA_matrix + plot_layout(heights = c(2.2, 1))
 output_files <- c(output_files, save_panel(pA, "Figure5A_UpSetPlot_nonDEG_CV", 50, 50))
 source_files <- c(
   source_files,
-  write_panel_source_data(gene_matrix, "Figure 5", "A_membership",
+  write_panel_source_data(gene_matrix, "Figure 6", "A_membership",
                           "Gene-level membership of non-DEG CV < 1.0 sets.",
                           panel_data_dir, "Figure5A_nonDEG_CV_membership"),
-  write_panel_source_data(intersection_counts, "Figure 5", "A_intersections",
+  write_panel_source_data(intersection_counts, "Figure 6", "A_intersections",
                           "Intersection sizes for non-DEG CV < 1.0 sets.",
                           panel_data_dir, "Figure5A_nonDEG_CV_intersections")
 )
 
 # ============================================================
-# Figure 5B - biotype composition
+# Final Figure 6B - biotype composition
 # ============================================================
 cv_label <- "1.0"
 gtf_path <- file.path(dirname(paths$human_analysis_dir), "ramdaq_annotation", "human", "gencode.v37.primary_assembly.annotation.gtf")
@@ -195,16 +195,16 @@ pB <- pB1 + pB2 + plot_layout(ncol = 2, widths = c(1.0, 1.2))
 output_files <- c(output_files, save_panel(pB, "Figure5B_Biotype_PieChart", 130, 50))
 source_files <- c(
   source_files,
-  write_panel_source_data(biotype_counts, "Figure 5", "B_biotype_counts",
+  write_panel_source_data(biotype_counts, "Figure 6", "B_biotype_counts",
                           "Biotype composition of common non-DEG genes with CV < 1.0.",
                           panel_data_dir, "Figure5B_biotype_counts"),
-  write_panel_source_data(annotated_genes, "Figure 5", "B_gene_annotations",
+  write_panel_source_data(annotated_genes, "Figure 6", "B_gene_annotations",
                           "Gene-level biotype annotations for common non-DEG genes.",
                           panel_data_dir, "Figure5B_gene_biotypes")
 )
 
 # ============================================================
-# Figure 5C - GO:BP enrichment of co-expressed mRNAs
+# Final Figure 6C - GO:BP enrichment of co-expressed mRNAs
 # ============================================================
 df_c <- readr::read_csv(file.path(paths$human_analysis_dir, "Figure", "Figure5C_GO_BP_enrichment.csv"),
                         show_col_types = FALSE)
@@ -240,13 +240,13 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
 output_files <- c(output_files, save_panel(pC, "Figure5C_GO_BP_dotplot_viridis", 180, 68))
 source_files <- c(source_files, write_panel_source_data(
   top_terms_c %>% arrange(p.adjust),
-  "Figure 5", "C",
+  "Figure 6", "C",
   "GO biological process enrichment terms for mRNAs co-expressed with lncRNAs.",
   panel_data_dir, "Figure5C_GO_BP_enrichment_terms"
 ))
 
 # ============================================================
-# Figure 5D - autophagy-related release heatmap
+# Final Figure 6D - autophagy-related release heatmap
 # ============================================================
 input_file_d <- file.path(paths$human_analysis_dir, "nonDEG", "common_nonDEG_genes_CV",
                           "Correlation_1.0", "Step15a_output",
@@ -307,16 +307,16 @@ pD <- pD_group / pD_heat + patchwork::plot_layout(heights = c(0.11, 1))
 output_files <- c(output_files, save_panel(pD, "Figure5D_heatmap_autophagy", 180, 100))
 source_files <- c(
   source_files,
-  write_panel_source_data(expr_d, "Figure 5", "D_expression",
+  write_panel_source_data(expr_d, "Figure 6", "D_expression",
                           "Expression matrix used for the autophagy-related release heatmap.",
                           panel_data_dir, "Figure5D_autophagy_heatmap_expression"),
-  write_panel_source_data(heat_df, "Figure 5", "D_z_scores",
+  write_panel_source_data(heat_df, "Figure 6", "D_z_scores",
                           "Row-scaled z-scores plotted in the autophagy-related release heatmap.",
                           panel_data_dir, "Figure5D_autophagy_heatmap_zscores")
 )
 
 # ============================================================
-# Figure 5E - autophagy-related release chord diagram
+# Final Figure 7 - autophagy-related release chord diagram
 # ============================================================
 input_file_e <- file.path(paths$human_analysis_dir, "nonDEG", "common_nonDEG_genes_CV",
                           "Correlation_1.0", "Step15a_output",
@@ -344,10 +344,10 @@ draw_chord <- function() {
 
 output_files <- c(output_files, save_circlize_panel(draw_chord, "Figure5E_chord_autophagy", 180, 165))
 source_files <- c(source_files, write_panel_source_data(
-  cor_df, "Figure 5", "E",
+  cor_df, "Figure 7", "",
   "lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.",
   panel_data_dir, "Figure5E_autophagy_chord_correlations"
 ))
 
-write_run_manifest("Figure5", output_files, source_files, paths$log_dir)
-message("Figure5 panels and source data completed.")
+write_run_manifest("Figure6_7", output_files, source_files, paths$log_dir)
+message("Figure6/7 panels and source data completed.")
