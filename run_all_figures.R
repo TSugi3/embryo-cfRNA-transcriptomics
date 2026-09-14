@@ -2,8 +2,10 @@
 # Driver script for the figure/source-data workflow.
 #
 # The final manuscript contains Figures 1-8 and Extended Data Figures 1-9.
-# Some scripts generate panels that were split into separate final display items;
-# see inventory/final_figure_mapping.csv for the final display-item mapping.
+# Final-numbered entry points are provided under figures/Figure1.R through
+# figures/Figure8.R. This driver runs shared panel generators only once when
+# adjacent final figures reuse the same upstream outputs; see
+# inventory/final_figure_mapping.csv for the display-item mapping.
 
 rm(list = ls())
 
@@ -27,8 +29,8 @@ figure_scripts <- c(
   "figures/Figure1.R",
   "figures/Figure2.R",
   "figures/Figure3.R",
-  "figures/Figure4.R",
   "figures/Figure5.R",
+  "figures/Figure6.R",
   "figures/Figure8.R",
   "figures/ExtendedDataFigure1.R",
   "figures/ExtendedDataFigure2.R",

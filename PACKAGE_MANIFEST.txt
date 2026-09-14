@@ -18,7 +18,12 @@ figures/Figure2.R
 figures/Figure3.R
 figures/Figure4.R
 figures/Figure5.R
+figures/Figure5_panels.R
+figures/Figure6.R
+figures/Figure6_7_panels.R
+figures/Figure7.R
 figures/Figure8.R
+figures/README.md
 figures/build_all_figures_preview_deck.py
 figures/build_extended_data_figure1_pptx.py
 figures/build_extended_data_figure2_pptx.py
