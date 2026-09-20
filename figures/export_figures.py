@@ -179,6 +179,24 @@ def make_pdf(pngs_with_labels: list[tuple[Path, str]], out_pdf: Path) -> None:
     c.save()
 
 
+def make_individual_pdf(png: Path, out_pdf: Path, dpi: int) -> None:
+    with Image.open(png) as im:
+        page_w = im.width / dpi * 72.0
+        page_h = im.height / dpi * 72.0
+    c = canvas.Canvas(str(out_pdf), pagesize=(page_w, page_h))
+    c.drawImage(
+        ImageReader(str(png)),
+        0,
+        0,
+        width=page_w,
+        height=page_h,
+        preserveAspectRatio=True,
+        mask="auto",
+    )
+    c.showPage()
+    c.save()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--figure-dir", required=True, type=Path)
@@ -208,8 +226,10 @@ def main() -> None:
             stem = output_stem(fig_name, page_count, page_idx)
             png = args.out_dir / f"{stem}.png"
             tif = args.out_dir / f"{stem}.tif"
+            pdf_page = args.out_dir / f"{stem}.pdf"
             image.save(png, dpi=(args.dpi, args.dpi))
             image.save(tif, dpi=(args.dpi, args.dpi), compression="tiff_lzw")
+            make_individual_pdf(png, pdf_page, args.dpi)
             rendered_width_mm = image.width / args.dpi * MM_PER_INCH
             rendered_height_mm = image.height / args.dpi * MM_PER_INCH
             pngs.append(png)
@@ -219,6 +239,7 @@ def main() -> None:
                 "page": str(page_idx),
                 "png": png.name,
                 "tif": tif.name,
+                "pdf": pdf_page.name,
                 "editable_pptx": editable.name,
                 "max_width_mm": f"{args.width_mm:g}",
                 "max_height_mm": f"{args.height_mm:g}",
@@ -243,8 +264,8 @@ def main() -> None:
     readme = args.out_dir / "README_figure_exports.txt"
     readme.write_text(
         "Figure exports generated from editable PPTX files.\n"
-        "PNG and TIFF files are rendered within 180 mm width and 200 mm height with 600 dpi metadata.\n"
-        "PNG and TIFF files omit the editable PPTX page-level figure titles.\n"
+        "PNG, TIFF and individual PDF files are rendered within 180 mm width and 200 mm height at 600 dpi.\n"
+        "PNG, TIFF and individual PDF files omit the editable PPTX page-level figure titles.\n"
         "The combined PDF contains one figure page per page with figure labels added for review and no page numbers.\n",
         encoding="utf-8",
     )

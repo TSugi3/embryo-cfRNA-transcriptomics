@@ -89,12 +89,12 @@ pA <- ggplot(df_a, aes(x = SampleID, y = ReadCount, fill = ReadType)) +
   labs(x = "Analysis ID", y = "Read count (log10)") +
   theme_publication() +
   theme(
-    axis.text.x = element_text(size = 4.2, angle = 90, vjust = 0.5, hjust = 1),
-    axis.text.y = element_text(size = 7),
+    axis.text.x = element_text(size = 7.5, angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.y = element_text(size = 7.5),
     axis.title = element_text(size = 7.5),
     legend.position = c(0.90, 0.30),
     legend.title = element_blank(),
-    legend.text = element_text(size = 7),
+    legend.text = element_text(size = 7.5),
     legend.background = element_rect(fill = "white", color = "black"),
     plot.margin = margin(2, 2, 2, 2)
   )
@@ -111,7 +111,7 @@ pB <- ggplot(raw_reads, aes(x = SampleType, y = Raw_Reads, fill = SampleType)) +
   scale_y_log10(expand = expansion(mult = c(0, 0.06))) +
   labs(x = "Sample type", y = "Raw read count (log10)") +
   theme_publication() +
-  theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
+  theme(axis.text = element_text(size = 7.5), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(2, 2, 2, 2))
 output_files <- c(output_files, save_panel(pB, "FigureS1B_ViolinPlot_RawReads", 60, 52))
 source_files <- c(source_files, write_panel_source_data(raw_reads, "Extended Data Figure 1", "B",
@@ -130,12 +130,12 @@ pC <- ggplot(df_c, aes(x = Group, y = MappingRate, fill = Group)) +
   geom_jitter(width = 0.1, size = 0.85, alpha = 0.8) +
   ggpubr::stat_compare_means(comparisons = list(c("EWE", "AWE"), c("ESM", "ASM")),
                              method = "wilcox.test", label = "p.signif",
-                             step.increase = 0.14, tip.length = 0.02, size = 2.4) +
+                             step.increase = 0.14, tip.length = 0.02, size = 2.8) +
   scale_fill_manual(values = color_group[c("EWE", "AWE", "ESM", "ASM")]) +
   coord_cartesian(ylim = c(0, 130), clip = "off") +
   labs(x = "Sample type", y = "Mapping rate (%)") +
   theme_publication() +
-  theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
+  theme(axis.text = element_text(size = 7.5), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(4, 3, 2, 2))
 output_files <- c(output_files, save_panel(pC, "FigureS1C_MappingRate_PerGroup", 60, 52))
 source_files <- c(source_files,
@@ -161,13 +161,13 @@ pD <- ggplot(df_d, aes(x = Group, y = Gini, fill = Group)) +
   geom_jitter(width = 0.18, size = 0.9, alpha = 0.8) +
   ggpubr::stat_compare_means(comparisons = list(c("EWE", "AWE"), c("ESM", "ASM")),
                              method = "wilcox.test", label = "p.signif",
-                             step.increase = 0.12, tip.length = 0.02, size = 2.4) +
+                             step.increase = 0.12, tip.length = 0.02, size = 2.8) +
   scale_fill_manual(values = color_group[c("EWE", "AWE", "ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.18))) +
   coord_cartesian(clip = "off") +
   labs(x = "Sample type", y = "Gini coefficient") +
   theme_publication() +
-  theme(axis.text = element_text(size = 7), axis.title = element_text(size = 7.5),
+  theme(axis.text = element_text(size = 7.5), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(5, 5, 2, 2))
 output_files <- c(output_files, save_panel(pD, "FigureS1D_GiniCoefficient_withPval", 60, 56))
 source_files <- c(source_files,
@@ -187,11 +187,11 @@ plot_subsampling <- function(data, y_col, y_label, title_label, show_legend = FA
     labs(x = "# Reads (million)", y = y_label, title = title_label, color = "Sample") +
     theme_publication(base_size = 8) +
     theme(plot.title = element_text(size = 8, face = "bold", hjust = 0.5),
-          axis.text = element_text(size = 7),
-          axis.title = element_text(size = 7),
+          axis.text = element_text(size = 7.5),
+          axis.title = element_text(size = 7.5),
           legend.position = "none",
           legend.title = element_blank(),
-          legend.text = element_text(size = 5.2),
+          legend.text = element_text(size = 7.5),
           legend.key.size = unit(0.42, "lines"),
           plot.margin = margin(2, 2, 2, 2))
   p
@@ -232,7 +232,7 @@ pG <- ggplot(ma_df, aes(x = a.value, y = m.value, color = DEG)) +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
         legend.position = "none", strip.background = element_blank(),
         strip.text = element_text(size = 7.5, face = "bold"),
-        axis.title = element_text(size = 7), axis.text = element_text(size = 7))
+        axis.title = element_text(size = 7.5), axis.text = element_text(size = 7.5))
 pH <- ggplot(ma_df, aes(x = a.value, fill = DEG)) +
   geom_density(alpha = 0.6) +
   facet_wrap(~Comparison, ncol = 2, scales = "free_x") +
@@ -240,10 +240,10 @@ pH <- ggplot(ma_df, aes(x = a.value, fill = DEG)) +
   labs(title = "Density plots of average expression", x = "Average expression (log2 scale)", y = "Density") +
   theme_publication() +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
-        axis.title = element_text(size = 7), axis.text = element_text(size = 7),
+        axis.title = element_text(size = 7.5), axis.text = element_text(size = 7.5),
         strip.text = element_text(size = 7.5, face = "bold"), strip.background = element_blank(),
         legend.position = "right", legend.title = element_blank(),
-        legend.text = element_text(size = 7), legend.key.size = unit(0.35, "lines"))
+        legend.text = element_text(size = 7.5), legend.key.size = unit(0.35, "lines"))
 output_files <- c(output_files, save_panel(pG, "FigureS1G_MAplot_Facet", 90, 90))
 output_files <- c(output_files, save_panel(pH, "FigureS1H_DensityPlot_Facet", 90, 90))
 source_files <- c(source_files, write_panel_source_data(ma_df, "Extended Data Figure 1", "G_H",
@@ -277,12 +277,12 @@ matrix_i <- intersection_i %>%
   mutate(Comparison = factor(Comparison, levels = rev(set_cols)))
 pI_bar <- ggplot(intersection_i, aes(x = pattern, y = intersection_size)) +
   geom_col(width = 0.6, fill = "gray25") +
-  geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
+  geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.8) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
   labs(y = "Intersection size", x = NULL) +
   theme_publication() +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-        axis.text.y = element_text(size = 6), axis.title.y = element_text(size = 6.5),
+        axis.text.y = element_text(size = 7.5), axis.title.y = element_text(size = 7.5),
         plot.margin = margin(1, 1, 0, 1))
 pI_matrix <- ggplot(matrix_i, aes(x = pattern, y = Comparison)) +
   geom_line(aes(group = pattern), color = "gray35", linewidth = 0.25) +
@@ -291,7 +291,7 @@ pI_matrix <- ggplot(matrix_i, aes(x = pattern, y = Comparison)) +
   labs(x = NULL, y = NULL) +
   theme_publication() +
   theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-        axis.text.y = element_text(size = 6),
+        axis.text.y = element_text(size = 7.5),
         plot.margin = margin(0, 1, 1, 1))
 pI <- pI_bar / pI_matrix + plot_layout(heights = c(2.1, 1))
 output_files <- c(output_files, save_panel(pI, "FigureS1I_UpSetPlot_DEG", 180, 80))

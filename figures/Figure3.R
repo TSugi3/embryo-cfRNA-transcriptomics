@@ -74,11 +74,11 @@ pA <- ggplot(deg_summary, aes(x = Group, y = Percentage, fill = DEG_class)) +
   coord_flip() +
   theme_publication() +
   theme(
-    axis.text.y = element_text(size = 7),
-    axis.text.x = element_text(size = 7),
+    axis.text.y = element_text(size = 7.5),
+    axis.text.x = element_text(size = 7.5),
     legend.position = "right",
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     plot.margin = margin(2, 2, 2, 2)
   )
 
@@ -127,13 +127,13 @@ make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
     labs(x = expression(-log[10]~"(q-value)"), y = NULL, title = title) +
     theme_publication() +
     theme(
-      plot.title = element_text(hjust = 0.5, size = 7),
-      strip.text.y.left = element_text(angle = 90, size = 6.2),
-      axis.text.y = element_text(size = 6.1, lineheight = 0.78),
-      axis.text.x = element_text(size = 6),
-      axis.title.x = element_text(size = 6.5),
-      legend.title = element_text(size = 5.5),
-      legend.text = element_text(size = 5.5),
+      plot.title = element_text(hjust = 0.5, size = 8.5),
+      strip.text.y.left = element_text(angle = 90, size = 7.5),
+      axis.text.y = element_text(size = 7.5, lineheight = 0.88),
+      axis.text.x = element_text(size = 7.5),
+      axis.title.x = element_text(size = 7.5),
+      legend.title = element_text(size = 7.5),
+      legend.text = element_text(size = 7.5),
       legend.key.size = unit(0.18, "cm"),
       plot.margin = margin(2, 2, 2, 5)
     ) +
@@ -186,17 +186,17 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
   labs(title = "GO:BP GSEA of AWE vs. ASM", x = "NES", y = NULL) +
   theme_publication() +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 7),
-    axis.text.y = element_text(size = 6.8, lineheight = 0.88),
-    axis.text.x = element_text(size = 6),
-    axis.title.x = element_text(size = 6.5),
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
+    plot.title = element_text(hjust = 0.5, size = 8.5),
+    axis.text.y = element_text(size = 7.5, lineheight = 0.92),
+    axis.text.x = element_text(size = 7.5),
+    axis.title.x = element_text(size = 7.5),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 8)
   )
 
-output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "Figure4A_GSEA_GO_BP_dotplot", 180, 125))
+output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "Figure4A_GSEA_GO_BP_dotplot", 180, 113))
 source_files <- c(source_files, write_panel_source_data(
   gsea_plot %>% arrange(desc(abs(NES))),
   "Figure 4", "A",
@@ -247,7 +247,7 @@ pE <- ggplot(expr_long, aes(x = Group, y = Expression, fill = Group)) +
   geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.8) +
   geom_jitter(width = 0.2, size = 0.55, alpha = 0.8) +
   stat_compare_means(method = "wilcox.test", comparisons = list(c("EWE", "AWE")),
-                     label = "p.format", size = 1.9) +
+                     label = "p.format", size = 2.8) +
   facet_wrap(~gene_id, scales = "free_y", nrow = 2,
              labeller = labeller(gene_id = as_labeller(gene_lab, label_parsed))) +
   scale_y_continuous(expand = expansion(mult = c(0.04, 0.18))) +
@@ -256,12 +256,12 @@ pE <- ggplot(expr_long, aes(x = Group, y = Expression, fill = Group)) +
        y = "Expression (TMM-normalized)", x = NULL) +
   theme_publication() +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 7),
-    strip.text = element_text(size = 6, face = "italic"),
+    plot.title = element_text(hjust = 0.5, size = 8.5),
+    strip.text = element_text(size = 7.5, face = "italic"),
     strip.background = element_blank(),
     panel.spacing = unit(1.2, "mm"),
-    axis.text = element_text(size = 5.5),
-    axis.title.y = element_text(size = 6.5),
+    axis.text = element_text(size = 7.5),
+    axis.title.y = element_text(size = 7.5),
     legend.position = "none",
     panel.border = element_blank(),
     axis.line.x = element_line(colour = "black", linewidth = 0.3),
@@ -269,7 +269,7 @@ pE <- ggplot(expr_long, aes(x = Group, y = Expression, fill = Group)) +
     plot.margin = margin(2, 2, 2, 2)
   )
 
-output_files <- c(output_files, save_panel(pE, "Figure4B_Expression_NMD_Apoptosis", 180, 74))
+output_files <- c(output_files, save_panel(pE, "Figure4B_Expression_NMD_Apoptosis", 180, 65))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_long, "Figure 4", "B_values",

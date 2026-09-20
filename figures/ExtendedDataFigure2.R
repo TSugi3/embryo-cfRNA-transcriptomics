@@ -44,7 +44,7 @@ parse_gene_ratio <- function(x) {
 }
 
 enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
-                           axis_text_size = 5.8) {
+                           axis_text_size = 7.5) {
   df <- readr::read_csv(file, show_col_types = FALSE) %>%
     mutate(qvalue = as.numeric(qvalue)) %>%
     filter(!is.na(qvalue), qvalue < 0.05) %>%
@@ -65,10 +65,10 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     theme(
       plot.title = element_text(size = 7.5, face = "bold", hjust = 0.5),
       axis.text.y = element_text(size = axis_text_size, lineheight = 0.86),
-      axis.text.x = element_text(size = 6.5),
-      axis.title.x = element_text(size = 6.5),
-      legend.title = element_text(size = 5.5),
-      legend.text = element_text(size = 5.5),
+      axis.text.x = element_text(size = 7.5),
+      axis.title.x = element_text(size = 7.5),
+      legend.title = element_text(size = 7.5),
+      legend.text = element_text(size = 7.5),
       legend.key.size = unit(0.18, "cm"),
       plot.margin = margin(2, 2, 2, 2)
     )
@@ -82,7 +82,7 @@ source_files <- character()
 resA <- enrich_dotplot(
   file.path(paths$human_analysis_dir, "nonDEG", "enrichment_output", "CV", "KEGG", "KEGG_EWEvsESM_1.0.csv"),
   "KEGG enrichment of stable non-DEGs",
-  n_terms = 18, wrap_width = 64, axis_text_size = 6.5
+  n_terms = 18, wrap_width = 64, axis_text_size = 7.5
 )
 output_files <- c(output_files, save_panel(resA$plot, "FigureS2A_KEGG_EWEvsESM_dotplot", 180, 75))
 source_files <- c(source_files, write_panel_source_data(resA$data, "Extended Data Figure 2", "A",
@@ -119,12 +119,12 @@ matrix_b <- intersection_b %>%
   mutate(Comparison = factor(Comparison, levels = rev(set_cols)))
 pB <- (ggplot(intersection_b, aes(x = pattern, y = intersection_size)) +
          geom_col(width = 0.6, fill = "gray25") +
-         geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
+         geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.8) +
          scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
          labs(y = "Intersection size", x = NULL) +
          theme_publication() +
          theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-               axis.text.y = element_text(size = 6), axis.title.y = element_text(size = 6.5),
+               axis.text.y = element_text(size = 7.5), axis.title.y = element_text(size = 7.5),
                plot.margin = margin(1, 1, 0, 1))) /
       (ggplot(matrix_b, aes(x = pattern, y = Comparison)) +
          geom_line(aes(group = pattern), color = "gray35", linewidth = 0.25) +
@@ -133,7 +133,7 @@ pB <- (ggplot(intersection_b, aes(x = pattern, y = intersection_size)) +
          labs(x = NULL, y = NULL) +
          theme_publication() +
          theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(),
-               axis.text.y = element_text(size = 6),
+               axis.text.y = element_text(size = 7.5),
                plot.margin = margin(0, 1, 1, 1))) +
   plot_layout(heights = c(2.1, 1))
 output_files <- c(output_files, save_panel(pB, "FigureS2B_UpSetPlot_GO_BP_Terms", 180, 75))
@@ -149,12 +149,12 @@ source_files <- c(source_files,
 resC <- enrich_dotplot(
   file.path(paths$human_analysis_dir, "nonDEG", "enrichment_output", "intersection_terms", "CV", "terms_GO_BP_EWEvsESM_EWEvsAWE_1.0.csv"),
   "GO:BP enrichment of shared non-DEGs",
-  n_terms = 20, wrap_width = 42, axis_text_size = 5.2
+  n_terms = 20, wrap_width = 42, axis_text_size = 7.5
 )
 resD <- enrich_dotplot(
   file.path(paths$human_analysis_dir, "nonDEG", "enrichment_output", "intersection_terms", "CV", "terms_KEGG_EWEvsESM_EWEvsAWE_1.0.csv"),
   "KEGG enrichment of shared non-DEGs",
-  n_terms = 20, wrap_width = 42, axis_text_size = 5.2
+  n_terms = 20, wrap_width = 42, axis_text_size = 7.5
 )
 output_files <- c(output_files, save_panel(resC$plot, "FigureS2C_GO_BP_EWEvsESM_EWEvsAWE_dotplot", 90, 105))
 output_files <- c(output_files, save_panel(resD$plot, "FigureS2D_KEGG_EWEvsESM_EWEvsAWE_dotplot", 90, 105))
@@ -199,10 +199,10 @@ pE <- ggplot(plot_data, aes(x = Group, y = Expression, fill = Group)) +
   labs(x = NULL, y = "Normalized expression") +
   theme_publication() +
   theme(legend.position = "none",
-        strip.text = element_text(size = 7, face = "italic"),
+        strip.text = element_text(size = 7.5, face = "italic"),
         strip.background = element_blank(),
-        axis.text = element_text(size = 6.5),
-        axis.title.y = element_text(size = 7),
+        axis.text = element_text(size = 7.5),
+        axis.title.y = element_text(size = 7.5),
         plot.margin = margin(2, 2, 2, 2))
 output_files <- c(output_files, save_panel(pE, "FigureS2E_RepresentativeGene_Boxplot", 180, 60))
 source_files <- c(source_files, write_panel_source_data(plot_data, "Extended Data Figure 2", "E",

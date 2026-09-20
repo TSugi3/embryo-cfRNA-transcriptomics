@@ -54,7 +54,7 @@ save_heatmap <- function(pheatmap_obj, title, name, width_mm, height_mm, dpi = 6
   )
   draw_it <- function() {
     grid.newpage()
-    title_grob <- textGrob(title, gp = gpar(fontsize = 7, fontface = "bold", fontfamily = "Arial"))
+    title_grob <- textGrob(title, gp = gpar(fontsize = 7.5, fontface = "bold", fontfamily = "Arial"))
     grid.arrange(title_grob, pheatmap_obj$gtable, heights = unit(c(1.0, 22), c("lines", "null")))
   }
   grDevices::cairo_pdf(files["pdf"], width = width_mm / 25.4, height = height_mm / 25.4)
@@ -86,7 +86,7 @@ save_chord <- function(chord_matrix, name, width_mm, height_mm, dpi = 600) {
     )
     circos.track(track.index = 1, panel.fun = function(x, y) {
       circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index,
-                  facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.5)
+                  facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.70)
     }, bg.border = NA)
     circos.clear()
   }
@@ -131,12 +131,12 @@ pA <- ggplot(kegg_plot, aes(x = GeneRatio_numeric, y = Description_wrapped)) +
        x = "Gene ratio", y = NULL) +
   theme_publication() +
   theme(
-    plot.title = element_text(face = "bold", size = 7, hjust = 0.5),
-    axis.text.y = element_text(size = 7.0, lineheight = 0.92),
-    axis.text.x = element_text(size = 6),
-    axis.title.x = element_text(size = 6.5),
-    legend.title = element_text(size = 5.5),
-    legend.text = element_text(size = 5.5),
+    plot.title = element_text(face = "bold", size = 7.5, hjust = 0.5),
+    axis.text.y = element_text(size = 7.5, lineheight = 0.92),
+    axis.text.x = element_text(size = 7.5),
+    axis.title.x = element_text(size = 7.5),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 5)
   )
@@ -174,7 +174,7 @@ sample_groups <- tibble(Sample = colnames(expr_mat_plot)) %>%
 expr_mat_plot <- expr_mat_plot[, sample_groups$Sample, drop = FALSE]
 annotation_col <- data.frame(Group = sample_groups$Group)
 rownames(annotation_col) <- sample_groups$Sample
-annotation_colours <- list(Group = color_group)
+annotation_colours <- list(Group = color_group[c("EWE", "AWE", "ESM", "ASM")])
 
 pheat <- pheatmap(
   expr_mat_plot,
@@ -183,8 +183,8 @@ pheat <- pheatmap(
   cluster_cols = FALSE,
   show_rownames = TRUE,
   show_colnames = FALSE,
-  fontsize = 6,
-  fontsize_row = 4.3,
+  fontsize = 7.5,
+  fontsize_row = 7.5,
   annotation_col = annotation_col,
   annotation_colors = annotation_colours,
   color = colorRampPalette(c("#2166AC", "white", "#B2182B"))(101),

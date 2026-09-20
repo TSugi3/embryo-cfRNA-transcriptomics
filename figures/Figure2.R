@@ -103,19 +103,25 @@ go_bp_plot <- go_bp_all %>%
 pB <- ggplot(go_bp_plot, aes(x = minus_log10_qvalue, y = Description)) +
   geom_point(aes(size = Count, color = GeneRatio_numeric), alpha = 0.95) +
   scale_color_viridis_c(name = "Gene Ratio", option = "D", direction = 1, end = 0.95) +
-  scale_size_continuous(name = "Gene Count", range = c(1.2, 4.2)) +
+  scale_size_continuous(name = "Gene Count", range = c(1.2, 4.2),
+                        breaks = c(20, 40, 60)) +
   scale_x_continuous(limits = c(3, 8), expand = expansion(mult = c(0.02, 0.06))) +
+  guides(
+    color = guide_colorbar(order = 1, barheight = grid::unit(18, "mm")),
+    size = guide_legend(order = 2)
+  ) +
   labs(x = expression(-log[10]~"(q-value)"), y = NULL) +
   theme_publication() +
   theme(
     legend.position = "right",
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
-    axis.text.y = element_text(size = 5.8),
-    plot.margin = margin(3, 3, 3, 3)
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
+    axis.text.y = element_text(size = 7.5),
+    legend.box.just = "top",
+    plot.margin = margin(6, 3, 3, 3)
   )
 
-output_files <- c(output_files, save_panel(pB, "Figure2B_GO_BP_EWEvsESM_dotplot", 110, 65))
+output_files <- c(output_files, save_panel(pB, "Figure2B_GO_BP_EWEvsESM_dotplot", 110, 59))
 source_files <- c(source_files, write_panel_source_data(
   go_bp_plot %>% arrange(qvalue),
   "Figure 2", "B",
@@ -174,7 +180,7 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
   ) +
   geom_text(
     aes(label = intersection_size),
-    vjust = -0.25, size = 1.9
+    vjust = -0.25, size = 2.8
   ) +
   scale_x_continuous(limits = c(0.5, max(intersection_summary$intersection_id) + 0.5),
                      expand = expansion(mult = c(0.01, 0.01))) +
@@ -184,8 +190,8 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.title.y = element_text(size = 6.5),
-    axis.text.y = element_text(size = 5.8),
+    axis.title.y = element_text(size = 7.5),
+    axis.text.y = element_text(size = 7.5),
     plot.margin = margin(2, 2, 0, 7)
   )
 
@@ -206,7 +212,7 @@ pC_matrix <- ggplot(matrix_for_plot, aes(x = intersection_id, y = comparison)) +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 6),
+    axis.text.y = element_text(size = 7.5),
     axis.line.x = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
@@ -216,7 +222,7 @@ pC_matrix <- ggplot(matrix_for_plot, aes(x = intersection_id, y = comparison)) +
 pC <- cowplot::plot_grid(pC_bar, pC_matrix, ncol = 1, align = "v",
                          rel_heights = c(0.70, 0.30))
 
-output_files <- c(output_files, save_panel(pC, "Figure2C_UpSetPlot_nonDEG", 70, 65))
+output_files <- c(output_files, save_panel(pC, "Figure2C_UpSetPlot_nonDEG", 70, 59))
 source_files <- c(
   source_files,
   write_panel_source_data(gene_matrix, "Figure 2", "C_values",
@@ -284,14 +290,14 @@ pD <- ggplot(score_scaled, aes(x = Sample, y = Pathway, fill = z_score)) +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 6.2),
+    axis.text.y = element_text(size = 7.5),
     legend.position = "right",
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     plot.margin = margin(2, 2, 2, 2)
   )
 
-output_files <- c(output_files, save_panel(pD, "Figure2D_ssGSEA_heatmap", 178, 40))
+output_files <- c(output_files, save_panel(pD, "Figure2D_ssGSEA_heatmap", 178, 36))
 source_files <- c(source_files, write_panel_source_data(
   score_scaled, "Figure 2", "D",
   "Sample-level ssGSEA scores and row-wise z-scores used in the heatmap.",
@@ -322,7 +328,7 @@ pE <- ggplot(ssgsea_long, aes(x = SampleType, y = ssGSEA_Score, fill = SampleTyp
     comparisons = comparisons,
     method = "wilcox.test",
     label = "p.format",
-    size = 2.2,
+    size = 2.8,
     tip.length = 0.01
   ) +
   facet_wrap(~Pathway, scales = "free_y", nrow = 1) +
@@ -332,14 +338,14 @@ pE <- ggplot(ssgsea_long, aes(x = SampleType, y = ssGSEA_Score, fill = SampleTyp
   theme_publication() +
   theme(
     strip.background = element_blank(),
-    strip.text = element_text(size = 6.2, face = "bold"),
-    axis.text.x = element_text(size = 5.8),
-    axis.text.y = element_text(size = 5.8),
+    strip.text = element_text(size = 7.5, face = "bold"),
+    axis.text.x = element_text(size = 7.5),
+    axis.text.y = element_text(size = 7.5),
     legend.position = "none",
     plot.margin = margin(3, 3, 3, 3)
   )
 
-output_files <- c(output_files, save_panel(pE, "Figure2E_ssGSEA_score_comparison", 180, 50))
+output_files <- c(output_files, save_panel(pE, "Figure2E_ssGSEA_score_comparison", 180, 45))
 source_files <- c(
   source_files,
   write_panel_source_data(ssgsea_long, "Figure 2", "E_values",

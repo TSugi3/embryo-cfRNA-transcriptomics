@@ -95,18 +95,18 @@ pA <- ggplot(data_long, aes(x = Value, fill = Comparison, color = Comparison)) +
   geom_density(alpha = 0.25, adjust = 1, linewidth = 0.35) +
   facet_wrap(~ValueType, scales = "free", nrow = 1) +
   geom_text(data = pval_df, aes(x = -Inf, y = Inf, label = p_label),
-            inherit.aes = FALSE, hjust = -0.05, vjust = 1.35, size = 2.0) +
+            inherit.aes = FALSE, hjust = -0.05, vjust = 1.35, size = 2.8) +
   scale_fill_manual(values = c("EWE vs. ESM" = "#00BFC4", "AWE vs. ASM" = "#F8766D")) +
   scale_color_manual(values = c("EWE vs. ESM" = "#00BFC4", "AWE vs. ASM" = "#F8766D")) +
   labs(x = expression(log[2]~"value"), y = "Density") +
   theme_publication() +
   theme(
     strip.background = element_blank(),
-    strip.text = element_text(size = 7, face = "bold"),
+    strip.text = element_text(size = 7.5, face = "bold"),
     legend.title = element_blank(),
-    legend.text = element_text(size = 6),
-    axis.text = element_text(size = 6),
-    axis.title = element_text(size = 6.5),
+    legend.text = element_text(size = 7.5),
+    axis.text = element_text(size = 7.5),
+    axis.title = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 2)
   )
@@ -159,18 +159,18 @@ make_reactome_dotplot <- function(files, title, output_name, panel_id) {
     theme_publication() +
     theme(
       plot.title = element_text(hjust = 0.75, size = 8, face = "bold"),
-      strip.text.y.left = element_text(angle = 90, size = 5),
-      axis.text.y = element_text(size = 5.4, lineheight = 0.78),
+      strip.text.y.left = element_text(angle = 90, size = 7.5),
+      axis.text.y = element_text(size = 7.5, lineheight = 0.88),
       axis.text.x = element_text(size = 8),
-      axis.title.x = element_text(size = 6.5),
-      legend.title = element_text(size = 6),
-      legend.text = element_text(size = 6),
+      axis.title.x = element_text(size = 7.5),
+      legend.title = element_text(size = 7.5),
+      legend.text = element_text(size = 7.5),
       legend.key.size = unit(0.2, "cm"),
       plot.margin = margin(1, 1, 1, 8, unit = "mm")
     ) +
     guides(color = guide_colorbar(order = 1), size = guide_legend(order = 2))
 
-  output <- save_panel(compress_panel_width(p, panel_width_cm = 4.4), output_name, 120, 170)
+  output <- save_panel(compress_panel_width(p, panel_width_cm = 4.4), output_name, 180, 170)
   source <- write_panel_source_data(
     combined %>% arrange(Comparison, qvalue),
     "Extended Data Figure 3", panel_id,
@@ -218,12 +218,12 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
   labs(title = "Reactome GSEA of AWE vs. ASM", x = "NES", y = NULL) +
   theme_publication() +
   theme(
-    plot.title = element_text(hjust = 0.5, size = 7),
-    axis.text.y = element_text(size = 6.6, lineheight = 0.88),
-    axis.text.x = element_text(size = 6),
-    axis.title.x = element_text(size = 6.5),
-    legend.title = element_text(size = 5.5),
-    legend.text = element_text(size = 5.5),
+    plot.title = element_text(hjust = 0.5, size = 8.5),
+    axis.text.y = element_text(size = 7.5, lineheight = 0.92),
+    axis.text.x = element_text(size = 7.5),
+    axis.title.x = element_text(size = 7.5),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 8)
   )
@@ -284,12 +284,17 @@ plot_list <- lapply(seq_len(nrow(stats_E)), function(i) {
       gsea_obj,
       geneSetID = row$ID,
       title = paste0(row$Display, "\n", row$annotation_inline),
-      base_size = 5,
+      base_size = 7.5,
       rel_heights = c(1.35, 0.25, 0.85),
       color = "steelblue"
     )
     gp[[1]] <- gp[[1]] +
-      theme(plot.title = element_text(size = 5.1, lineheight = 0.95, hjust = 0.5))
+      theme(
+        plot.title = element_text(size = 7.5, lineheight = 0.95, hjust = 0.5),
+        axis.title.y = element_blank()
+      )
+    gp[[2]] <- gp[[2]] + theme(axis.title.y = element_blank())
+    gp[[3]] <- gp[[3]] + theme(axis.title.y = element_blank())
     gp[[1]] / gp[[2]] / gp[[3]] + plot_layout(heights = c(1.35, 0.25, 0.85))
   }, error = function(e) {
     message(sprintf("Skip: %s - %s", row$Display, e$message))

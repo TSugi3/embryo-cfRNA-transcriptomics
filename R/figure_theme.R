@@ -4,7 +4,7 @@ suppressPackageStartupMessages({
   library(ggplot2)
 })
 
-theme_publication <- function(base_size = 7.5, base_family = "Arial") {
+theme_publication <- function(base_size = 8.5, base_family = "Arial") {
   theme_bw(base_size = base_size, base_family = base_family) %+replace%
     theme(
       panel.background = element_blank(),
@@ -67,4 +67,3 @@ save_publication_plot <- function(plot, filename_base, width_mm, height_mm, outp
 
   invisible(c(pdf = pdf_file, png = png_file, tiff = tiff_file))
 }
-

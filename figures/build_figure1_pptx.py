@@ -21,7 +21,7 @@ OUT_PPTX = FIG_DIR / "Figure1_editable.pptx"
 
 
 SLIDE_W = 7.5
-SLIDE_H = 10.833333333333334
+SLIDE_H = 8.30
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -96,7 +96,7 @@ def main() -> None:
         "G": (2.95, 5.58),
     }
     for label, (left, top) in label_positions.items():
-        add_textbox(slide, label, left, top, 0.20, 0.16, 7, bold=True)
+        add_textbox(slide, label, left, top, 0.20, 0.18, 8, bold=True)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

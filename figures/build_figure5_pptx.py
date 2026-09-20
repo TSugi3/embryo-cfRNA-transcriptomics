@@ -13,7 +13,7 @@ from path_config import FIG_DIR
 
 OUT_PPTX = FIG_DIR / "Figure5_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 9.2
+SLIDE_H = 8.30
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -55,14 +55,14 @@ def main() -> None:
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 5", 0.0, 0.005, 1.25, 0.30, 10)
-    add_picture(slide, "Figure5A_GSEA_GO_BP_ESMvsASM_dotplot.png", 0.208, 0.308, 7.083, 3.931)
-    add_picture(slide, "Figure5B_Representative_Gene_Expression_Boxplot.png", 0.208, 4.238, 7.083, 1.569)
-    add_picture(slide, "Figure5C_ExosomeMarkers_Boxplot.png", 0.208, 6.007, 7.083, 1.486)
-    add_picture(slide, "Figure5D_ssGSEA_Boxplot_GO_BP.png", 0.208, 7.596, 7.083, 1.569)
+    add_picture(slide, "Figure5A_GSEA_GO_BP_ESMvsASM_dotplot.png", 0.208, 0.308, 7.083, 3.542)
+    add_picture(slide, "Figure5B_Representative_Gene_Expression_Boxplot.png", 0.208, 3.950, 7.083, 1.378)
+    add_picture(slide, "Figure5C_ExosomeMarkers_Boxplot.png", 0.208, 5.430, 7.083, 1.338)
+    add_picture(slide, "Figure5D_ssGSEA_Boxplot_GO_BP.png", 0.208, 6.870, 7.083, 1.378)
     add_panel_label(slide, "A", 0.208, 0.296)
-    add_panel_label(slide, "B", 0.208, 4.131)
-    add_panel_label(slide, "C", 0.208, 5.889)
-    add_panel_label(slide, "D", 0.208, 7.540)
+    add_panel_label(slide, "B", 0.208, 3.840)
+    add_panel_label(slide, "C", 0.208, 5.320)
+    add_panel_label(slide, "D", 0.208, 6.760)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

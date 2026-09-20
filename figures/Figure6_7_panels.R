@@ -97,15 +97,15 @@ set_labels <- tibble(
 
 pA_bar <- ggplot(intersection_counts, aes(x = membership, y = intersection_size)) +
   geom_col(width = 0.58, fill = "gray25") +
-  geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.0) +
+  geom_text(aes(label = intersection_size), vjust = -0.25, size = 2.8) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.18))) +
   labs(y = "Intersection size", x = NULL) +
   theme_publication() +
   theme(
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 6),
-    axis.title.y = element_text(size = 6.5),
+    axis.text.y = element_text(size = 7.5),
+    axis.title.y = element_text(size = 7.5),
     plot.margin = margin(1, 1, 0, 1)
   )
 
@@ -116,8 +116,8 @@ pA_matrix <- ggplot(set_labels, aes(x = membership, y = set)) +
   labs(x = NULL, y = NULL) +
   theme_publication() +
   theme(
-    axis.text.x = element_text(size = 5.5, angle = 35, hjust = 1),
-    axis.text.y = element_text(size = 6),
+    axis.text.x = element_text(size = 7.5, angle = 35, hjust = 1),
+    axis.text.y = element_text(size = 7.5),
     axis.ticks = element_blank(),
     plot.margin = margin(0, 1, 1, 1)
   )
@@ -169,7 +169,7 @@ names(etc_colors) <- etc_df$gene_type
 pB1 <- ggplot(main_df, aes(x = "", y = count, fill = group)) +
   geom_col(width = 1) +
   coord_polar("y") +
-  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 2.3) +
+  geom_text(aes(label = label), position = position_stack(vjust = 0.5), size = 2.8) +
   labs(title = "Biotype composition") +
   scale_fill_manual(values = main_colors) +
   theme_void(base_size = 8) +
@@ -184,7 +184,7 @@ pB2 <- ggplot(etc_df, aes(x = "", y = count, fill = gene_type)) +
   theme(
     plot.title = element_text(hjust = 0.5, size = 8),
     legend.title = element_blank(),
-    legend.text = element_text(size = 5.6),
+    legend.text = element_text(size = 7.5),
     legend.key.size = unit(2.5, "mm"),
     legend.spacing.y = unit(0.5, "mm"),
     legend.position = "right"
@@ -214,7 +214,7 @@ top_terms_c <- df_c %>%
   slice_head(n = 15) %>%
   mutate(
     GeneRatio_numeric = vapply(GeneRatio, function(x) eval(parse(text = x)), numeric(1)),
-    Description_wrapped = stringr::str_wrap(Description, width = 58),
+    Description_wrapped = stringr::str_wrap(Description, width = 32),
     Description_wrapped = fct_reorder(Description_wrapped, GeneRatio_numeric)
   )
 
@@ -222,22 +222,23 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
   geom_point(alpha = 0.95) +
   scale_color_viridis_c(option = "D", direction = -1, name = "Adjusted P") +
   scale_size_continuous(name = "Gene count", range = c(1.2, 4.0)) +
-  labs(title = "GO:BP enrichment of mRNAs co-expressed with lncRNAs",
+  scale_x_continuous(breaks = scales::pretty_breaks(n = 3)) +
+  labs(title = "GO:BP enrichment of mRNAs\nco-expressed with lncRNAs",
        x = "Gene ratio", y = NULL) +
   theme_publication() +
   theme(
     plot.title = element_text(face = "bold", size = 8, hjust = 0.5),
     legend.position = "right",
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.22, "cm"),
-    axis.text.y = element_text(size = 6.5, lineheight = 0.86),
-    axis.text.x = element_text(size = 7),
-    axis.title.x = element_text(size = 7),
+    axis.text.y = element_text(size = 7.5, lineheight = 0.92),
+    axis.text.x = element_text(size = 7.5),
+    axis.title.x = element_text(size = 7.5),
     plot.margin = margin(1, 1, 1, 2, unit = "mm")
   )
 
-output_files <- c(output_files, save_panel(pC, "Figure6C_GO_BP_dotplot_viridis", 180, 68))
+output_files <- c(output_files, save_panel(pC, "Figure6C_GO_BP_dotplot_viridis", 80, 140))
 source_files <- c(source_files, write_panel_source_data(
   top_terms_c %>% arrange(p.adjust),
   "Figure 6", "C",
@@ -279,7 +280,7 @@ pD_group <- ggplot(sample_group_df, aes(x = Sample, y = "Group", fill = Group)) 
   theme(
     legend.position = "top",
     legend.title = element_blank(),
-    legend.text = element_text(size = 6),
+    legend.text = element_text(size = 7.5),
     legend.key.width = unit(0.35, "cm"),
     plot.margin = margin(0, 1, 0, 1)
   )
@@ -294,17 +295,17 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
     plot.title = element_text(size = 8, face = "bold", hjust = 0.5),
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 5.0, face = "italic"),
+    axis.text.y = element_text(size = 7.5, face = "italic"),
     panel.grid = element_blank(),
-    legend.title = element_text(size = 6),
-    legend.text = element_text(size = 6),
+    legend.title = element_text(size = 7.5),
+    legend.text = element_text(size = 7.5),
     legend.key.height = unit(0.35, "cm"),
     plot.margin = margin(1, 1, 1, 1)
   )
 
 pD <- pD_group / pD_heat + patchwork::plot_layout(heights = c(0.11, 1))
 
-output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 180, 100))
+output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 100, 140))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_d, "Figure 6", "D_expression",
@@ -337,7 +338,7 @@ draw_chord <- function() {
   circos.track(track.index = 1, panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ylim[1],
                 CELL_META$sector.index, facing = "clockwise",
-                niceFacing = TRUE, adj = c(0, 0.5), cex = 0.48, font = 3)
+                niceFacing = TRUE, adj = c(0, 0.5), cex = 0.70, font = 3)
   }, bg.border = NA)
   circos.clear()
 }

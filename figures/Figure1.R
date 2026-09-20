@@ -70,8 +70,8 @@ ks_df <- tibble(
   p_value = ks_test$p.value,
   method = ks_test$method
 )
-ks_result <- paste0("KS Test: D = ", round(ks_test$statistic, 5),
-                    ", p = ", format(ks_test$p.value, scientific = TRUE))
+ks_result <- sprintf("KS test\nD = %.3f, P = %.2g",
+                     unname(ks_test$statistic), ks_test$p.value)
 
 pB <- ggplot(insert_long, aes(x = InsertLength, y = RelativeFrequency,
                               fill = SampleType, color = SampleType)) +
@@ -82,14 +82,14 @@ pB <- ggplot(insert_long, aes(x = InsertLength, y = RelativeFrequency,
   scale_x_continuous(breaks = seq(0, max(insert_data$InsertLength, na.rm = TRUE), by = 100)) +
   labs(x = "Insert Size (bp)", y = "Relative Read Fraction") +
   annotate("text", x = Inf, y = Inf, label = ks_result,
-           hjust = 1, vjust = 1, size = 2.3, color = "black") +
+           hjust = 1, vjust = 1, size = 2.8, color = "black") +
   theme_publication() +
   theme(
     legend.position = c(0.7, 0.7),
     legend.background = element_rect(fill = "transparent"),
     legend.key = element_rect(fill = "transparent"),
     legend.title = element_blank(),
-    legend.text = element_text(size = 6),
+    legend.text = element_text(size = 7.5),
     plot.title = element_blank()
   )
 
@@ -152,7 +152,7 @@ pC <- ggplot(biotype_summary, aes(x = Group, y = MeanProportion, fill = Biotype)
   theme(
     legend.position = "right",
     legend.title = element_blank(),
-    legend.text = element_text(size = 6),
+    legend.text = element_text(size = 7.5),
     plot.title = element_blank()
   )
 
@@ -203,7 +203,7 @@ pD <- ggplot(gene_count_df, aes(x = Group, y = Count, fill = Group)) +
   geom_jitter(width = 0.2, size = 0.5, alpha = 0.8) +
   scale_fill_manual(values = group_colors) +
   stat_compare_means(comparisons = comparisons_d, method = "wilcox.test",
-                     label = "p.signif", size = 2.5, tip.length = 0.01) +
+                     label = "p.signif", size = 2.8, tip.length = 0.01) +
   labs(x = NULL, y = "Number of Genes") +
   theme_publication() +
   theme(legend.position = "none", plot.title = element_blank())
@@ -247,7 +247,7 @@ pE <- ggplot(shannon_df, aes(x = Group, y = Shannon, fill = Group)) +
   geom_jitter(width = 0.2, size = 0.5, alpha = 0.8) +
   scale_fill_manual(values = group_colors) +
   stat_compare_means(comparisons = comparisons_e, method = "wilcox.test",
-                     label = "p.signif", size = 2.5) +
+                     label = "p.signif", size = 2.8) +
   labs(x = NULL, y = "Shannon Entropy") +
   theme_publication() +
   theme(legend.position = "none", plot.title = element_blank())

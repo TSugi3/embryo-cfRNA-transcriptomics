@@ -104,7 +104,7 @@ candidate_genes <- c(
   "Sdc1", "Sdc4", "Sdcbp", "Smpd3"
 )
 
-theme_fig <- function(base_size = 6.2) {
+theme_fig <- function(base_size = 8.5) {
   theme_bw(base_size = base_size, base_family = "Arial") %+replace%
     theme(
       panel.background = element_blank(),
@@ -114,15 +114,15 @@ theme_fig <- function(base_size = 6.2) {
       axis.line = element_line(color = "black", linewidth = 0.3),
       axis.ticks = element_line(color = "black", linewidth = 0.3),
       axis.title = element_text(size = base_size),
-      axis.text = element_text(size = base_size * 0.9, color = "black"),
+      axis.text = element_text(size = max(7.5, base_size * 0.9), color = "black"),
       plot.title = element_text(face = "bold", size = base_size + 0.8, hjust = 0),
-      plot.subtitle = element_text(size = base_size * 0.9, hjust = 0),
+      plot.subtitle = element_text(size = max(7.5, base_size * 0.9), hjust = 0),
       axis.text.x = element_text(face = "bold"),
       strip.background = element_rect(fill = "grey92", color = "grey70", linewidth = 0.25),
-      strip.text = element_text(face = "bold", size = base_size * 0.85),
+      strip.text = element_text(face = "bold", size = max(7.5, base_size * 0.85)),
       strip.text.y = element_text(angle = 0, face = "bold"),
-      legend.title = element_text(size = base_size * 0.85),
-      legend.text = element_text(size = base_size * 0.8),
+      legend.title = element_text(size = max(7.5, base_size * 0.85)),
+      legend.text = element_text(size = max(7.5, base_size * 0.8)),
       legend.key = element_blank(),
       legend.spacing = unit(0.1, "cm"),
       legend.key.size = unit(0.15, "cm"),
@@ -173,11 +173,11 @@ make_gsea_dotplot <- function(df, exp_name, title_text, subtitle_text) {
       name = "Significance"
     ) +
     labs(title = title_text, subtitle = subtitle_text, x = NULL, y = NULL) +
-    theme_fig(base_size = 5.9) +
+    theme_fig(base_size = 8.5) +
     theme(
-      axis.text.y = element_text(size = 5.5, lineheight = 0.85),
-      axis.text.x = element_text(size = 5.8, face = "bold"),
-      strip.text.y = element_text(size = 5.5, face = "bold")
+      axis.text.y = element_text(size = 7.5, lineheight = 0.92),
+      axis.text.x = element_text(size = 7.5, face = "bold"),
+      strip.text.y = element_text(size = 7.5, face = "bold")
     ) +
     guides(
       color = guide_colorbar(barheight = unit(1.4, "cm"), barwidth = unit(0.18, "cm")),
@@ -212,9 +212,9 @@ make_sm_release_barplot <- function(df, exp_name, title_text, subtitle_text, fil
       name = "Significance"
     ) +
     labs(title = title_text, subtitle = subtitle_text, x = "NES in SM cfRNA", y = NULL) +
-    theme_fig(base_size = 5.9) +
+    theme_fig(base_size = 8.5) +
     theme(
-      axis.text.y = element_text(size = 5.5, lineheight = 0.85),
+      axis.text.y = element_text(size = 7.5, lineheight = 0.92),
       legend.position = "right"
     )
 }
@@ -410,12 +410,12 @@ pB <- ggplot(cq_we_gene_panel, aes(x = group, y = log_count, fill = group)) +
     x = NULL,
     y = "log10(normalized count + 1)"
   ) +
-  theme_fig(base_size = 5.9) +
+    theme_fig(base_size = 8.5) +
   theme(
     legend.position = "none",
-    axis.text.x = element_text(angle = 30, hjust = 1, face = "bold", size = 5.3),
-    axis.text.y = element_text(size = 5.3),
-    strip.text = element_text(size = 5.5, face = "italic"),
+    axis.text.x = element_text(angle = 30, hjust = 1, face = "bold", size = 7.5),
+    axis.text.y = element_text(size = 7.5),
+    strip.text = element_text(size = 7.5, face = "italic"),
     plot.margin = margin(2, 2, 8, 2)
   )
 
@@ -453,7 +453,7 @@ pB_all <- ggplot(cq_we_gene_long, aes(x = group, y = log_count, fill = group)) +
     x = NULL,
     y = "log10(normalized count + 1)"
   ) +
-  theme_fig(base_size = 5.8) +
+  theme_fig(base_size = 8.5) +
   theme(
     legend.position = "none",
     axis.text.x = element_text(angle = 45, hjust = 1, face = "bold")

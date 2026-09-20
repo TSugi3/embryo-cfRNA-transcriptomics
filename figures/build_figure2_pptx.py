@@ -16,7 +16,7 @@ from path_config import BASE_DIR, FIG_DIR
 OUT_PPTX = FIG_DIR / "Figure2_editable.pptx"
 
 SLIDE_W = 7.5
-SLIDE_H = 8.9
+SLIDE_H = 8.32
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -40,7 +40,7 @@ def add_textbox(slide, text: str, left: float, top: float, width: float, height:
 
 
 def add_panel_label(slide, label: str, left: float, top: float) -> None:
-    add_textbox(slide, label, left, top, 0.20, 0.16, 7, bold=True)
+    add_textbox(slide, label, left, top, 0.20, 0.18, 8, bold=True)
 
 
 def add_rect(slide, text: str, left: float, top: float, width: float, height: float,
@@ -79,7 +79,7 @@ def add_figure2a(slide) -> None:
         add_picture(slide, panel, 0.62, 0.42, 6.26, 1.99)
     else:
         add_rect(slide, "Schematic workflow panel prepared separately",
-                 0.62, 0.42, 6.26, 1.99, fill="F7F7F7", line="D0D0D0", font_size=7.0)
+                 0.62, 0.42, 6.26, 1.99, fill="F7F7F7", line="D0D0D0", font_size=8.0)
 
 
 def add_picture(slide, path: Path, left: float, top: float, width: float, height: float) -> None:
@@ -98,16 +98,16 @@ def main() -> None:
     add_textbox(slide, "Figure 2", 0.00, 0.00, 1.25, 0.30, 10)
     add_figure2a(slide)
 
-    add_picture(slide, FIG_DIR / "Figure2B_GO_BP_EWEvsESM_dotplot.png", 0.30, 2.58, 4.32, 2.56)
-    add_picture(slide, FIG_DIR / "Figure2C_UpSetPlot_nonDEG.png", 4.63, 2.59, 2.75, 2.56)
-    add_picture(slide, FIG_DIR / "Figure2D_ssGSEA_heatmap.png", 0.31, 5.13, 7.03, 1.56)
-    add_picture(slide, FIG_DIR / "Figure2E_ssGSEA_score_comparison.png", 0.21, 6.69, 7.08, 1.96)
+    add_picture(slide, FIG_DIR / "Figure2B_GO_BP_EWEvsESM_dotplot.png", 0.30, 2.58, 4.32, 2.32)
+    add_picture(slide, FIG_DIR / "Figure2C_UpSetPlot_nonDEG.png", 4.63, 2.58, 2.75, 2.32)
+    add_picture(slide, FIG_DIR / "Figure2D_ssGSEA_heatmap.png", 0.31, 4.98, 7.03, 1.42)
+    add_picture(slide, FIG_DIR / "Figure2E_ssGSEA_score_comparison.png", 0.21, 6.48, 7.08, 1.77)
 
     add_panel_label(slide, "A", 0.21, 0.30)
     add_panel_label(slide, "B", 0.21, 2.40)
     add_panel_label(slide, "C", 4.54, 2.40)
-    add_panel_label(slide, "D", 0.21, 4.96)
-    add_panel_label(slide, "E", 0.21, 6.52)
+    add_panel_label(slide, "D", 0.21, 4.81)
+    add_panel_label(slide, "E", 0.21, 6.31)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

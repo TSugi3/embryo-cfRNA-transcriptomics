@@ -106,7 +106,7 @@ pA <- ggplot(gsea_top, aes(x = NES, y = Description_wrapped, color = set, size =
   ) +
   guides(color = "none")
 
-output_files <- c(output_files, save_panel(pA, "Figure5A_GSEA_GO_BP_ESMvsASM_dotplot", 180, 100))
+output_files <- c(output_files, save_panel(pA, "Figure5A_GSEA_GO_BP_ESMvsASM_dotplot", 180, 90))
 source_files <- c(source_files, write_panel_source_data(
   gsea_top %>% arrange(set, desc(abs(NES))),
   "Figure 5", "A",
@@ -156,7 +156,7 @@ pB <- ggplot(expr_b, aes(x = Group, y = Log2_expression, fill = Group)) +
   geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.8) +
   geom_jitter(width = 0.2, size = 0.85, alpha = 0.8) +
   stat_compare_means(method = "wilcox.test", comparisons = list(c("ESM", "ASM")),
-                     label = "p.format", size = 2.0) +
+                     label = "p.format", size = 2.8) +
   facet_wrap(~gene_id, scales = "free_y", ncol = 6,
              labeller = labeller(gene_id = as_labeller(gene_lab_b, label_parsed))) +
   scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
@@ -166,17 +166,17 @@ pB <- ggplot(expr_b, aes(x = Group, y = Log2_expression, fill = Group)) +
   theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 8),
-    strip.text = element_text(size = 6.5, face = "italic"),
+    strip.text = element_text(size = 7.5, face = "italic"),
     strip.background = element_blank(),
     panel.spacing = unit(0.8, "mm"),
-    axis.text = element_text(size = 7),
-    axis.title.y = element_text(size = 7),
+    axis.text = element_text(size = 7.5),
+    axis.title.y = element_text(size = 7.5),
     legend.position = "none",
     plot.margin = margin(2, 4, 2, 2)
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pB, "Figure5B_Representative_Gene_Expression_Boxplot", 180, 40))
+output_files <- c(output_files, save_panel(pB, "Figure5B_Representative_Gene_Expression_Boxplot", 180, 35))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_b, "Figure 5", "B_values",
@@ -212,7 +212,7 @@ pC <- ggplot(expr_c, aes(x = Group, y = Log2_expression, fill = Group)) +
   geom_boxplot(outlier.shape = NA, width = 0.6, alpha = 0.85) +
   geom_jitter(width = 0.2, size = 0.95, alpha = 0.65) +
   stat_compare_means(method = "wilcox.test", comparisons = list(c("ESM", "ASM")),
-                     label = "p.format", size = 2.0) +
+                     label = "p.format", size = 2.8) +
   facet_wrap(~gene_id, scales = "free_y", ncol = 6,
              labeller = labeller(gene_id = as_labeller(gene_lab_c, label_parsed))) +
   scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
@@ -222,17 +222,17 @@ pC <- ggplot(expr_c, aes(x = Group, y = Log2_expression, fill = Group)) +
   theme_publication() +
   theme(
     plot.title = element_text(hjust = 0.5, size = 8),
-    strip.text = element_text(size = 6.5, face = "italic"),
+    strip.text = element_text(size = 7.5, face = "italic"),
     strip.background = element_blank(),
     panel.spacing = unit(0.8, "mm"),
-    axis.text = element_text(size = 7),
-    axis.title.y = element_text(size = 7),
+    axis.text = element_text(size = 7.5),
+    axis.title.y = element_text(size = 7.5),
     legend.position = "none",
     plot.margin = margin(2, 4, 2, 2)
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pC, "Figure5C_ExosomeMarkers_Boxplot", 180, 38))
+output_files <- c(output_files, save_panel(pC, "Figure5C_ExosomeMarkers_Boxplot", 180, 34))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_c, "Figure 5", "C_values",
@@ -281,7 +281,7 @@ pD <- ggplot(df_scores, aes(x = Group, y = Score, fill = Group)) +
   geom_jitter(width = 0.15, size = 0.95, alpha = 0.65) +
   facet_wrap(~Pathway, scales = "free_y", nrow = 1) +
   stat_compare_means(comparisons = list(c("ESM", "ASM")), label = "p.format",
-                     method = "wilcox.test", size = 2.0) +
+                     method = "wilcox.test", size = 2.8) +
   scale_fill_manual(values = color_group[c("ESM", "ASM")]) +
   scale_y_continuous(expand = expansion(mult = c(0.05, 0.15))) +
   labs(x = NULL, y = "ssGSEA enrichment score", title = "cfRNA-associated pathway activity (ssGSEA)") +
@@ -289,16 +289,16 @@ pD <- ggplot(df_scores, aes(x = Group, y = Score, fill = Group)) +
   theme(
     legend.position = "none",
     strip.background = element_blank(),
-    strip.text = element_text(size = 7),
+    strip.text = element_text(size = 7.5),
     plot.title = element_text(size = 8, hjust = 0.5, face = "bold"),
-    axis.text = element_text(size = 7),
-    axis.title.y = element_text(size = 7),
+    axis.text = element_text(size = 7.5),
+    axis.title.y = element_text(size = 7.5),
     panel.spacing = unit(0.8, "mm"),
     plot.margin = margin(2, 4, 2, 2)
   ) +
   coord_cartesian(clip = "off")
 
-output_files <- c(output_files, save_panel(pD, "Figure5D_ssGSEA_Boxplot_GO_BP", 180, 40))
+output_files <- c(output_files, save_panel(pD, "Figure5D_ssGSEA_Boxplot_GO_BP", 180, 35))
 source_files <- c(
   source_files,
   write_panel_source_data(df_scores, "Figure 5", "D_values",

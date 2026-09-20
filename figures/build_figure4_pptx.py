@@ -13,7 +13,7 @@ from path_config import FIG_DIR
 
 OUT_PPTX = FIG_DIR / "Figure4_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 7.3
+SLIDE_H = 7.65
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
@@ -55,9 +55,9 @@ def main() -> None:
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 4", 0.0, 0.005, 1.25, 0.30, 10)
     add_picture_keep_aspect(slide, "Figure4A_GSEA_GO_BP_dotplot.png", 0.208, 0.420, 7.083)
-    add_picture_keep_aspect(slide, "Figure4B_Expression_NMD_Apoptosis.png", 0.208, 5.270, 7.083)
+    add_picture_keep_aspect(slide, "Figure4B_Expression_NMD_Apoptosis.png", 0.208, 5.000, 7.083)
     add_panel_label(slide, "A", 0.208, 0.296)
-    add_panel_label(slide, "B", 0.208, 5.150)
+    add_panel_label(slide, "B", 0.208, 4.880)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

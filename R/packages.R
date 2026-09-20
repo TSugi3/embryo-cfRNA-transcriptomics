@@ -2,7 +2,7 @@
 # Install from CRAN/Bioconductor as appropriate for your R version.
 
 cran_packages <- c(
-  "tidyverse", "readxl", "ggplot2", "ggpubr", "ggrepel", "ggupset",
+  "tidyverse", "readxl", "ggplot2", "ggpubr", "ggrepel",
   "patchwork", "cowplot", "viridis", "hexbin", "entropy",
   "circlize", "pheatmap", "ggsci", "scales", "RColorBrewer"
 )

@@ -127,7 +127,7 @@ python3 figures/export_figures.py --figure-dir "$CFRNA_FIGURE_DIR" --out-dir /pa
 
 ## Software
 
-The workflow uses R and Python. Main R packages include `tidyverse`, `readxl`, `ggplot2`, `ggpubr`, `ComplexHeatmap`, `clusterProfiler`, `ReactomePA`, `GSVA`, `circlize`, `patchwork`, `cowplot`, `viridis`, `ggrepel`, `ggupset` and related plotting/data packages. Python helpers use `openpyxl`, `python-pptx`, `reportlab` and `Pillow`.
+The workflow uses R and Python. Main R packages include `tidyverse`, `readxl`, `ggplot2`, `ggpubr`, `ComplexHeatmap`, `clusterProfiler`, `ReactomePA`, `GSVA`, `circlize`, `patchwork`, `cowplot`, `viridis` and `ggrepel`. Python helpers use `openpyxl`, `python-pptx`, `reportlab` and `Pillow`. Exact versions used for the final figure regeneration are recorded in `SOFTWARE_VERSIONS.txt`; Python helper versions are also pinned in `requirements-python.txt`.
 
 ## License
 
