@@ -7,6 +7,17 @@ This file records the environment used to regenerate and export the final
 figures from the processed input tables. It does not replace the versions of
 the upstream RNA-seq processing tools reported in the manuscript.
 
+Verified upstream human RNA-seq pipeline records
+------------------------------------------------
+ramdaq v1.2.2, v1.4 or v1.4.1, depending on sequencing batch
+Nextflow v20.10.0
+FastQC v0.11.8
+MultiQC v1.9
+
+These versions were recovered from the retained human pipeline records. The
+corresponding mouse upstream pipeline log was not part of the figure-generation
+workspace and is therefore not inferred here.
+
 R and R packages
 ----------------
 R 4.5.0
