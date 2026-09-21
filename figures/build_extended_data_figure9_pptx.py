@@ -12,9 +12,9 @@ def main() -> None:
         FIG_DIR / "ExtendedDataFigure9_editable.pptx",
         "Extended Data Figure 9",
         FIG_DIR,
-        7.2,
+        7.95,
         [
-            ("FigureS4C_chord_vesicle.png", 0.208, 0.420, 7.083),
+            ("FigureS4C_chord_vesicle.png", 0.208, 0.340, 7.083),
         ],
         [],
     )

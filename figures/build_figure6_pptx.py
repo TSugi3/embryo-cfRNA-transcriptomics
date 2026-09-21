@@ -65,11 +65,11 @@ def main() -> None:
     add_picture(slide, "Figure6A_UpSetPlot_nonDEG_CV.png", 0.230, 0.459, 1.958, 1.958)
     add_picture(slide, "Figure6B_Biotype_PieChart.png", 2.195, 0.459, 5.111, 1.958)
     add_picture_keep_aspect(slide, "Figure6C_GO_BP_dotplot_viridis.png", 0.208, 2.520, 3.150)
-    add_picture_keep_aspect(slide, "Figure6D_heatmap_autophagy.png", 3.460, 2.520, 3.820)
+    add_picture_keep_aspect(slide, "Figure6D_heatmap_autophagy.png", 3.530, 2.350, 3.750)
     add_panel_label(slide, "A", 0.208, 0.296)
     add_panel_label(slide, "B", 2.195, 0.296)
     add_panel_label(slide, "C", 0.208, 2.350)
-    add_panel_label(slide, "D", 3.460, 2.350)
+    add_panel_label(slide, "D", 3.530, 2.180)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

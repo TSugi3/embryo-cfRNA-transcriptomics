@@ -395,7 +395,7 @@ source_files <- c(
 pA <- make_gsea_dotplot(
   plot_df,
   "CQ",
-  "A. CQ pathway signatures",
+  "CQ pathway signatures",
   "Whole embryos and spent-medium cfRNA."
 )
 
@@ -416,7 +416,7 @@ pB <- ggplot(cq_we_gene_panel, aes(x = group, y = log_count, fill = group)) +
     size = 3
   ) +
   labs(
-    title = "B. CQ-responsive genes",
+    title = "CQ-responsive genes",
     subtitle = "Whole embryos.",
     x = NULL,
     y = "log10(normalized count + 1)"
@@ -433,7 +433,7 @@ pB <- ggplot(cq_we_gene_panel, aes(x = group, y = log_count, fill = group)) +
 pC <- make_sm_release_barplot(
   plot_df,
   "CQ",
-  "C. CQ cfRNA release response",
+  "CQ cfRNA release response",
   "Spent-medium cfRNA.",
   "#F8766D"
 )
@@ -441,7 +441,7 @@ pC <- make_sm_release_barplot(
 pD <- make_gsea_dotplot(
   plot_df,
   "CB",
-  "D. CB pathway signatures",
+  "CB pathway signatures",
   "Whole embryos and spent-medium cfRNA."
 )
 

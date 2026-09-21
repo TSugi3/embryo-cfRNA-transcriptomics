@@ -355,7 +355,7 @@ pG <- ggplot(hex_data, aes(x = WE_mean, y = SM_mean)) +
   ) +
   labs(
     x = "Whole Embryo Mean Expression (log10 scale)",
-    y = "Spent Media Mean Expression (log10 scale)"
+    y = "Spent Media Mean Expression\n(log10 scale)"
   ) +
   theme_publication() +
   theme(

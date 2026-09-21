@@ -223,7 +223,7 @@ gsea_plot <- gsea_reactome %>%
 pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
   geom_vline(xintercept = 0, linetype = "dashed", color = "gray50", linewidth = 0.3) +
   geom_point(aes(size = setSize, color = minus_log10_FDR), alpha = 0.95) +
-  scale_color_viridis_c(option = "D", name = expression(-log[10]~"(FDR)")) +
+  scale_color_viridis_c(option = "D", guide = "none") +
   scale_size_continuous(name = "Gene set size", range = c(1.0, 3.6)) +
   labs(title = "Reactome GSEA of AWE vs. ASM", x = "NES", y = NULL) +
   theme_publication() +
@@ -238,14 +238,7 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 8)
   ) +
-  guides(
-    color = guide_colorbar(
-      order = 1, direction = "horizontal",
-      barwidth = unit(22, "mm"), barheight = unit(2.0, "mm"),
-      title.position = "top"
-    ),
-    size = guide_legend(order = 2, nrow = 1, title.position = "top")
-  )
+  guides(size = guide_legend(nrow = 1, title.position = "top"))
 
 output_files <- c(output_files, save_panel(pD, "FigureS3D_GSEA_Reactome_dotplot", 180, 82))
 source_files <- c(source_files, write_panel_source_data(

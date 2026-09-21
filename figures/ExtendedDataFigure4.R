@@ -77,16 +77,26 @@ save_chord <- function(chord_matrix, name, width_mm, height_mm, dpi = 600) {
     tiff = file.path(fig_dir, paste0(name, ".tiff"))
   )
   draw_it <- function() {
+    sectors <- c(rownames(chord_matrix), colnames(chord_matrix))
+    sector_totals <- c(rowSums(chord_matrix), colSums(chord_matrix))
+    sector_floor <- unname(quantile(sector_totals, 0.90))
+    sector_xmax <- setNames(pmax(sector_totals, sector_floor), sectors)
+
     circos.clear()
+    circos.par(
+      canvas.xlim = c(-1.15, 1.15),
+      canvas.ylim = c(-1.25, 1.15)
+    )
     chordDiagram(
       chord_matrix,
+      xmax = sector_xmax,
       transparency = 0.4,
       annotationTrack = "grid",
       preAllocateTracks = list(track.height = 0.05)
     )
     circos.track(track.index = 1, panel.fun = function(x, y) {
       circos.text(CELL_META$xcenter, CELL_META$ylim[1], CELL_META$sector.index,
-                  facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.70)
+                  facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5), cex = 0.59)
     }, bg.border = NA)
     circos.clear()
   }
@@ -218,7 +228,7 @@ cor_plot <- cor_all %>%
   mutate(weight = 1)
 chord_matrix <- table(cor_plot$lncRNA, cor_plot$mRNA)
 
-output_files <- c(output_files, save_chord(chord_matrix, "FigureS4C_chord_vesicle", 180, 165))
+output_files <- c(output_files, save_chord(chord_matrix, "FigureS4C_chord_vesicle", 180, 190))
 source_files <- c(source_files,
                   write_panel_source_data(cor_all, "Extended Data Figure 4", "C_all",
                                           "All lncRNA-mRNA correlations for vesicle-mediated release genes.",

@@ -184,7 +184,7 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
   ) +
   scale_x_continuous(limits = c(0.5, max(intersection_summary$intersection_id) + 0.5),
                      expand = expansion(mult = c(0.01, 0.01))) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
+  scale_y_continuous(expand = expansion(mult = c(0.03, 0.28))) +
   labs(x = NULL, y = "Intersection size") +
   theme_publication() +
   theme(
@@ -192,7 +192,7 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
     axis.ticks.x = element_blank(),
     axis.title.y = element_text(size = 7.5),
     axis.text.y = element_text(size = 7.5),
-    plot.margin = margin(2, 2, 0, 12)
+    plot.margin = margin(2, 2, 3, 14)
   )
 
 pC_matrix <- ggplot(matrix_for_plot, aes(x = intersection_id, y = comparison)) +
@@ -216,7 +216,7 @@ pC_matrix <- ggplot(matrix_for_plot, aes(x = intersection_id, y = comparison)) +
     axis.line.x = element_blank(),
     axis.line.y = element_blank(),
     axis.ticks.y = element_blank(),
-    plot.margin = margin(0, 2, 2, 12)
+    plot.margin = margin(1, 2, 2, 14)
   )
 
 pC <- cowplot::plot_grid(pC_bar, pC_matrix, ncol = 1, align = "v",

@@ -45,6 +45,11 @@ parse_gene_ratio <- function(x) {
 
 enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
                            axis_text_size = 7.5, compact_size_legend = FALSE) {
+  compact_end_breaks <- function(limits) {
+    candidates <- scales::breaks_pretty(n = 3)(limits)
+    candidates <- candidates[candidates >= limits[1] & candidates <= limits[2]]
+    if (length(candidates) > 2) candidates[c(1, length(candidates))] else candidates
+  }
   df <- readr::read_csv(file, show_col_types = FALSE) %>%
     mutate(qvalue = as.numeric(qvalue)) %>%
     filter(!is.na(qvalue), qvalue < 0.05) %>%
@@ -60,22 +65,18 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     geom_point(aes(size = Count, color = GeneRatio_numeric), alpha = 0.95) +
     scale_color_viridis_c(
       name = "Gene ratio", option = "D", direction = 1, end = 0.95,
-      breaks = scales::breaks_pretty(n = 3)
+      breaks = if (compact_size_legend) compact_end_breaks else scales::breaks_pretty(n = 3)
     ) +
     scale_size_continuous(
       name = "Gene count", range = c(1.0, 3.6),
       breaks = if (compact_size_legend) {
-        function(limits) {
-          candidates <- scales::breaks_pretty(n = 3)(limits)
-          candidates <- candidates[candidates >= limits[1] & candidates <= limits[2]]
-          if (length(candidates) > 2) candidates[c(1, length(candidates))] else candidates
-        }
+        compact_end_breaks
       } else {
         scales::breaks_pretty(n = 3)
       }
     ) +
     scale_x_continuous(expand = expansion(mult = c(0.08, 0.25))) +
-    labs(title = stringr::str_wrap(title, width = 32),
+    labs(title = title,
          x = expression(-log[10]~"(q-value)"), y = NULL) +
     theme_publication() +
     theme(
@@ -85,13 +86,15 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
       axis.text.x = element_text(size = 7.5),
       axis.title.x = element_text(size = 7.5),
       legend.position = "bottom",
-      legend.box = "vertical",
+      legend.location = "plot",
+      legend.box = "horizontal",
+      legend.box.just = "center",
       legend.direction = "horizontal",
       legend.title = element_text(size = 7.0),
       legend.text = element_text(size = 7.0),
       legend.key.height = unit(0.20, "cm"),
-      legend.key.width = unit(0.26, "cm"),
-      legend.spacing.x = unit(0.04, "cm"),
+      legend.key.width = unit(if (compact_size_legend) 0.20 else 0.26, "cm"),
+      legend.spacing.x = unit(if (compact_size_legend) 0.40 else 0.04, "cm"),
       legend.key.spacing.x = unit(0, "cm"),
       legend.margin = margin(0, 0, 0, 0),
       legend.box.margin = margin(0, 0, 0, 0),
@@ -102,7 +105,8 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     guides(
       color = guide_colorbar(
         order = 1, direction = "horizontal",
-        barwidth = unit(14, "mm"), barheight = unit(1.8, "mm"),
+        barwidth = unit(if (compact_size_legend) 13 else 14, "mm"),
+        barheight = unit(1.8, "mm"),
         title.position = "top"
       ),
       size = guide_legend(order = 2, nrow = 1, byrow = TRUE, title.position = "top")

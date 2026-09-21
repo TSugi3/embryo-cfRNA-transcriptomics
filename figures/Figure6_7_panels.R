@@ -226,11 +226,11 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
     breaks = scales::pretty_breaks(n = 3),
     expand = expansion(mult = c(0.06, 0.20))
   ) +
-  labs(title = "GO:BP enrichment of mRNAs\nco-expressed with lncRNAs",
+  labs(title = "GO:BP enrichment of co-expressed mRNAs",
        x = "Gene ratio", y = NULL) +
   theme_publication() +
   theme(
-    plot.title = element_text(face = "bold", size = 8, hjust = 0.5),
+    plot.title = element_text(face = "bold", size = 7.5, hjust = 0.5),
     legend.position = "right",
     legend.title = element_text(size = 7.5),
     legend.text = element_text(size = 7.5),
@@ -292,13 +292,12 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
   geom_tile(color = "white", linewidth = 0.05) +
   scale_fill_gradient2(low = "#3B0F70", mid = "white", high = "#F8766D",
                        midpoint = 0, name = "z-score") +
-  labs(title = "Autophagy-related release genes", x = NULL, y = NULL) +
+  labs(x = NULL, y = NULL) +
   theme_minimal(base_family = "Arial") +
   theme(
-    plot.title = element_text(size = 8, face = "bold", hjust = 0.5),
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 7.0, face = "italic", lineheight = 0.76),
+    axis.text.y = element_text(size = 7.0, face = "italic", lineheight = 0.96),
     panel.grid = element_blank(),
     legend.title = element_text(size = 7.5),
     legend.text = element_text(size = 7.5),
@@ -306,9 +305,14 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
     plot.margin = margin(1, 1, 1, 1)
   )
 
-pD <- pD_group / pD_heat + patchwork::plot_layout(heights = c(0.11, 1))
+pD <- (pD_group / pD_heat + patchwork::plot_layout(heights = c(0.08, 1))) +
+  patchwork::plot_annotation(
+    title = "Autophagy-related release genes",
+    theme = theme(plot.title = element_text(size = 8, face = "bold", hjust = 0.5,
+                                            margin = margin(b = 1)))
+  )
 
-output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 97, 136))
+output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 97, 145))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_d, "Figure 6", "D_expression",
@@ -332,21 +336,32 @@ chord_data <- cor_df %>%
 chord_matrix <- as.matrix(xtabs(weight ~ lncRNA + mRNA, data = chord_data))
 
 draw_chord <- function() {
+  sectors <- c(rownames(chord_matrix), colnames(chord_matrix))
+  sector_totals <- c(rowSums(chord_matrix), colSums(chord_matrix))
+  sector_floor <- unname(quantile(sector_totals, 0.75))
+  sector_xmax <- setNames(pmax(sector_totals, sector_floor), sectors)
+
   circos.clear()
-  circos.par(start.degree = 90, gap.after = 1)
+  circos.par(
+    start.degree = 90,
+    gap.after = 1,
+    canvas.xlim = c(-1.15, 1.15),
+    canvas.ylim = c(-1.25, 1.15)
+  )
   chordDiagram(chord_matrix,
+               xmax = sector_xmax,
                transparency = 0.42,
                annotationTrack = "grid",
                preAllocateTracks = list(track.height = 0.06))
   circos.track(track.index = 1, panel.fun = function(x, y) {
     circos.text(CELL_META$xcenter, CELL_META$ylim[1],
                 CELL_META$sector.index, facing = "clockwise",
-                niceFacing = TRUE, adj = c(0, 0.5), cex = 0.70, font = 3)
+                niceFacing = TRUE, adj = c(0, 0.5), cex = 0.59, font = 3)
   }, bg.border = NA)
   circos.clear()
 }
 
-output_files <- c(output_files, save_circlize_panel(draw_chord, "Figure7_chord_autophagy", 180, 165))
+output_files <- c(output_files, save_circlize_panel(draw_chord, "Figure7_chord_autophagy", 180, 190))
 source_files <- c(source_files, write_panel_source_data(
   cor_df, "Figure 7", "",
   "lncRNA-mRNA correlation pairs used for the autophagy-related release chord diagram.",

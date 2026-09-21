@@ -235,14 +235,16 @@ pG <- ggplot(ma_df, aes(x = a.value, y = m.value, color = DEG)) +
         axis.title = element_text(size = 7.5), axis.text = element_text(size = 7.5))
 pH <- ggplot(ma_df, aes(x = a.value, fill = DEG)) +
   geom_density(alpha = 0.6) +
-  facet_wrap(~Comparison, ncol = 2, scales = "free_x") +
+  facet_wrap(~Comparison, ncol = 2, axes = "all_x", axis.labels = "all_x") +
   scale_fill_manual(values = deg_colors, name = NULL) +
+  scale_x_continuous(breaks = c(-10, 0, 10, 20), expand = expansion(mult = c(0, 0))) +
+  coord_cartesian(xlim = c(-11, 20)) +
   labs(title = "Density plots of average expression", x = "Average expression (log2 scale)", y = "Density") +
   theme_publication() +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
         axis.title = element_text(size = 7.5), axis.text = element_text(size = 7.5),
         strip.text = element_text(size = 7.5, face = "bold"), strip.background = element_blank(),
-        panel.spacing.x = unit(0.50, "cm"),
+        panel.spacing.x = unit(0.60, "cm"),
         legend.position = "bottom", legend.direction = "horizontal",
         legend.title = element_blank(), legend.text = element_text(size = 7.0),
         legend.key.size = unit(0.35, "lines")) +

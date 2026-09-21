@@ -44,6 +44,10 @@ def add_picture(slide, filename: str, left: float, top: float, width: float, hei
                              width=Inches(width), height=Inches(height))
 
 
+def add_panel_label(slide, label: str, left: float, top: float) -> None:
+    add_textbox(slide, label, left, top, 0.31, 0.24, 9, bold=True)
+
+
 def main() -> None:
     prs = Presentation()
     prs.slide_width = Inches(SLIDE_W)
@@ -51,10 +55,15 @@ def main() -> None:
 
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     add_textbox(slide, "Figure 8", 0.0, 0.005, 1.25, 0.30, 10)
-    add_picture(slide, "Figure8A_CQ_GSEA_dotplot.png", 0.05, 0.32, 3.72, 2.95)
-    add_picture(slide, "Figure8B_CQ_WE_gene_boxplot.png", 3.78, 0.32, 3.65, 2.13)
-    add_picture(slide, "Figure8C_CQ_SM_release_barplot.png", 0.23, 3.72, 3.45, 1.78)
-    add_picture(slide, "Figure8D_CB_GSEA_dotplot.png", 3.78, 3.02, 3.72, 2.95)
+    add_picture(slide, "Figure8A_CQ_GSEA_dotplot.png", 0.05, 0.42, 3.72, 2.95)
+    add_picture(slide, "Figure8B_CQ_WE_gene_boxplot.png", 3.78, 0.42, 3.65, 2.13)
+    add_picture(slide, "Figure8C_CQ_SM_release_barplot.png", 0.23, 3.82, 3.45, 1.78)
+    add_picture(slide, "Figure8D_CB_GSEA_dotplot.png", 3.78, 3.12, 3.72, 2.95)
+
+    add_panel_label(slide, "A", 0.05, 0.24)
+    add_panel_label(slide, "B", 3.78, 0.24)
+    add_panel_label(slide, "C", 0.23, 3.64)
+    add_panel_label(slide, "D", 3.78, 2.94)
 
     prs.save(str(OUT_PPTX))
     print(OUT_PPTX)

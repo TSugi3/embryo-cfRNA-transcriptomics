@@ -13,7 +13,7 @@ from path_config import FIG_DIR
 
 OUT_PPTX = FIG_DIR / "Figure7_editable.pptx"
 SLIDE_W = 7.5
-SLIDE_H = 7.1
+SLIDE_H = 7.95
 
 
 def add_textbox(slide, text: str, left: float, top: float, width: float, height: float,
