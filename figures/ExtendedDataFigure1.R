@@ -86,11 +86,10 @@ pA <- ggplot(df_a, aes(x = SampleID, y = ReadCount, fill = ReadType)) +
   geom_col(position = "dodge", width = 0.7) +
   scale_y_log10(expand = expansion(mult = c(0, 0.06))) +
   scale_fill_manual(values = c(Raw_Reads = "#1f77b4", Mapped_Reads = "#ff7f0e")) +
-  scale_x_discrete(labels = function(x) ifelse(seq_along(x) %% 3 == 1, x, "")) +
   labs(x = "Analysis ID", y = "Read count (log10)") +
   theme_publication() +
   theme(
-    axis.text.x = element_text(size = 7.5, angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.x = element_text(size = 5.0, angle = 90, vjust = 0.5, hjust = 1),
     axis.text.y = element_text(size = 7.5),
     axis.title = element_text(size = 7.5),
     legend.position = c(0.90, 0.30),
@@ -243,8 +242,11 @@ pH <- ggplot(ma_df, aes(x = a.value, fill = DEG)) +
   theme(plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
         axis.title = element_text(size = 7.5), axis.text = element_text(size = 7.5),
         strip.text = element_text(size = 7.5, face = "bold"), strip.background = element_blank(),
-        legend.position = "right", legend.title = element_blank(),
-        legend.text = element_text(size = 7.5), legend.key.size = unit(0.35, "lines"))
+        panel.spacing.x = unit(0.50, "cm"),
+        legend.position = "bottom", legend.direction = "horizontal",
+        legend.title = element_blank(), legend.text = element_text(size = 7.0),
+        legend.key.size = unit(0.35, "lines")) +
+  guides(fill = guide_legend(nrow = 1, byrow = TRUE))
 output_files <- c(output_files, save_panel(pG, "FigureS1G_MAplot_Facet", 90, 90))
 output_files <- c(output_files, save_panel(pH, "FigureS1H_DensityPlot_Facet", 90, 90))
 source_files <- c(source_files, write_panel_source_data(ma_df, "Extended Data Figure 1", "G_H",

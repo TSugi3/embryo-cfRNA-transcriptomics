@@ -44,7 +44,7 @@ parse_gene_ratio <- function(x) {
 }
 
 enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
-                           axis_text_size = 7.5) {
+                           axis_text_size = 7.5, compact_size_legend = FALSE) {
   df <- readr::read_csv(file, show_col_types = FALSE) %>%
     mutate(qvalue = as.numeric(qvalue)) %>%
     filter(!is.na(qvalue), qvalue < 0.05) %>%
@@ -64,9 +64,17 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     ) +
     scale_size_continuous(
       name = "Gene count", range = c(1.0, 3.6),
-      breaks = scales::breaks_pretty(n = 3)
+      breaks = if (compact_size_legend) {
+        function(limits) {
+          candidates <- scales::breaks_pretty(n = 3)(limits)
+          candidates <- candidates[candidates >= limits[1] & candidates <= limits[2]]
+          if (length(candidates) > 2) candidates[c(1, length(candidates))] else candidates
+        }
+      } else {
+        scales::breaks_pretty(n = 3)
+      }
     ) +
-    scale_x_continuous(expand = expansion(mult = c(0.08, 0.18))) +
+    scale_x_continuous(expand = expansion(mult = c(0.08, 0.25))) +
     labs(title = stringr::str_wrap(title, width = 32),
          x = expression(-log[10]~"(q-value)"), y = NULL) +
     theme_publication() +
@@ -79,22 +87,25 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
       legend.position = "bottom",
       legend.box = "vertical",
       legend.direction = "horizontal",
-      legend.title = element_text(size = 7.5),
-      legend.text = element_text(size = 7.5),
+      legend.title = element_text(size = 7.0),
+      legend.text = element_text(size = 7.0),
       legend.key.height = unit(0.20, "cm"),
-      legend.key.width = unit(0.34, "cm"),
-      legend.spacing.x = unit(0.10, "cm"),
-      legend.justification = "left",
+      legend.key.width = unit(0.26, "cm"),
+      legend.spacing.x = unit(0.04, "cm"),
+      legend.key.spacing.x = unit(0, "cm"),
+      legend.margin = margin(0, 0, 0, 0),
+      legend.box.margin = margin(0, 0, 0, 0),
+      legend.justification = "center",
       # Extra right margin keeps the terminal x-axis tick fully inside the export.
       plot.margin = margin(2, 5, 2, 2)
     ) +
     guides(
       color = guide_colorbar(
         order = 1, direction = "horizontal",
-        barwidth = unit(24, "mm"), barheight = unit(2.0, "mm"),
+        barwidth = unit(14, "mm"), barheight = unit(1.8, "mm"),
         title.position = "top"
       ),
-      size = guide_legend(order = 2, nrow = 2, byrow = TRUE, title.position = "top")
+      size = guide_legend(order = 2, nrow = 1, byrow = TRUE, title.position = "top")
     )
   list(plot = p, data = df)
 }
@@ -173,12 +184,12 @@ source_files <- c(source_files,
 resC <- enrich_dotplot(
   file.path(paths$human_analysis_dir, "nonDEG", "enrichment_output", "intersection_terms", "CV", "terms_GO_BP_EWEvsESM_EWEvsAWE_1.0.csv"),
   "GO:BP enrichment of shared non-DEGs",
-  n_terms = 20, wrap_width = 42, axis_text_size = 7.5
+  n_terms = 20, wrap_width = 42, axis_text_size = 7.5, compact_size_legend = TRUE
 )
 resD <- enrich_dotplot(
   file.path(paths$human_analysis_dir, "nonDEG", "enrichment_output", "intersection_terms", "CV", "terms_KEGG_EWEvsESM_EWEvsAWE_1.0.csv"),
   "KEGG enrichment of shared non-DEGs",
-  n_terms = 20, wrap_width = 42, axis_text_size = 7.5
+  n_terms = 20, wrap_width = 42, axis_text_size = 7.5, compact_size_legend = TRUE
 )
 output_files <- c(output_files, save_panel(resC$plot, "FigureS2C_GO_BP_EWEvsESM_EWEvsAWE_dotplot", 90, 105))
 output_files <- c(output_files, save_panel(resD$plot, "FigureS2D_KEGG_EWEvsESM_EWEvsAWE_dotplot", 90, 105))

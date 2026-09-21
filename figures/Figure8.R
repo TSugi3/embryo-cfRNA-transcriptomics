@@ -159,7 +159,14 @@ make_gsea_dotplot <- function(df, exp_name, title_text, subtitle_text) {
       alpha = 0.95,
       stroke = 0.45
     ) +
-    facet_grid(Category ~ ., scales = "free_y", space = "free_y") +
+    facet_grid(
+      Category ~ ., scales = "free_y", space = "free_y",
+      labeller = labeller(Category = c(
+        "Autophagy" = "Autophagy",
+        "Lysosome / Endosome" = "Endolysosome",
+        "Vesicle / Secretion" = "Vesicle"
+      ))
+    ) +
     scale_color_gradient2(
       low = "#2166AC",
       mid = "white",
@@ -177,10 +184,14 @@ make_gsea_dotplot <- function(df, exp_name, title_text, subtitle_text) {
     theme(
       axis.text.y = element_text(size = 7.5, lineheight = 0.92),
       axis.text.x = element_text(size = 7.5, face = "bold"),
-      strip.text.y = element_text(size = 7.5, face = "bold")
+      strip.text.y = element_text(size = 7.0, angle = 90, face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(size = 7.0),
+      legend.text = element_text(size = 7.0),
+      plot.margin = margin(2, 3, 2, 2)
     ) +
     guides(
-      color = guide_colorbar(barheight = unit(1.4, "cm"), barwidth = unit(0.18, "cm")),
+      color = guide_colorbar(barheight = unit(1.15, "cm"), barwidth = unit(0.16, "cm")),
       size = guide_legend(override.aes = list(color = "black")),
       shape = guide_legend(override.aes = list(size = 2))
     )

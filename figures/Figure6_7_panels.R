@@ -222,7 +222,10 @@ pC <- ggplot(top_terms_c, aes(x = GeneRatio_numeric, y = Description_wrapped, si
   geom_point(alpha = 0.95) +
   scale_color_viridis_c(option = "D", direction = -1, name = "Adjusted P") +
   scale_size_continuous(name = "Gene count", range = c(1.2, 4.0)) +
-  scale_x_continuous(breaks = scales::pretty_breaks(n = 3)) +
+  scale_x_continuous(
+    breaks = scales::pretty_breaks(n = 3),
+    expand = expansion(mult = c(0.06, 0.20))
+  ) +
   labs(title = "GO:BP enrichment of mRNAs\nco-expressed with lncRNAs",
        x = "Gene ratio", y = NULL) +
   theme_publication() +
@@ -295,7 +298,7 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
     plot.title = element_text(size = 8, face = "bold", hjust = 0.5),
     axis.text.x = element_blank(),
     axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 7.5, face = "italic"),
+    axis.text.y = element_text(size = 7.0, face = "italic", lineheight = 0.76),
     panel.grid = element_blank(),
     legend.title = element_text(size = 7.5),
     legend.text = element_text(size = 7.5),
