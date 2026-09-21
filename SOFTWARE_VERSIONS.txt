@@ -9,14 +9,20 @@ the upstream RNA-seq processing tools reported in the manuscript.
 
 Upstream RNA-seq processing
 ---------------------------
-ramdaq v1.6
-Nextflow v20.10.0
+BlueFuse Multi v4.5 (PGT-A analysis)
+ramdaq v1.2.2, v1.4 and v1.4.1 (across sequencing batches)
+Nextflow v20.10.0, v21.04.1 and v21.10.3
 FastQC v0.11.8
 MultiQC v1.9
+HISAT2 v2.2.0
+SAMtools v1.10
+featureCounts v2.0.1
+GENCODE human release 37
+GENCODE mouse release M39
 
-The ramdaq version is the version reported for the human and mouse RNA-seq
-processing in the final manuscript. Versions not recoverable from retained
-records are not inferred.
+These versions are the upstream RNA-seq processing versions reported in the
+final manuscript and are distinct from the environment used to regenerate the
+final figures from processed input tables.
 
 R and R packages
 ----------------
