@@ -15,8 +15,9 @@ FastQC v0.11.8
 MultiQC v1.9
 
 These versions were recovered from the retained human pipeline records. The
-corresponding mouse upstream pipeline log was not part of the figure-generation
-workspace and is therefore not inferred here.
+mouse perturbation RNA-seq data were processed with ramdaq v1.6, as recorded
+for the final manuscript. Versions not recoverable from retained records are
+not inferred.
 
 R and R packages
 ----------------

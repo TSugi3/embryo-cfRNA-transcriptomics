@@ -14,12 +14,12 @@ def main() -> None:
         FIG_DIR,
         8.2,
         [
-            ("FigureS4A_KEGG_dotplot.png", 0.208, 0.420, 7.083, 2.800),
-            ("FigureS4B_heatmap_vesicle.png", 0.208, 3.520, 7.083, 4.400),
+            ("FigureS4A_KEGG_dotplot.png", 0.208, 0.260, 7.083),
+            ("FigureS4B_heatmap_vesicle.png", 0.208, 3.455, 7.083),
         ],
         [
-            ("A", 0.208, 0.278),
-            ("B", 0.208, 3.380),
+            ("A", 0.208, 0.118),
+            ("B", 0.208, 3.315),
         ],
     )
 

@@ -305,7 +305,7 @@ pD_heat <- ggplot(heat_df, aes(x = Sample, y = Gene, fill = z_score)) +
 
 pD <- pD_group / pD_heat + patchwork::plot_layout(heights = c(0.11, 1))
 
-output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 100, 140))
+output_files <- c(output_files, save_panel(pD, "Figure6D_heatmap_autophagy", 97, 136))
 source_files <- c(
   source_files,
   write_panel_source_data(expr_d, "Figure 6", "D_expression",

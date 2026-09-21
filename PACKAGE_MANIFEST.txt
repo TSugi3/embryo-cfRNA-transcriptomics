@@ -42,6 +42,7 @@ figures/build_figure5_pptx.py
 figures/build_figure6_pptx.py
 figures/build_figure7_pptx.py
 figures/build_figure8_pptx.py
+figures/audit_figure_pptx.py
 figures/export_figures.py
 figures/path_config.py
 figures/pptx_helpers.py

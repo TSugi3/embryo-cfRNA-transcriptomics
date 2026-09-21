@@ -88,7 +88,11 @@ ks_source <- tibble(
 pval_df <- ks_source %>%
   mutate(
     ValueType = factor(ValueType, levels = levels(data_long$ValueType)),
-    p_label = paste0("P = ", format_p(p_value))
+    p_label = if_else(
+      p_value == 0,
+      "P < 2.2e-16",
+      paste0("P = ", format_p(p_value))
+    )
   )
 
 pA <- ggplot(data_long, aes(x = Value, fill = Comparison, color = Comparison)) +
@@ -111,7 +115,7 @@ pA <- ggplot(data_long, aes(x = Value, fill = Comparison, color = Comparison)) +
     plot.margin = margin(2, 2, 2, 2)
   )
 
-output_files <- c(output_files, save_panel(pA, "FigureS3A_Distribution_KS_Density", 180, 45))
+output_files <- c(output_files, save_panel(pA, "FigureS3A_Distribution_KS_Density", 180, 40))
 source_files <- c(source_files,
                   write_panel_source_data(data_long, "Extended Data Figure 3", "A_values",
                                           "M-value and A-value distributions plotted in panel A.",
@@ -123,12 +127,6 @@ source_files <- c(source_files,
 # ============================================================
 # Extended Data Figure 3B/C - Reactome terms for up/downregulated genes
 # ============================================================
-compress_panel_width <- function(plot, panel_width_cm = 4.8) {
-  grob <- ggplotGrob(plot)
-  panel_cols <- unique(grob$layout$l[grepl("^panel", grob$layout$name)])
-  grob$widths[panel_cols] <- unit(panel_width_cm, "cm")
-  grob
-}
 
 make_reactome_dotplot <- function(files, title, output_name, panel_id) {
   combined <- imap_dfr(files, function(file, comparison) {
@@ -141,7 +139,7 @@ make_reactome_dotplot <- function(files, title, output_name, panel_id) {
       qvalue = if_else(qvalue == 0, .Machine$double.xmin, qvalue),
       minus_log10_qvalue = -log10(qvalue),
       Comparison = factor(Comparison, levels = names(files)),
-      Description_wrapped = str_wrap(Description, width = 50),
+      Description_wrapped = Description,
       Description_full = paste(Description_wrapped, Comparison, sep = "___")
     ) %>%
     group_by(Comparison) %>%
@@ -152,25 +150,37 @@ make_reactome_dotplot <- function(files, title, output_name, panel_id) {
     geom_point(aes(size = Count, color = minus_log10_qvalue), alpha = 0.95) +
     scale_color_viridis_c(option = "D", name = expression(-log[10]~"(q-value)")) +
     scale_size(range = c(1, 4), name = "Gene count") +
-    scale_x_continuous(limits = c(0, 90), expand = c(0, 0)) +
+    scale_x_continuous(limits = c(0, NA), expand = expansion(mult = c(0.01, 0.08))) +
     scale_y_discrete(labels = function(x) gsub("___.*", "", x)) +
     facet_grid(rows = vars(Comparison), scales = "free_y", space = "free_y", switch = "y") +
     labs(x = expression(-log[10]~"(q-value)"), y = NULL, title = title) +
     theme_publication() +
     theme(
-      plot.title = element_text(hjust = 0.75, size = 8, face = "bold"),
+      plot.title = element_text(hjust = 0.5, size = 8, face = "bold"),
       strip.text.y.left = element_text(angle = 90, size = 7.5),
       axis.text.y = element_text(size = 7.5, lineheight = 0.88),
       axis.text.x = element_text(size = 8),
       axis.title.x = element_text(size = 7.5),
+      legend.position = "bottom",
+      legend.box = "horizontal",
+      legend.direction = "horizontal",
       legend.title = element_text(size = 7.5),
       legend.text = element_text(size = 7.5),
-      legend.key.size = unit(0.2, "cm"),
-      plot.margin = margin(1, 1, 1, 8, unit = "mm")
+      legend.key.height = unit(0.20, "cm"),
+      legend.key.width = unit(0.34, "cm"),
+      legend.spacing.x = unit(0.12, "cm"),
+      plot.margin = margin(1, 2, 1, 8, unit = "mm")
     ) +
-    guides(color = guide_colorbar(order = 1), size = guide_legend(order = 2))
+    guides(
+      color = guide_colorbar(
+        order = 1, direction = "horizontal",
+        barwidth = unit(22, "mm"), barheight = unit(2.0, "mm"),
+        title.position = "top"
+      ),
+      size = guide_legend(order = 2, nrow = 1, title.position = "top")
+    )
 
-  output <- save_panel(compress_panel_width(p, panel_width_cm = 4.4), output_name, 180, 170)
+  output <- save_panel(p, output_name, 180, 145)
   source <- write_panel_source_data(
     combined %>% arrange(Comparison, qvalue),
     "Extended Data Figure 3", panel_id,
@@ -205,7 +215,7 @@ gsea_plot <- gsea_reactome %>%
   arrange(desc(abs(NES))) %>%
   slice_head(n = 14) %>%
   mutate(
-    Description_wrapped = str_wrap(Description, width = 56),
+    Description_wrapped = Description,
     Description_wrapped = fct_reorder(Description_wrapped, NES),
     minus_log10_FDR = -log10(p.adjust)
   )
@@ -222,13 +232,22 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
     axis.text.y = element_text(size = 7.5, lineheight = 0.92),
     axis.text.x = element_text(size = 7.5),
     axis.title.x = element_text(size = 7.5),
+    legend.position = "bottom",
     legend.title = element_text(size = 7.5),
     legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 8)
+  ) +
+  guides(
+    color = guide_colorbar(
+      order = 1, direction = "horizontal",
+      barwidth = unit(22, "mm"), barheight = unit(2.0, "mm"),
+      title.position = "top"
+    ),
+    size = guide_legend(order = 2, nrow = 1, title.position = "top")
   )
 
-output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "FigureS3D_GSEA_Reactome_dotplot", 180, 82))
+output_files <- c(output_files, save_panel(pD, "FigureS3D_GSEA_Reactome_dotplot", 180, 82))
 source_files <- c(source_files, write_panel_source_data(
   gsea_plot %>% arrange(desc(abs(NES))),
   "Extended Data Figure 3", "D",
@@ -305,8 +324,8 @@ plot_list <- lapply(seq_len(nrow(stats_E)), function(i) {
 plot_list <- Filter(Negate(is.null), plot_list)
 
 if (length(plot_list) > 0) {
-  pE <- wrap_plots(plotlist = plot_list, ncol = 2)
-  output_files <- c(output_files, save_panel(pE, "FigureS3E_GSEAplot_EWEvsAWE_Reactome", 180, 140, dpi = 600))
+  pE <- wrap_plots(plotlist = plot_list, ncol = 3)
+  output_files <- c(output_files, save_panel(pE, "FigureS3E_GSEAplot_EWEvsAWE_Reactome", 180, 100, dpi = 600))
 }
 source_files <- c(source_files, write_panel_source_data(
   stats_E,

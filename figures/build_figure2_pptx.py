@@ -44,7 +44,7 @@ def add_panel_label(slide, label: str, left: float, top: float) -> None:
 
 
 def add_rect(slide, text: str, left: float, top: float, width: float, height: float,
-             fill: str = "FFFFFF", line: str = "1F2F50", font_size: float = 7.0,
+             fill: str = "FFFFFF", line: str = "1F2F50", font_size: float = 7.5,
              bold: bool = False) -> None:
     shape = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(left), Inches(top),
                                    Inches(width), Inches(height))

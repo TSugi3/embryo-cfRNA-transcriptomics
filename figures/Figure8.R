@@ -471,10 +471,10 @@ candidate_outputs <- save_publication_plot(
 )
 
 panel_outputs <- c(
-  save_publication_plot(pA, "Figure8A_CQ_GSEA_dotplot", 120, 95, fig_dir),
-  save_publication_plot(pB, "Figure8B_CQ_WE_gene_boxplot", 120, 70, fig_dir),
-  save_publication_plot(pC, "Figure8C_CQ_SM_release_barplot", 120, 62, fig_dir),
-  save_publication_plot(pD, "Figure8D_CB_GSEA_dotplot", 120, 95, fig_dir)
+  save_publication_plot(pA, "Figure8A_CQ_GSEA_dotplot", 95, 75.3, fig_dir),
+  save_publication_plot(pB, "Figure8B_CQ_WE_gene_boxplot", 93, 54.3, fig_dir),
+  save_publication_plot(pC, "Figure8C_CQ_SM_release_barplot", 88, 45.4, fig_dir),
+  save_publication_plot(pD, "Figure8D_CB_GSEA_dotplot", 95, 75.3, fig_dir)
 )
 
 combined <- (pA | pB) / (pC | pD) +

@@ -86,6 +86,7 @@ pA <- ggplot(df_a, aes(x = SampleID, y = ReadCount, fill = ReadType)) +
   geom_col(position = "dodge", width = 0.7) +
   scale_y_log10(expand = expansion(mult = c(0, 0.06))) +
   scale_fill_manual(values = c(Raw_Reads = "#1f77b4", Mapped_Reads = "#ff7f0e")) +
+  scale_x_discrete(labels = function(x) ifelse(seq_along(x) %% 3 == 1, x, "")) +
   labs(x = "Analysis ID", y = "Read count (log10)") +
   theme_publication() +
   theme(
@@ -169,7 +170,7 @@ pD <- ggplot(df_d, aes(x = Group, y = Gini, fill = Group)) +
   theme_publication() +
   theme(axis.text = element_text(size = 7.5), axis.title = element_text(size = 7.5),
         legend.position = "none", plot.margin = margin(5, 5, 2, 2))
-output_files <- c(output_files, save_panel(pD, "FigureS1D_GiniCoefficient_withPval", 60, 56))
+output_files <- c(output_files, save_panel(pD, "FigureS1D_GiniCoefficient_withPval", 55, 52))
 source_files <- c(source_files,
                   write_panel_source_data(df_d, "Extended Data Figure 1", "D_values",
                                           "Sample-level Gini coefficients.",
@@ -200,8 +201,8 @@ pE <- plot_subsampling(subsampling, "Gene_Count_ALL", "Gene count (all, log10)",
                        "Subsampling curve: all genes", FALSE)
 pF <- plot_subsampling(subsampling, "Gene_Count_Protein-coding", "Gene count (protein-coding, log10)",
                        "Subsampling curve: protein-coding genes", FALSE)
-output_files <- c(output_files, save_panel(pE, "FigureS1E_Subsampling_Gene_Count_ALL_log10", 89, 69))
-output_files <- c(output_files, save_panel(pF, "FigureS1F_Subsampling_Gene_Count_ProteinCoding_log10", 89, 69))
+output_files <- c(output_files, save_panel(pE, "FigureS1E_Subsampling_Gene_Count_ALL_log10", 87, 69))
+output_files <- c(output_files, save_panel(pF, "FigureS1F_Subsampling_Gene_Count_ProteinCoding_log10", 87, 69))
 source_files <- c(source_files, write_panel_source_data(subsampling, "Extended Data Figure 1", "E_F",
                                                         "Subsampling read-depth curves.",
                                                         panel_data_dir, "FigureS1EF_subsampling_values"))

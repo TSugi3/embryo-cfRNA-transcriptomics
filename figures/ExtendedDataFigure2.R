@@ -53,24 +53,48 @@ enrich_dotplot <- function(file, title, n_terms = 12, wrap_width = 42,
     mutate(
       GeneRatio_numeric = parse_gene_ratio(GeneRatio),
       log10q = -log10(qvalue),
-      Description_wrapped = stringr::str_wrap(Description, width = wrap_width),
+      Description_wrapped = Description,
       Description_wrapped = fct_reorder(Description_wrapped, log10q)
     )
   p <- ggplot(df, aes(x = log10q, y = Description_wrapped)) +
     geom_point(aes(size = Count, color = GeneRatio_numeric), alpha = 0.95) +
-    scale_color_viridis_c(name = "Gene ratio", option = "D", direction = 1, end = 0.95) +
-    scale_size_continuous(name = "Gene count", range = c(1.0, 3.6)) +
-    labs(title = title, x = expression(-log[10]~"(q-value)"), y = NULL) +
+    scale_color_viridis_c(
+      name = "Gene ratio", option = "D", direction = 1, end = 0.95,
+      breaks = scales::breaks_pretty(n = 3)
+    ) +
+    scale_size_continuous(
+      name = "Gene count", range = c(1.0, 3.6),
+      breaks = scales::breaks_pretty(n = 3)
+    ) +
+    scale_x_continuous(expand = expansion(mult = c(0.08, 0.18))) +
+    labs(title = stringr::str_wrap(title, width = 32),
+         x = expression(-log[10]~"(q-value)"), y = NULL) +
     theme_publication() +
     theme(
-      plot.title = element_text(size = 7.5, face = "bold", hjust = 0.5),
-      axis.text.y = element_text(size = axis_text_size, lineheight = 0.86),
+      plot.title.position = "plot",
+      plot.title = element_text(size = 7.5, face = "bold", hjust = 0),
+      axis.text.y = element_text(size = 7.5, lineheight = 0.86),
       axis.text.x = element_text(size = 7.5),
       axis.title.x = element_text(size = 7.5),
+      legend.position = "bottom",
+      legend.box = "vertical",
+      legend.direction = "horizontal",
       legend.title = element_text(size = 7.5),
       legend.text = element_text(size = 7.5),
-      legend.key.size = unit(0.18, "cm"),
-      plot.margin = margin(2, 2, 2, 2)
+      legend.key.height = unit(0.20, "cm"),
+      legend.key.width = unit(0.34, "cm"),
+      legend.spacing.x = unit(0.10, "cm"),
+      legend.justification = "left",
+      # Extra right margin keeps the terminal x-axis tick fully inside the export.
+      plot.margin = margin(2, 5, 2, 2)
+    ) +
+    guides(
+      color = guide_colorbar(
+        order = 1, direction = "horizontal",
+        barwidth = unit(24, "mm"), barheight = unit(2.0, "mm"),
+        title.position = "top"
+      ),
+      size = guide_legend(order = 2, nrow = 2, byrow = TRUE, title.position = "top")
     )
   list(plot = p, data = df)
 }

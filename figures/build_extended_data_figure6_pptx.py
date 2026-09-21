@@ -12,9 +12,9 @@ def main() -> None:
         FIG_DIR / "ExtendedDataFigure6_editable.pptx",
         "Extended Data Figure 6",
         FIG_DIR,
-        8.2,
+        7.2,
         [
-            ("FigureS3C_Reactome_DownregulatedOnly.png", 0.775, 0.560, 5.950, 7.200),
+            ("FigureS3C_Reactome_DownregulatedOnly.png", 0.208, 0.420, 7.083),
         ],
         [],
     )

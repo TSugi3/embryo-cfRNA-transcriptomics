@@ -92,12 +92,6 @@ source_files <- c(source_files, write_panel_source_data(
 # ============================================================
 # Figure 3B/C - GO BP terms for up/downregulated genes
 # ============================================================
-compress_panel_width <- function(plot, panel_width_cm = 6.2) {
-  grob <- ggplotGrob(plot)
-  panel_cols <- unique(grob$layout$l[grepl("^panel", grob$layout$name)])
-  grob$widths[panel_cols] <- unit(panel_width_cm, "cm")
-  grob
-}
 
 make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
   combined <- imap_dfr(files, function(file, comparison) {
@@ -110,7 +104,7 @@ make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
       qvalue = if_else(qvalue == 0, .Machine$double.xmin, qvalue),
       minus_log10_qvalue = -log10(qvalue),
       Comparison = factor(Comparison, levels = names(files)),
-      Description_wrapped = str_wrap(Description, width = 46),
+      Description_wrapped = Description,
       Description_full = paste(Description_wrapped, Comparison, sep = "___")
     ) %>%
     group_by(Comparison) %>%
@@ -121,7 +115,7 @@ make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
     geom_point(aes(size = Count, color = minus_log10_qvalue), alpha = 0.95) +
     scale_color_viridis_c(option = "D", name = expression(-log[10]~"(q-value)")) +
     scale_size(range = c(0.8, 3.3), name = "Gene count") +
-    scale_x_continuous(expand = expansion(mult = c(0.02, 0.06))) +
+    scale_x_continuous(expand = expansion(mult = c(0.04, 0.10))) +
     scale_y_discrete(labels = function(x) gsub("___.*", "", x)) +
     facet_grid(rows = vars(Comparison), scales = "free_y", space = "free_y", switch = "y") +
     labs(x = expression(-log[10]~"(q-value)"), y = NULL, title = title) +
@@ -132,14 +126,26 @@ make_go_dotplot <- function(files, title, output_name, panel_id, n_terms = 10) {
       axis.text.y = element_text(size = 7.5, lineheight = 0.88),
       axis.text.x = element_text(size = 7.5),
       axis.title.x = element_text(size = 7.5),
+      legend.position = "bottom",
+      legend.box = "horizontal",
+      legend.direction = "horizontal",
       legend.title = element_text(size = 7.5),
       legend.text = element_text(size = 7.5),
-      legend.key.size = unit(0.18, "cm"),
-      plot.margin = margin(2, 2, 2, 5)
+      legend.key.height = unit(0.20, "cm"),
+      legend.key.width = unit(0.34, "cm"),
+      legend.spacing.x = unit(0.12, "cm"),
+      plot.margin = margin(1, 2, 1, 5)
     ) +
-    guides(color = guide_colorbar(order = 1), size = guide_legend(order = 2))
+    guides(
+      color = guide_colorbar(
+        order = 1, direction = "horizontal",
+        barwidth = unit(22, "mm"), barheight = unit(2.0, "mm"),
+        title.position = "top"
+      ),
+      size = guide_legend(order = 2, nrow = 1, title.position = "top")
+    )
 
-  output <- save_panel(compress_panel_width(p), output_name, 180, 103)
+  output <- save_panel(p, output_name, 180, 82)
   source <- write_panel_source_data(
     combined %>% arrange(Comparison, qvalue),
     "Figure 3", panel_id,
@@ -174,7 +180,7 @@ gsea_plot <- gsea %>%
   arrange(desc(abs(NES))) %>%
   slice_head(n = 20) %>%
   mutate(
-    Description_wrapped = str_wrap(Description, width = 48),
+    Description_wrapped = Description,
     Description_wrapped = fct_reorder(Description_wrapped, NES),
     minus_log10_FDR = -log10(p.adjust)
   )
@@ -190,13 +196,15 @@ pD <- ggplot(gsea_plot, aes(x = NES, y = Description_wrapped)) +
     axis.text.y = element_text(size = 7.5, lineheight = 0.92),
     axis.text.x = element_text(size = 7.5),
     axis.title.x = element_text(size = 7.5),
+    legend.position = "bottom",
     legend.title = element_text(size = 7.5),
     legend.text = element_text(size = 7.5),
     legend.key.size = unit(0.18, "cm"),
     plot.margin = margin(2, 2, 2, 8)
-  )
+  ) +
+  guides(size = guide_legend(nrow = 1, title.position = "top"))
 
-output_files <- c(output_files, save_panel(compress_panel_width(pD, panel_width_cm = 5.6), "Figure4A_GSEA_GO_BP_dotplot", 180, 113))
+output_files <- c(output_files, save_panel(pD, "Figure4A_GSEA_GO_BP_dotplot", 180, 113))
 source_files <- c(source_files, write_panel_source_data(
   gsea_plot %>% arrange(desc(abs(NES))),
   "Figure 4", "A",

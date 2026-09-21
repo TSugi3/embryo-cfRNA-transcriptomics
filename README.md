@@ -17,6 +17,7 @@ The scripts document the figure-generation workflow from processed input tables.
 - `figures/build_*_pptx.py`: helper scripts for assembling editable PowerPoint figures when the corresponding generated panel images are available locally.
 - `figures/render_figure_previews.py`: preview rendering helper.
 - `figures/export_figures.py`: image/PDF export helper for editable figure files.
+- `figures/audit_figure_pptx.py`: figure-quality audit for page count, output dimensions and accidental raster-image distortion.
 - `build_source_data_workbook.py`: combines panel-level CSV files into a single Source Data workbook.
 - `inventory/final_figure_mapping.csv`: mapping between the final manuscript display items and the public figure-generation scripts.
 - `inventory/source_data_sheet_mapping.csv`: optional mapping used to convert panel-output stems to final Source Data sheet names.
@@ -117,6 +118,12 @@ Assemble editable figures and export publication images when local panel images 
 
 ```bash
 python3 figures/export_figures.py --figure-dir "$CFRNA_FIGURE_DIR" --out-dir /path/to/figure_exports --width-mm 180 --height-mm 200 --dpi 600
+```
+
+Audit the editable figure files before export:
+
+```bash
+python3 figures/audit_figure_pptx.py "$CFRNA_FIGURE_DIR" --output /path/to/figure_pptx_audit.csv
 ```
 
 ## Privacy and reproducibility notes

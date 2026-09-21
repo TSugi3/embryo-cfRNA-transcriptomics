@@ -12,14 +12,14 @@ def main() -> None:
         FIG_DIR / "ExtendedDataFigure7_editable.pptx",
         "Extended Data Figure 7",
         FIG_DIR,
-        8.2,
+        8.15,
         [
             ("FigureS3D_GSEA_Reactome_dotplot.png", 0.208, 0.420, 7.083, 3.229),
-            ("FigureS3E_GSEAplot_EWEvsAWE_Reactome.png", 0.208, 4.050, 7.083, 3.850),
+            ("FigureS3E_GSEAplot_EWEvsAWE_Reactome.png", 0.208, 3.850, 7.083),
         ],
         [
             ("A", 0.208, 0.278),
-            ("B", 0.208, 3.930),
+            ("B", 0.208, 3.720),
         ],
     )
 

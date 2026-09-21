@@ -180,11 +180,11 @@ pC_bar <- ggplot(intersection_summary, aes(x = intersection_id, y = intersection
   ) +
   geom_text(
     aes(label = intersection_size),
-    vjust = -0.25, size = 2.8
+    angle = 55, hjust = 0, vjust = -0.15, size = 2.65
   ) +
   scale_x_continuous(limits = c(0.5, max(intersection_summary$intersection_id) + 0.5),
                      expand = expansion(mult = c(0.01, 0.01))) +
-  scale_y_continuous(expand = expansion(mult = c(0, 0.16))) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.28))) +
   labs(x = NULL, y = "Intersection size") +
   theme_publication() +
   theme(
