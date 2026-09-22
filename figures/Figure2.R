@@ -105,7 +105,10 @@ pB <- ggplot(go_bp_plot, aes(x = minus_log10_qvalue, y = Description)) +
   scale_color_viridis_c(name = "Gene Ratio", option = "D", direction = 1, end = 0.95) +
   scale_size_continuous(name = "Gene Count", range = c(1.2, 4.2),
                         breaks = c(20, 40, 60)) +
-  scale_x_continuous(limits = c(3, 8), expand = expansion(mult = c(0.02, 0.06))) +
+  scale_x_continuous(
+    limits = c(2.4, 8), breaks = 3:8,
+    expand = expansion(mult = c(0, 0.06))
+  ) +
   guides(
     color = guide_colorbar(order = 1, barheight = grid::unit(18, "mm")),
     size = guide_legend(order = 2)
