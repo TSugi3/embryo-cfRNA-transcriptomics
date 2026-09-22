@@ -109,6 +109,7 @@ pB <- ggplot(go_bp_plot, aes(x = minus_log10_qvalue, y = Description)) +
     limits = c(2.4, 8), breaks = 3:8,
     expand = expansion(mult = c(0, 0.06))
   ) +
+  scale_y_discrete(expand = expansion(add = c(0.6, 1.0))) +
   guides(
     color = guide_colorbar(order = 1, barheight = grid::unit(18, "mm")),
     size = guide_legend(order = 2)
