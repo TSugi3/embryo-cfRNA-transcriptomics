@@ -1,8 +1,12 @@
 # Embryo cfRNA transcriptomics analysis code
 
-This repository contains analysis scripts used to generate figure panels and source-data tables for the manuscript:
+This repository contains analysis scripts used to generate figure panels and source-data tables for the published article:
 
-**Full-length RNA-sequencing profiles intracellular and extracellular RNAs in euploid and aneuploid human embryos**
+**Full-length RNA sequencing profiles intracellular and extracellular RNAs in euploid and aneuploid human embryos**
+
+## Publication
+
+Sugimoto, T., Mariya, T., Kato, T. et al. Full-length RNA sequencing profiles intracellular and extracellular RNAs in euploid and aneuploid human embryos. *Nature Cell Biology* (2026). https://doi.org/10.1038/s41556-026-02123-3
 
 The scripts document the figure-generation workflow from processed input tables. Raw sequencing files, private sample-registration materials, correspondence and private manuscript files are not included.
 
@@ -24,7 +28,13 @@ The scripts document the figure-generation workflow from processed input tables.
 
 ## Data availability and inputs
 
-This code expects processed input files generated from the RNA-seq analysis workflow. Raw sequencing data are available from the public repositories described in the manuscript Data Availability section. Processed count matrices, sample metadata, differential-expression outputs, pathway-enrichment outputs and source data are provided with the paper as Supplementary Tables and Source Data files.
+This code expects processed input files generated from the RNA-seq analysis workflow. Raw sequencing data and the archived analysis code are publicly available from the following repositories:
+
+- Human embryo and spent-medium RNA-seq data: [NCBI BioProject PRJNA1072852](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1072852)
+- Mouse embryo perturbation RNA-seq data: [NCBI BioProject PRJNA1483724](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1483724)
+- Archived analysis code, version 1.0.4: [Zenodo](https://doi.org/10.5281/zenodo.22876947)
+
+Processed count matrices, sample metadata, differential-expression outputs, pathway-enrichment outputs and numerical source data are provided with the published article as Supplementary Tables and Source Data files.
 
 Expected local inputs include:
 
